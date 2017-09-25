@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<resources>
+    <string name="app_name">De Casteljau Bézier Curve Simulation</string>
+    <string name="app_name_for_app_drawer">Bézier Splines</string>
+    <string name="app_version">Version 2.0 &#8213; &#169; Peter Loos</string>
+
+    <!-- activities -->
+    <string name="app_main_title">Bézier Curve Simulation</string>
+    <string name="app_sub_title">De Casteljau\'s Algorithm</string>
+    <string name="title_activity_about">About</string>
+    <string name="title_activity_documentation">Documentation</string>
+    <string name="title_activity_demo">Demo</string>
+    <string name="title_activity_settings">Settings</string>
+
+    <!-- views -->
+    <string name="resolution">Resolution:</string>
+    <string name="t">t:</string>
+    <string name="action_settings">Settings</string>
+    <string name="action_about">About</string>
+    <string name="action_demo">Demo</string>
+    <string name="action_documentation">Documentation</string>
+    <string name="about_link">peterloos.de</string>
+    <string name="button_stop">Stop</string>
+    <string name="button_restart">Restart</string>
+    <string name="show_construction">Show Construction</string>
+    <string name="show_snaptogrid">Snap to Grid</string>
+
+    <!-- shared preferences -->
+    <string name="shared_pref_strokewidthfactor">StrokeWidthFactor</string>
+    <string name="shared_pref_gridlines">Gridlines</string>
+    <string name="shared_pref_language">Language</string>
+
+    <!-- state changes according to settings activity -->
+    <string name="result_gridlines">ResultGridlines</string>
+    <string name="result_strokewidth">ResultStrokewidth</string>
+
+    <!-- main spinner -->
+    <string-array name="editor_modes">
+        <item>Create</item>
+        <item>Edit</item>
+        <item>Delete</item>
+        <item>Clear</item>
+        <!-- <item>Demo</item>  -->   <!-- just for generating screenshots -->
+    </string-array>
+
+    <!-- settings activity - languages -->
+    <string name="settings_language_title">Language</string>
+    <string name="settings_dialog_ok">OK</string>
+    <string name="settings_dialog_cancel">Cancel</string>
+
+    <string-array name="settings_languages">
+        <item>English (United States)</item>
+        <item>Deutsch (Deutschland)</item>
+    </string-array>
+
+    <!-- miscellaneous -->
+    <string name="bezier_app_icon_content_description">bezier app icon</string>
+    <string name="documentation_image">documentation image</string>
+
+    <!-- settings activity - stroke widths -->
+    <string name="settings_stroke_widths_title">Stroke Width</string>
+
+    <string-array name="settings_stroke_widths">
+        <item>Extra Light</item>
+        <item>Light</item>
+        <item>Normal</item>
+        <item>Bold</item>
+        <item>Extra Bold</item>
+    </string-array>
+
+    <!-- settings activity - number of grid lines -->
+    <string name="settings_gridlines_title">Gridlines Density</string>
+
+    <string-array name="settings_gridlines">
+        <item>Low</item>
+        <item>Normal</item>
+        <item>High</item>
+    </string-array>
+
+    <!-- documentation: header -->
+    <string-array name="docs_app_modes_headers">
+        <item>Interactive creation of a \nBézier-curve</item>
+        <item>App modes</item>
+        <item>Curve resolution</item>
+        <item>Algorithm of de Casteljau</item>
+    </string-array>
+
+    <!-- documentation: description -->
+    <string-array name="docs_app_modes_description">
+        <item>
+            <![CDATA[
+                The <em>control points</em> of a <b>Bézier</b> curve can be entered by simply tapping on the touch screen.
+                The control points are numbered in the order of their input.
+                The current Bézier curve is displayed, if three or more control points exist.
+            ]]>
+        </item>
+        <item>
+            <![CDATA[
+            Depending on the <b>mode</b> of the <b>Bézier</b> curves view, you can either <em>add</em> new control points,
+            <em>move</em> existing ones or <em>delete</em> them (individually or all). The app mode is set by a drop-down menu:<br/><br/>
+                <em>Create</em> &#8213; Input of control points<br/>
+                <em>Move</em> &#8213; Moving of control points<br/>
+                <em>Delete</em> &#8213; Deleting a control point<br/>
+                <em>Clear</em> &#8213; Clear all control points<br/>
+                <br/>
+                 In <em>Create</em>-mode, you can enter the control points of a Bézier curve by tapping.
+                 In <em>Move</em>-mode, you can move a specific control point by swiping. To do this,
+                 you must first touch the control point, then you can move the point.<br/><br/>
+                 <b>Note</b>: When moving a control point, the app is busy with a lot of computational operations (updating the Bézier curve).
+                 Therefore the app can loose its reference point to the touch gesture if wiping is too fast.<br/><br/>
+                 To delete a control point, switch to the <em>Delete</em>-mode.
+                 Select the point you want to delete with a one-finger tip. You can also delete the whole Bézier curve:
+                 To do this, switch to the <em>Clear</em>-mode.
+                 After deleting the curve, the app automatically switches to the <em>Create</em>-mode.
+            ]]>
+        </item>
+        <item>
+            <![CDATA[
+                For each <em>t</em> in the interval from 0 to 1 you can calculate a point of the Bézier curve.
+                In this app, the points of the Bézier curve are determined for a maximum of 100 equidistant values of <em>t</em> in the interval [0,1].
+                The exact number can be set with the lower slider with the label &bdquo;<em>Resolution</em>&ldquo;
+            ]]>
+        </item>
+        <item>
+            <![CDATA[
+                 A special feature of this implementation is the combo box &bdquo;<em>Show Construction</em>&ldquo;.
+                 To demonstrate the internal operations of the algorithm of <em>de Casteljau</em>, the
+                 auxiliary points of the <em>Casteljau</em> scheme are calculated for the construction of the current Bézier point
+                 and additionally displayed in this view. This is of course only possible for a particular parameter <em>t</em> in the interval [0,1].
+                 Use the second slider bar at the bottom (labelled &bdquo;t&ldquo;) to set this value.
+            ]]>
+        </item>
+    </string-array>
+</resources>

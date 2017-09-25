@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!-- added: PeLo-->
+    <color name="white">#ffffffff</color>
+
+    <color name="colorPrimary">#FF9800</color>
+    <color name="colorPrimaryDark">#E65100</color>
+
+
+    <!-- Text & foreground colors -->
+
+    <!--<color name="primary_text_default_material_light">#de000000</color>  --> <!-- Black 87% -->
+    <!-- Black 54% -->
+
+    <!--<color name="primary_text_default_material_dark">#deffffff</color> --> <!-- White 87% -->
+    <!-- White 38% -->
+
+    <!-- Primary & accent colors -->
+    <color name="material_red_700">#ffc53929</color>
+
+    <color name="material_blue_700">#ff3367d6</color>
+    <color name="material_blue_A200">#ff448aff</color>
+
+
+    <!-- Accent color used by Settings -->
+
+    <color name="material_green_300">#ff57bb8a</color>
+
+    <!-- Neutral colors -->
+    <color name="material_grey_500">#ffa3a3a3</color>
+
+    <color name="material_blue_grey_200">#ffb0bec5</color>
+    <color name="material_blue_grey_500">#ff607d8b</color>
+    <color name="material_blue_grey_800">#ff37474f</color>
+    <color name="material_blue_grey_900">#ff263238</color> <!-- Primary color used by Settings -->
+    <color name="material_blue_grey_950">#ff21272b
+    </color> <!-- Primary dark color used by Settings -->
+
+</resources>

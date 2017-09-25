@@ -1,0 +1,38 @@
+TODO: WICHTIG:
+Die Demontration-View hat eine andere Größe ....
+Da muss die CellLength geändert werden !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+
+// --------------------------------------------------------------------------------
+
+Demo geht wieder --- aber jetzt werden die Punkte DOPPELT gemalt
+
+// --------------------------------------------------------------------------------
+
+Fehler: Die Demonstration-View muss nach der Rückkehr
+die Liste der Punkte löschen
+
+// --------------------------------------------------------------------------------
+
+Allgemein: Wann muss die Liste der Punkte eigentlich gelöscht werden
+
+// --------------------------------------------------------------------------------
+
+"App is not indexable by Google Search (android lint)"
+
+// --------------------------------------------------------------------------------
+
+"Wo wird verhindert, dass die App zwischen Landscape und Portrait wechselt ????"
+
+DERZEIT wird nur der Portrait-Modus unterstützt ... sollte evtl. auch so
+bleiben ?!?!?!
+
+// --------------------------------------------------------------------------------
+
+Das DemonstrationActivit XML übersetzt nicht !!!
+
+Siehe Fehlermeldung weiter unten !!!
+
+To support older versions than API 17 (project specifies 16) you should also add android:layout_marginRight="10dp" less... (Strg+F1)
+API 17 adds a textAlignment attribute to specify text alignment. However, if you are supporting older versions than API 17, you must also specify a gravity or layout_gravity attribute, since older platforms will ignore the textAlignment attribute.
+
+// --------------------------------------------------------------------------------

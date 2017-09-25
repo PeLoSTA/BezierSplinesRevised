@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">De Casteljau Bézierkurven Simulation</string>
+    <string name="app_name_for_app_drawer">Bézier Kurven</string>
+    <string name="app_version">Version 2.0 &#8213; &#169; Peter Loos</string>
+
+    <!-- activities -->
+    <string name="app_main_title">Bézierkurven Simulation</string>
+    <string name="app_sub_title">De Casteljau\'s Algorithmus</string>
+    <string name="title_activity_about">Über</string>
+    <string name="title_activity_documentation">Dokumentation</string>
+    <string name="title_activity_demo">Demo</string>
+    <string name="title_activity_settings">Einstellungen</string>
+
+    <!-- views -->
+    <string name="resolution">Auflösung:</string>
+    <string name="t">t:</string>
+    <string name="action_settings">Einstellungen</string>
+    <string name="action_about">Über</string>
+    <string name="action_demo">Demonstration</string>
+    <string name="action_documentation">Dokumentation</string>
+    <string name="about_link">peterloos.de</string>
+    <string name="button_stop">Stop</string>
+    <string name="button_restart">Start</string>
+    <string name="show_construction">Konstruktion</string>
+    <string name="show_snaptogrid">Gitternetzlinien</string>
+
+    <!-- shared preferences -->
+    <string name="shared_pref_strokewidthfactor">StrokeWidthFactor</string>
+    <string name="shared_pref_gridlines">Gridlines</string>
+    <string name="shared_pref_language">Language</string>
+
+    <!-- state changes according to settings activity -->
+    <string name="result_gridlines">ResultGridlines</string>
+    <string name="result_strokewidth">ResultStrokewidth</string>
+
+    <!-- main spinner -->
+    <string-array name="editor_modes">
+        <item>Neu</item>
+        <item>Verschieben</item>
+        <item>Entfernen</item>
+        <item>Löschen</item>
+        <!-- <item>Demo</item> -->   <!-- just for generating screenshots -->
+    </string-array>
+
+    <!-- settings activity - languages -->
+    <string name="settings_language_title">Sprache</string>
+    <string name="settings_dialog_ok">OK</string>
+    <string name="settings_dialog_cancel">Abbrechen</string>
+
+    <string-array name="settings_languages">
+        <item>English (United States)</item>
+        <item>Deutsch (Deutschland)</item>
+    </string-array>
+
+    <!-- miscellaneous -->
+    <string name="bezier_app_icon_content_description">bezier app icon</string>
+    <string name="documentation_image">documentation image</string>
+
+    <!-- settings activity - stroke widths -->
+    <string name="settings_stroke_widths_title">Linienstärke</string>
+
+    <string-array name="settings_stroke_widths">
+        <item>Extra Dünn</item>
+        <item>Dünn</item>
+        <item>Normal</item>
+        <item>Fett</item>
+        <item>Extra Fett</item>
+    </string-array>
+
+    <!-- settings activity - number of grid lines -->
+    <string name="settings_gridlines_title">Gitternetzlinien</string>
+
+    <string-array name="settings_gridlines">
+        <item>Weniger</item>
+        <item>Normal</item>
+        <item>Mehr</item>
+    </string-array>
+
+    <!-- documentation: header -->
+    <string-array name="docs_app_modes_headers">
+        <item>Interaktives Erstellen einer\nBézier-Kurve</item>
+        <item>Modi der Kurvenstellung</item>
+        <item>Auflösung der Kurve</item>
+        <item>Algorithmus von de Casteljau</item>
+    </string-array>
+
+    <!-- documentation: description -->
+    <string-array name="docs_app_modes_description">
+        <item>
+            <![CDATA[
+              Die <b>Stützpunkte</b> einer Bézier-Kurve lassen sich durch simples Tippen auf dem Touchscreen eingeben. Sie werden dabei in der Reihenfolge der Eingabe durchnummeriert.
+              Ab drei oder mehr Stützpunkten wird die aktuelle Bézier-Kurve dargestellt.
+            ]]>
+        </item>
+        <item>
+            <![CDATA[
+            Je nach <b>Modus</b> der Bézier-Kurven Ansicht kann man entweder neue Stützpunkte <em>hinzufügen</em>,
+            bestehende Stützpunkte <em>verschieben</em> oder diese auch <em>löschen</em> (einzeln oder alle).
+            Eingestellt wird der App-Modus durch ein DropDown-Menü:<br/><br/>
+            <br/>
+            <em>Neu</em> &#8213; Eingabe von Stützpunkten<br/>
+            <em>Verschieben</em> &#8213; Verschieben von Stützpunkten<br/>
+            <em>Entfernen</em> &#8213; Löschen eines Stützpunktes<br/>
+            <em>Löschen</em> &#8213; Löschen von allen Stützpunkten<br/>
+            <br/>
+            Im <em>Neu</em>-Modus lassen sich durch Tippen die Stützpunkte einer Bézier-Kurve eingeben. Im <em>Verschieben</em>-Modus können Sie durch Wischen einen Stützpunkt verschieben.
+            Dazu müssen Sie den ausgesuchten Stützpunkte zunächst Berühren, dann können Sie den Punkt verschieben.<br/><br/>
+            <b>Beachte</b>: Beim Verschieben eines Stützpunkts ist die App mit vielen Rechenoperationen ausgelastet (Aktualisierung der Bézier-Kurve).
+            Deshalb kann bei zu schnellem Wischen die App ihren Bezugspunkt zur Touch-Gestik verlieren.
+            Zum Löschen eines Stützpunkts wechseln Sie in den <em>Entfernen</em>-Modus.
+            Selektieren Sie den zu löschenden Punkt mit einem Ein-Finger-Tipp. Sie können auch die komplette Bézier-Kurve löschen: Wechseln Sie dazu in den <em>Löschen</em>-Modus.
+            Nach dem Löschen der Kurve wechselt die App automatisch in den <em>Neu</em>-Modus.
+            ]]>
+        </item>
+        <item>
+            <![CDATA[
+                Für jedes <em>t</em> im Intervall von 0 bis 1 kann man prinzipiell einen Punkt der Bézier-Kurve berechnen.
+                In dieser App werden für maximal 100 äquidistante Werte die Punkte der Bézier-Kurve ermittelt.
+                Die genaue Anzahl (<em>Auflösung</em>) können Sie mit dem unteren Schiebebalken mit der Beschriftung &bdquo;<em>Auflösung</em>&ldquo; einstellen.
+            ]]>
+        </item>
+        <item>
+            <![CDATA[
+                Eine Besonderheit in der Realisierung stellt die Auswahlbox &bdquo;<em>Konstruktion</em>&ldquo; dar.
+                Um die Arbeitsweise des Algorithmus von <em>de Casteljau</em> zu demonstrieren, werden in diesem Anzeigemodus
+                zusätzlich die für die Konstruktion des aktuellen Bézierpunktes berechneten Hilfspunkte
+                des <em>Casteljau</em>-Schemas mit angezeigt.<br/><br/>
+                Dies ist natürlich immer nur für einen bestimmten Parameter <em>t</em> aus dem Intervall [0,1] möglich.
+                Mit dem zweiten Schiebebalken am unteren Rand (Beschriftung <em>t</em>) stellen Sie diesen Wert ein.
+            ]]>
+        </item>
+    </string-array>
+</resources>
