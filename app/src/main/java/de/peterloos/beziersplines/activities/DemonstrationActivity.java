@@ -7,6 +7,7 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
@@ -16,6 +17,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 
+import de.peterloos.beziersplines.BezierGlobals;
 import de.peterloos.beziersplines.utils.BezierMode;
 import de.peterloos.beziersplines.utils.BezierPoint;
 import de.peterloos.beziersplines.R;
@@ -41,7 +43,7 @@ public class DemonstrationActivity
 
     private DemoOperation task;
 
-    // size of underlying bezier view(s) (datatype Size only at API level 21 supported)
+    // size of underlying bezier view(s) (data type Size only at API level 21 supported)
     private int viewWidth;
     private int viewHeight;
 
@@ -57,6 +59,9 @@ public class DemonstrationActivity
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_demo);
+
+        Log.v(BezierGlobals.TAG, "DemonstrationActivity::onCreate ------------------------------------------------------------------");
+
         this.setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
 
         this.viewWidth = -1;
@@ -196,12 +201,18 @@ public class DemonstrationActivity
     @Override
     public void setSize(int width, int height) {
 
-        this.viewWidth = width;
-        this.viewHeight = height;
 
         // TODO: Das muss natürlich noch richtig berechnet werden !!!
         // Die 100 ist nur zum Testen
         this.bezierView.setCellLength(100);
+
+        this.viewWidth = width;
+        this.viewHeight = height;
+
+        String info = String.format(Locale.getDefault(),
+                "DemonstrationActivity: Size in Pixel: -------------> %d, %d", this.viewWidth, this.viewHeight);
+        Log.v(BezierGlobals.TAG, info);
+
 
         this.task = new DemoOperation();
         this.task.setRunning(true);

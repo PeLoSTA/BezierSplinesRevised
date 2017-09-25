@@ -87,7 +87,7 @@ public class MainActivity
         super.onCreate(savedInstanceState);
         this.setContentView(R.layout.activity_main);
 
-        Log.v(BezierGlobals.TAG, "onCreate ------------------------------------------------------------------");
+        Log.v(BezierGlobals.TAG, "MainActivity::onCreate ------------------------------------------------------------------");
 
         // both portrait and landscape mode make this app more complicated
         this.setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
@@ -156,8 +156,8 @@ public class MainActivity
 //        int gridlinesFactor = SharedPreferencesUtils.getPersistedGridlinesFactor(context);
 //        this.bezierViewWithGrid.setDensityOfGridlines(gridlinesFactor);
 
-        // connect event sink with client
-        // (both views - with and without grid - have same size, one sink is therefore sufficient)
+        // connect event sinks with client
+        this.bezierViewWithGrid.registerListener(this);
         this.bezierViewWithoutGrid.registerListener(this);
 
         // sync shared preferences settings with language:
@@ -358,7 +358,7 @@ public class MainActivity
         this.viewHeight = height;
 
         String info = String.format(Locale.getDefault(),
-            "Size in Pixel: =============> %d, %d", this.viewWidth, this.viewHeight);
+            "MainActivity: Size in Pixel: -------------> %d, %d", this.viewWidth, this.viewHeight);
         Log.v(BezierGlobals.TAG, info);
 
         DisplayMetrics dm = new DisplayMetrics();

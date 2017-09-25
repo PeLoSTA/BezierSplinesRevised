@@ -7,6 +7,8 @@ import android.graphics.Paint;
 import android.util.AttributeSet;
 import android.util.Log;
 
+import java.util.Locale;
+
 import de.peterloos.beziersplines.BezierGlobals;
 import de.peterloos.beziersplines.utils.BezierPoint;
 import de.peterloos.beziersplines.utils.BezierUtils;
@@ -46,8 +48,11 @@ public class BezierGridView extends BezierView {
     @Override
     protected void setActualViewSize(int width, int height) {
 
+        String msg = String.format(Locale.getDefault(), "====> BezierGridView::setActualViewSize: %d - %d", width, height);
+        Log.v(BezierGlobals.TAG, msg);
+
         super.setActualViewSize(width, height);
-        this.calculateNumOfGridLines();
+        // this.calculateNumOfGridLines();
     }
 
     @Override
@@ -72,6 +77,7 @@ public class BezierGridView extends BezierView {
     public void setCellLength(double cellLength) {
 
         this.cellLength = cellLength;
+        this.calculateNumOfGridLines();
         this.invalidate();
     }
 
@@ -91,6 +97,9 @@ public class BezierGridView extends BezierView {
 
         this.numCellCols = (int) Math.round (this.viewWidth / this.cellLength);
         this.numCellRows = (int) Math.round (this.viewHeight / this.cellLength);
+
+        String msg = String.format(Locale.getDefault(), "====> BezierGridView::calculateNumOfGridLines: Cols=%d - Rows=%d", this.numCellCols, this.numCellRows);
+        Log.v(BezierGlobals.TAG, msg);
     }
 
     private void drawGrid(Canvas canvas) {
