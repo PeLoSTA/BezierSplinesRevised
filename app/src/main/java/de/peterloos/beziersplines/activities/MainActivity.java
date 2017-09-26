@@ -31,6 +31,7 @@ import java.util.Locale;
 
 import de.peterloos.beziersplines.BezierGlobals;
 import de.peterloos.beziersplines.utils.BezierMode;
+import de.peterloos.beziersplines.utils.BezierUtils;
 import de.peterloos.beziersplines.utils.LocaleUtils;
 import de.peterloos.beziersplines.utils.SharedPreferencesUtils;
 import de.peterloos.beziersplines.views.BezierGridView;
@@ -176,29 +177,10 @@ public class MainActivity
 
                 // retrieve display metrics that describe the size and density of this display
                 DisplayMetrics dm = new DisplayMetrics();
-                WindowManager wm = MainActivity.this.getWindowManager();
-                Display display = wm.getDefaultDisplay();
-                display.getMetrics(dm);
+                MainActivity.this.getWindowManager().getDefaultDisplay().getMetrics(dm);
 
-                // calculate size of this display in cm
-                double xInches = (double) width / (double) dm.xdpi;
-                double xCm = xInches * 2.54;
-                double yInches = (double) height / (double) dm.ydpi;
-                double yCm = yInches * 2.54;
-                Log.d(BezierGlobals.TAG,"View in cm (width): " + xCm);
-                Log.d(BezierGlobals.TAG,"View in cm (height): " + yCm);
-
-                // calculate cell size for bézier grid view in pixel
-                double numPixelsHorizontalPerCm = (double) width / xCm;
-                double numPixelsVerticalPerCm = (double) height / yCm;
-
-                Log.d(BezierGlobals.TAG,"numPixelsHorizontalPerCm: " + numPixelsHorizontalPerCm);
-                Log.d(BezierGlobals.TAG,"numPixelsVerticalPerCm:   " + numPixelsVerticalPerCm);
-
-                // TODO: Das soll jetzt mal ein Viertel CM sein ...
-                // TODO: Das muss noch entsprechend erweitert werden !!!!!!!!!!!!!!!!
-                // this.bezierViewWithGrid.setCellLength(numPixelsHorizontalPerCm / 4.0);
-                MainActivity.this.bezierViewWithGrid.setCellLength(numPixelsHorizontalPerCm);
+                double cellLength = BezierUtils.calculateGridCellLength(dm, width, height);
+                MainActivity.this.bezierViewWithGrid.setCellLength(cellLength);
             }
 
             @Override

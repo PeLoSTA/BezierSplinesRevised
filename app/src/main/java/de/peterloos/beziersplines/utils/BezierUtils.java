@@ -1,8 +1,13 @@
 package de.peterloos.beziersplines.utils;
 
+import android.util.DisplayMetrics;
+import android.util.Log;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
+
+import de.peterloos.beziersplines.BezierGlobals;
 
 /**
  * Project: Bézier Splines Simulation
@@ -88,6 +93,31 @@ public class BezierUtils {
 
         p.setX(snapX);
         p.setY(snapY);
+    }
+
+    public static double calculateGridCellLength (DisplayMetrics dm, int widthPx, int heightPx) {
+
+        // calculate size of this display in cm
+        double xInches = (double) widthPx / (double) dm.xdpi;
+        double xCm = xInches * 2.54;
+        double yInches = (double) heightPx / (double) dm.ydpi;
+        double yCm = yInches * 2.54;
+        Log.d(BezierGlobals.TAG,"View in cm (width): " + xCm);
+        Log.d(BezierGlobals.TAG,"View in cm (height): " + yCm);
+
+        // calculate cell size for bézier grid view in pixel
+        double numPixelsHorizontalPerCm = (double) widthPx / xCm;
+        double numPixelsVerticalPerCm = (double) heightPx / yCm;
+
+        Log.d(BezierGlobals.TAG,"numPixelsHorizontalPerCm: " + numPixelsHorizontalPerCm);
+        Log.d(BezierGlobals.TAG,"numPixelsVerticalPerCm:   " + numPixelsVerticalPerCm);
+
+        // TODO: Das soll jetzt mal ein Viertel CM sein ...
+        // TODO: Das muss noch entsprechend erweitert werden !!!!!!!!!!!!!!!!
+        // this.bezierViewWithGrid.setCellLength(numPixelsHorizontalPerCm / 4.0);
+
+        return numPixelsHorizontalPerCm / 2.0;
+
     }
 
     // ============================================================================================

@@ -7,6 +7,7 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
+import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -122,12 +123,15 @@ public class DemonstrationActivity
             @Override
             public void setSize(int width, int height) {
 
-                // TODO: Das muss natürlich noch richtig berechnet werden !!!
-                // Die 100 ist nur zum Testen
-                DemonstrationActivity.this.bezierViewWithGrid.setCellLength(100);
-
                 DemonstrationActivity.this.viewWidth = width;
                 DemonstrationActivity.this.viewHeight = height;
+
+                // retrieve display metrics that describe the size and density of this display
+                DisplayMetrics dm = new DisplayMetrics();
+                DemonstrationActivity.this.getWindowManager().getDefaultDisplay().getMetrics(dm);
+
+                double cellLength = BezierUtils.calculateGridCellLength(dm, width, height);
+                DemonstrationActivity.this.bezierViewWithGrid.setCellLength(cellLength);
 
                 String info = String.format(Locale.getDefault(),
                         "DemonstrationActivity: Size in Pixel: -------------> %d, %d",
