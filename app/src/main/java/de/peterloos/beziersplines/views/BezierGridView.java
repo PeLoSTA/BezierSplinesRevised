@@ -21,11 +21,12 @@ import de.peterloos.beziersplines.utils.BezierUtils;
 
 public class BezierGridView extends BezierView {
 
+    // grid specific variables
+    private double cellLength;
     private int numCellRows;
     private int numCellCols;
 
-    private double cellLength;
-
+    // paint object(s)
     private Paint linePaint;
 
     // c'tor
@@ -36,6 +37,8 @@ public class BezierGridView extends BezierView {
 
         // setup grid details
         this.cellLength = 0;
+        this.numCellRows = -1;
+        this.numCellCols = -1;
 
         // setup paint object
         this.linePaint = new Paint();
@@ -132,19 +135,6 @@ public class BezierGridView extends BezierView {
 
         this.holder.snapAllPoints(this.cellLength);
     }
-
-//    private void snapPoint(BezierPoint p) {
-//
-//        double realLeft = Math.floor((p.getX() / this.cellLength)) * this.cellLength;
-//        float snapX = (p.getX() <= realLeft + this.cellLengthtHalf) ?
-//            (float) realLeft : (float) (realLeft + this.cellLength);
-//        double realUpper = Math.floor((p.getY() / this.cellLength)) * this.cellLength;
-//        float snapY = (p.getY() <= realUpper + this.cellLengthtHalf) ?
-//            (float) realUpper : (float) (realUpper + this.cellLength);
-//
-//        p.setX(snapX);
-//        p.setY(snapY);
-//    }
 }
 
 // =======================================================================================

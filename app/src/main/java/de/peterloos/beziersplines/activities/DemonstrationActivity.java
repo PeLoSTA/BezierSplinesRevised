@@ -53,6 +53,8 @@ public class DemonstrationActivity
     private TextView textViewResolution;
     private TextView textViewT;
 
+    // TODO: Das muss irgendwie in einer Demo-Klasse !!!
+    // TODO: Oder anders herum: Warum sind da unten mehrere unused Methoden ?!?!?!?
     private List<BezierPoint> demoControlPoints;
 
     @Override

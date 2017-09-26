@@ -142,7 +142,7 @@ public class BezierView extends View implements View.OnTouchListener {
         // retrieve singleton data object, to access control points
         this.holder = ControlPointsHolder.getInstance();
 
-        //  need size of view (when view is visible)
+        //  need size of this view (when view is visible)
         ViewTreeObserver vto = this.getViewTreeObserver();
         vto.addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
             @Override
@@ -162,6 +162,9 @@ public class BezierView extends View implements View.OnTouchListener {
     }
 
     protected void setActualViewSize(int width, int height) {
+
+        String msg = String.format(Locale.getDefault(), "====> BezierGrid::setActualViewSize: %d - %d", width, height);
+        Log.v(BezierGlobals.TAG, msg);
 
         this.viewWidth = width;
         this.viewHeight = height;

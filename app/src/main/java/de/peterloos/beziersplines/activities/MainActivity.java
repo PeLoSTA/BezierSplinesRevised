@@ -144,9 +144,9 @@ public class MainActivity
 
         // sync shared preferences settings with bezier view
         Context context = this.getApplicationContext();
-        int strokewidthFactor = SharedPreferencesUtils.getPersistedStrokewidthFactor(context);
-        this.bezierViewWithoutGrid.setStrokewidthFactor(strokewidthFactor);
-        this.bezierViewWithGrid.setStrokewidthFactor(strokewidthFactor);
+        int strokeWidthFactor = SharedPreferencesUtils.getPersistedStrokewidthFactor(context);
+        this.bezierViewWithoutGrid.setStrokewidthFactor(strokeWidthFactor);
+        this.bezierViewWithGrid.setStrokewidthFactor(strokeWidthFactor);
 
         // read shared preferences (gridlines factor)
 
