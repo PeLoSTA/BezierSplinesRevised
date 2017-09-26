@@ -63,7 +63,7 @@ public class DemonstrationActivity
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_demo);
 
-        Log.v(BezierGlobals.TAG, "DemonstrationActivity::onCreate ------------------------------------------------------------------");
+        Log.v(BezierGlobals.TAG, "DemonstrationActivity::onCreate");
 
         this.setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
 
@@ -117,7 +117,6 @@ public class DemonstrationActivity
         this.bezierViewWithGrid.registerListener(new BezierListener() {
             @Override
             public void setInfo(String info) {
-
             }
 
             @Override
@@ -130,8 +129,10 @@ public class DemonstrationActivity
                 DisplayMetrics dm = new DisplayMetrics();
                 DemonstrationActivity.this.getWindowManager().getDefaultDisplay().getMetrics(dm);
 
-                double cellLength = BezierUtils.calculateGridCellLength(dm, width, height);
-                DemonstrationActivity.this.bezierViewWithGrid.setCellLength(cellLength);
+                // calculate some cell lengths (according to unit 'cm')
+                BezierUtils.calculateCellLengths(dm, width, height);
+
+                DemonstrationActivity.this.bezierViewWithGrid.setDensityOfGridlines(1);
 
                 String info = String.format(Locale.getDefault(),
                         "DemonstrationActivity: Size in Pixel: -------------> %d, %d",
@@ -140,7 +141,9 @@ public class DemonstrationActivity
 
                 DemonstrationActivity.this.task = new DemoOperation();
                 DemonstrationActivity.this.task.setRunning(true);
-                DemonstrationActivity.this.task.execute();
+
+                // TODO: Das muss natürlich wieder weg
+                // DemonstrationActivity.this.task.execute();
             }
 
             @Override

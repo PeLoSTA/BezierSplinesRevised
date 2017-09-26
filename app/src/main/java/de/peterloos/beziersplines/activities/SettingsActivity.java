@@ -184,7 +184,7 @@ public class SettingsActivity extends AppCompatActivity {
 
                 SettingsActivity.this.indexGridlines = SettingsActivity.this.indexTmpGridlines;
 
-                // persist gridlines factor
+                // persist grid lines factor
                 Context context = SettingsActivity.this.getApplicationContext();
                 SharedPreferencesUtils.persistGridlinesFactor(context, SettingsActivity.this.indexGridlines);
 

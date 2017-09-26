@@ -9,10 +9,8 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.DisplayMetrics;
 import android.util.Log;
-import android.view.Display;
 import android.view.View;
 import android.view.View.OnClickListener;
-import android.view.WindowManager;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemSelectedListener;
 import android.widget.CheckBox;
@@ -32,7 +30,6 @@ import java.util.Locale;
 import de.peterloos.beziersplines.BezierGlobals;
 import de.peterloos.beziersplines.utils.BezierMode;
 import de.peterloos.beziersplines.utils.BezierUtils;
-import de.peterloos.beziersplines.utils.LocaleUtils;
 import de.peterloos.beziersplines.utils.SharedPreferencesUtils;
 import de.peterloos.beziersplines.views.BezierGridView;
 import de.peterloos.beziersplines.views.BezierListener;
@@ -86,7 +83,7 @@ public class MainActivity
         super.onCreate(savedInstanceState);
         this.setContentView(R.layout.activity_main);
 
-        Log.v(BezierGlobals.TAG, "MainActivity::onCreate ------------------------------------------------------------------");
+        Log.v(BezierGlobals.TAG, "MainActivity::onCreate");
 
         // both portrait and landscape mode make this app more complicated
         this.setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
@@ -146,21 +143,8 @@ public class MainActivity
         this.bezierViewWithGrid.setStrokewidthFactor(strokeWidthFactor);
 
         // read shared preferences (gridlines factor)
-
-        // TODO: DAS Mit den Shared prefs ist komplett neu zu gestalten !!!!!!!
-        // TODO: Was wird da überaupt angespeichert ????
-
-//        int gridlinesFactor = SharedPreferencesUtils.getPersistedGridlinesFactor(context);
-//        this.bezierViewWithGrid.setDensityOfGridlines(gridlinesFactor);
-
-        // sync shared preferences settings with language:
-        // implemented - but didn't work with Android 'Nougat'
-        // TODO: Remove this language handling ... isn't Android conform this way .. )
-        // this.syncSharedPrefsWithLanguage(context);
-
-        // connect event sinks with client
-//        this.bezierViewWithGrid.registerListener(this);
-//        this.bezierViewWithoutGrid.registerListener(this);
+        final int gridlinesFactor = SharedPreferencesUtils.getPersistedGridlinesFactor(context);
+        this.bezierViewWithGrid.setDensityOfGridlines(gridlinesFactor);
 
         // connect event sinks with client
         this.bezierViewWithGrid.registerListener(new BezierListener() {
@@ -179,8 +163,10 @@ public class MainActivity
                 DisplayMetrics dm = new DisplayMetrics();
                 MainActivity.this.getWindowManager().getDefaultDisplay().getMetrics(dm);
 
-                double cellLength = BezierUtils.calculateGridCellLength(dm, width, height);
-                MainActivity.this.bezierViewWithGrid.setCellLength(cellLength);
+                // calculate some cell lengths (according to unit 'cm')
+                BezierUtils.calculateCellLengths(dm, width, height);
+
+                MainActivity.this.bezierViewWithGrid.setDensityOfGridlines(gridlinesFactor);
             }
 
             @Override
@@ -252,9 +238,7 @@ public class MainActivity
                 int strokewidthFactor = data.getIntExtra(this.resultStrokewidth, -1);
 
                 if (gridlinesFactor != -1) {
-
-                    // TODO: DAS MUSS ANGEPASST WERDEN !!!!!!!!!!!!!!!!
-                    // this.bezierViewWithGrid.setDensityOfGridlines(gridlinesFactor);
+                    this.bezierViewWithGrid.setDensityOfGridlines(gridlinesFactor);
                 }
 
                 if (strokewidthFactor != -1) {

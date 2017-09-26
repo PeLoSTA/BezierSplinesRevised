@@ -17,6 +17,15 @@ import de.peterloos.beziersplines.BezierGlobals;
 
 public class BezierUtils {
 
+    private static double cellLengths[];
+
+    static {
+        cellLengths = new double[3];
+        cellLengths[0] = -1;
+        cellLengths[1] = -1;
+        cellLengths[2] = -1;
+    }
+
     private enum Direction {ToTheRight, ToTheBottom, ToTheLeft, ToTheTop}
 
     // just for concentric rectangles
@@ -95,7 +104,7 @@ public class BezierUtils {
         p.setY(snapY);
     }
 
-    public static double calculateGridCellLength (DisplayMetrics dm, int widthPx, int heightPx) {
+    public static void calculateCellLengths (DisplayMetrics dm, int widthPx, int heightPx) {
 
         // calculate size of this display in cm
         double xInches = (double) widthPx / (double) dm.xdpi;
@@ -112,11 +121,13 @@ public class BezierUtils {
         Log.d(BezierGlobals.TAG,"numPixelsHorizontalPerCm: " + numPixelsHorizontalPerCm);
         Log.d(BezierGlobals.TAG,"numPixelsVerticalPerCm:   " + numPixelsVerticalPerCm);
 
-        // TODO: Das soll jetzt mal ein Viertel CM sein ...
-        // TODO: Das muss noch entsprechend erweitert werden !!!!!!!!!!!!!!!!
-        // this.bezierViewWithGrid.setCellLength(numPixelsHorizontalPerCm / 4.0);
+        cellLengths[0] = numPixelsHorizontalPerCm / 2.0;    // 1/2 cm
+        cellLengths[1] = numPixelsHorizontalPerCm / 4.0;    // 1/4 cm
+        cellLengths[2] = numPixelsHorizontalPerCm / 8.0;    // 1/8 cm
+    }
 
-        return numPixelsHorizontalPerCm / 4.0;
+    public static double getCellLength (int density) {
+        return cellLengths[density];
     }
 
     // ============================================================================================

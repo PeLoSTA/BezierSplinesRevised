@@ -21,6 +21,10 @@ import de.peterloos.beziersplines.utils.BezierUtils;
 
 public class BezierGridView extends BezierView {
 
+    // TODO: Die ist - glaube ich - uberflüssig
+    private int density;
+    // private int densities[];
+
     // grid specific variables
     private double cellLength;
     private int numCellRows;
@@ -46,17 +50,15 @@ public class BezierGridView extends BezierView {
         this.linePaint.setFlags(Paint.ANTI_ALIAS_FLAG);
         this.linePaint.setColor(Color.WHITE);
         this.linePaint.setStrokeCap(Paint.Cap.ROUND);
-    }
 
-//    @Override
-//    protected void setActualViewSize(int width, int height) {
-//
-//        String msg = String.format(Locale.getDefault(), "====> BezierGridView::setActualViewSize: %d - %d", width, height);
-//        Log.v(BezierGlobals.TAG, msg);
-//
-//        super.setActualViewSize(width, height);
-//        // this.calculateNumOfGridLines();
-//    }
+        // setup density of gridlines
+        this.density = 1;  // 0, 1 or 2
+//        this.densities = new int[]{
+//            BezierGlobals.GridlinesDensityLow,
+//            BezierGlobals.GridlinesDensityNormal,
+//            BezierGlobals.GridlinesDensityHigh
+//        };
+    }
 
     @Override
     public void addControlPoint(BezierPoint p) {
@@ -77,29 +79,20 @@ public class BezierGridView extends BezierView {
     }
 
     // public interface
-    public void setCellLength(double cellLength) {
-
-        this.cellLength = cellLength;
+    public void setDensityOfGridlines(int density) {
+        this.density = density;
+        this.cellLength = BezierUtils.getCellLength(density);
         this.calculateNumOfGridLines();
         this.invalidate();
     }
-
-//    public void setDensityOfGridlines(int density) {
-//        this.density = density;
-//        this.calculateCellSize();
-//        this.invalidate();
-//    }
 
     // private helper methods
     private void calculateNumOfGridLines() {
         // calculate number of grid lines (horizontally and vertically)
         // (cut off decimal part, no rounding)
 
-//        this.numCellCols = (int) (this.viewWidth / this.cellLength);
-//        this.numCellRows = (int) (this.viewHeight / this.cellLength);
-
-        this.numCellCols = (int) Math.round (this.viewWidth / this.cellLength);
-        this.numCellRows = (int) Math.round (this.viewHeight / this.cellLength);
+        this.numCellCols = (int) (this.viewWidth / this.cellLength);
+        this.numCellRows = (int) (this.viewHeight / this.cellLength);
 
         String msg = String.format(Locale.getDefault(), "====> BezierGridView::calculateNumOfGridLines: Cols=%d - Rows=%d", this.numCellCols, this.numCellRows);
         Log.v(BezierGlobals.TAG, msg);
