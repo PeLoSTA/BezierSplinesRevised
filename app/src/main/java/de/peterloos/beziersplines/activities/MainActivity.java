@@ -9,8 +9,10 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.DisplayMetrics;
 import android.util.Log;
+import android.view.Display;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.view.WindowManager;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemSelectedListener;
 import android.widget.CheckBox;
@@ -44,7 +46,7 @@ import de.peterloos.beziersplines.R;
 
 public class MainActivity
         extends AppCompatActivity
-        implements OnClickListener, OnSeekBarChangeListener, OnItemSelectedListener, BezierListener {
+        implements OnClickListener, OnSeekBarChangeListener, OnItemSelectedListener {
 
     private static final int REQUESTCODE_SETTINGS = 1;
 
@@ -74,10 +76,6 @@ public class MainActivity
     private String resultGridlines;
     private String resultStrokewidth;
 
-    // size of bezier view(s) - class Size only at API level 21 supported
-    private int viewWidth;
-    private int viewHeight;
-
     private int resolution;
     private boolean gridIsVisible;
     private boolean constructionIsVisible;
@@ -103,8 +101,6 @@ public class MainActivity
         this.resolution = 50;
         this.gridIsVisible = false;
         this.constructionIsVisible = false;
-        this.viewWidth = -1;
-        this.viewHeight = -1;
 
         // retrieve control references
         this.viewSwitcher = (ViewSwitcher) findViewById(R.id.viewswitcher);
@@ -156,14 +152,79 @@ public class MainActivity
 //        int gridlinesFactor = SharedPreferencesUtils.getPersistedGridlinesFactor(context);
 //        this.bezierViewWithGrid.setDensityOfGridlines(gridlinesFactor);
 
-        // connect event sinks with client
-        this.bezierViewWithGrid.registerListener(this);
-        this.bezierViewWithoutGrid.registerListener(this);
-
         // sync shared preferences settings with language:
         // implemented - but didn't work with Android 'Nougat'
         // TODO: Remove this language handling ... isn't Android conform this way .. )
         // this.syncSharedPrefsWithLanguage(context);
+
+        // connect event sinks with client
+//        this.bezierViewWithGrid.registerListener(this);
+//        this.bezierViewWithoutGrid.registerListener(this);
+
+        // connect event sinks with client
+        this.bezierViewWithGrid.registerListener(new BezierListener() {
+            @Override
+            public void setInfo(String info) {
+                MainActivity.this.textViewInfo.setText(info);
+            }
+
+            @Override
+            public void setSize(int width, int height) {
+                String info = String.format(Locale.getDefault(),
+                        "MainActivity: Size in Pixel: -------------> %d, %d", width, height);
+                Log.v(BezierGlobals.TAG, info);
+
+                // retrieve display metrics that describe the size and density of this display
+                DisplayMetrics dm = new DisplayMetrics();
+                WindowManager wm = MainActivity.this.getWindowManager();
+                Display display = wm.getDefaultDisplay();
+                display.getMetrics(dm);
+
+                // calculate size of this display in cm
+                double xInches = (double) width / (double) dm.xdpi;
+                double xCm = xInches * 2.54;
+                double yInches = (double) height / (double) dm.ydpi;
+                double yCm = yInches * 2.54;
+                Log.d(BezierGlobals.TAG,"View in cm (width): " + xCm);
+                Log.d(BezierGlobals.TAG,"View in cm (height): " + yCm);
+
+                // calculate cell size for bézier grid view in pixel
+                double numPixelsHorizontalPerCm = (double) width / xCm;
+                double numPixelsVerticalPerCm = (double) height / yCm;
+
+                Log.d(BezierGlobals.TAG,"numPixelsHorizontalPerCm: " + numPixelsHorizontalPerCm);
+                Log.d(BezierGlobals.TAG,"numPixelsVerticalPerCm:   " + numPixelsVerticalPerCm);
+
+                // TODO: Das soll jetzt mal ein Viertel CM sein ...
+                // TODO: Das muss noch entsprechend erweitert werden !!!!!!!!!!!!!!!!
+                // this.bezierViewWithGrid.setCellLength(numPixelsHorizontalPerCm / 4.0);
+                MainActivity.this.bezierViewWithGrid.setCellLength(numPixelsHorizontalPerCm);
+            }
+
+            @Override
+            public void changeMode(BezierMode mode) {
+                // should be only called with requested mode 'BezierMode.Create'
+                MainActivity.this.spinnerMode.setSelection(0);
+            }
+        });
+
+        this.bezierViewWithoutGrid.registerListener(new BezierListener() {
+            @Override
+            public void setInfo(String info) {
+                MainActivity.this.textViewInfo.setText(info);
+            }
+
+            @Override
+            public void setSize(int width, int height) {
+                // nothing to do
+            }
+
+            @Override
+            public void changeMode(BezierMode mode) {
+                // should be only called with requested mode 'BezierMode.Create'
+                MainActivity.this.spinnerMode.setSelection(0);
+            }
+        });
     }
 
     @Override
@@ -341,60 +402,6 @@ public class MainActivity
     @Override
     public void onNothingSelected(AdapterView<?> adapterView) {
         Log.v("PeLo", "onNothingSelected");
-    }
-
-    /*
-     * implementation of interface 'BezierListener'
-     */
-
-    @Override
-    public void setInfo(String info) {
-        this.textViewInfo.setText(info);
-    }
-
-    public void setSize(int width, int height) {
-
-        this.viewWidth = width;
-        this.viewHeight = height;
-
-        String info = String.format(Locale.getDefault(),
-            "MainActivity: Size in Pixel: -------------> %d, %d", this.viewWidth, this.viewHeight);
-        Log.v(BezierGlobals.TAG, info);
-
-        DisplayMetrics dm = new DisplayMetrics();
-        getWindowManager().getDefaultDisplay().getMetrics(dm);
-        double x = Math.pow(width/dm.xdpi,2);
-        double y = Math.pow(height/dm.ydpi,2);
-        double screenInches = Math.sqrt(x+y);
-        Log.d(BezierGlobals.TAG,"Screen inches: " + screenInches);
-
-        // und jetzt PeLo
-        double xxInches = (double) width / (double) dm.xdpi;
-        double xxCm = xxInches * 2.54;
-        double yyInches = (double) height / (double) dm.ydpi;
-        double yyCm = yyInches * 2.54;
-        Log.d(BezierGlobals.TAG,"View in cm (width): " + xxCm);
-        Log.d(BezierGlobals.TAG,"View in cm (height): " + yyCm);
-
-        // calculate cell size for bézier grid view
-        double numPixelsHorizontalPerCm = (double) width / xxCm;
-        double numPixelsVerticalPerCm = (double) height / yyCm;
-
-        Log.d(BezierGlobals.TAG,"numPixelsHorizontalPerCm: " + numPixelsHorizontalPerCm);
-        Log.d(BezierGlobals.TAG,"numPixelsVerticalPerCm:   " + numPixelsVerticalPerCm);
-
-
-        // TODO: Das soll jetzt mal ein Viertel CM sein ...
-        // TODO: Das muss noch entsprechend erweitert werden !!!!!!!!!!!!!!!!
-
-        // this.bezierViewWithGrid.setCellLength(numPixelsHorizontalPerCm / 4.0);
-        this.bezierViewWithGrid.setCellLength(numPixelsHorizontalPerCm);
-    }
-
-    @Override
-    public void changeMode(BezierMode mode) {
-        // should be only called with requested mode 'BezierMode.Create'
-        this.spinnerMode.setSelection(0);
     }
 
     // private helper methods

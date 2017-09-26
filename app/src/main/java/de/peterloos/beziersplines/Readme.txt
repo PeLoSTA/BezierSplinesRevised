@@ -4,6 +4,13 @@ Da muss die CellLength geändert werden !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 
 // --------------------------------------------------------------------------------
 
+Es müsste die Toolbar eingeführt werden.
+
+Damit ich beim Rücksprung in den entsprechenden Events auch
+den Holder löschen kann.
+
+// --------------------------------------------------------------------------------
+
 Demo geht wieder --- aber jetzt werden die Punkte DOPPELT gemalt
 
 // --------------------------------------------------------------------------------

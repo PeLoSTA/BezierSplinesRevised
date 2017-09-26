@@ -35,7 +35,7 @@ import de.peterloos.beziersplines.views.BezierView;
 
 public class DemonstrationActivity
         extends AppCompatActivity
-        implements OnClickListener, BezierListener {
+        implements OnClickListener {
 
     private static final int DemoViewResolution = 200; // resolution of demonstration view
     private static final int TaskDelay = 30; // animation velocity
@@ -47,7 +47,7 @@ public class DemonstrationActivity
     private int viewWidth;
     private int viewHeight;
 
-    private BezierGridView bezierView;
+    private BezierGridView bezierViewWithGrid;
     private Button buttonStop;
     private Button buttonRestart;
     private TextView textViewResolution;
@@ -70,11 +70,8 @@ public class DemonstrationActivity
         this.viewHeight = -1;
 
         // retrieve control references
-        this.bezierView = (BezierGridView) this.findViewById(R.id.bezier_view_demo);
-
-        // connect event sink with client
-        // (both views - with and without grid - have same size, one sink is therefore sufficient)
-        this.bezierView.registerListener(this);
+        this.bezierViewWithGrid = (BezierGridView) this.findViewById(R.id.bezier_view_demo);
+        this.bezierViewWithGrid.clear();
 
         // prefer action bar title with two lines
         ActionBar actionBar = this.getSupportActionBar();
@@ -96,15 +93,15 @@ public class DemonstrationActivity
         this.buttonRestart.setOnClickListener(this);
 
         // initialize bezier view
-        this.bezierView.setMode(BezierMode.Demo);
-        this.bezierView.setResolution(DemoViewResolution);
-        this.bezierView.setT(0);
-        this.bezierView.setShowConstruction(true);
+        this.bezierViewWithGrid.setMode(BezierMode.Demo);
+        this.bezierViewWithGrid.setResolution(DemoViewResolution);
+        this.bezierViewWithGrid.setT(0);
+        this.bezierViewWithGrid.setShowConstruction(true);
 
         // retrieve shared preferences
         Context context = this.getApplicationContext();
         int strokewidthFactor = SharedPreferencesUtils.getPersistedStrokewidthFactor(context);
-        this.bezierView.setStrokewidthFactor(strokewidthFactor);
+        this.bezierViewWithGrid.setStrokewidthFactor(strokewidthFactor);
 
         // initialize controls
         String resolution = String.format(Locale.getDefault(), "%d", DemoViewResolution);
@@ -114,6 +111,39 @@ public class DemonstrationActivity
 
         this.demoControlPoints = new ArrayList<>();
         this.task = null;
+
+        // connect event sink with client
+        this.bezierViewWithGrid.registerListener(new BezierListener() {
+            @Override
+            public void setInfo(String info) {
+
+            }
+
+            @Override
+            public void setSize(int width, int height) {
+
+                // TODO: Das muss natürlich noch richtig berechnet werden !!!
+                // Die 100 ist nur zum Testen
+                DemonstrationActivity.this.bezierViewWithGrid.setCellLength(100);
+
+                DemonstrationActivity.this.viewWidth = width;
+                DemonstrationActivity.this.viewHeight = height;
+
+                String info = String.format(Locale.getDefault(),
+                        "DemonstrationActivity: Size in Pixel: -------------> %d, %d",
+                        DemonstrationActivity.this.viewWidth, DemonstrationActivity.this.viewHeight);
+                Log.v(BezierGlobals.TAG, info);
+
+                DemonstrationActivity.this.task = new DemoOperation();
+                DemonstrationActivity.this.task.setRunning(true);
+                DemonstrationActivity.this.task.execute();
+            }
+
+            @Override
+            public void changeMode(BezierMode mode) {
+
+            }
+        });
     }
 
     // private helper methods
@@ -180,8 +210,8 @@ public class DemonstrationActivity
 
             if (this.task == null) {
 
-                this.bezierView.clear();
-                this.bezierView.setT(0);
+                this.bezierViewWithGrid.clear();
+                this.bezierViewWithGrid.setT(0);
                 String t = String.format(Locale.getDefault(), "%1.2f", 0.0);
                 this.textViewT.setText(t);
                 this.task = new DemoOperation();
@@ -189,41 +219,6 @@ public class DemonstrationActivity
                 this.task.execute();
             }
         }
-    }
-
-    /*
-     * implementation of interface 'BezierListener'
-     */
-
-    @Override
-    public void setInfo(String info) {
-
-    }
-
-    @Override
-    public void setSize(int width, int height) {
-
-
-        // TODO: Das muss natürlich noch richtig berechnet werden !!!
-        // Die 100 ist nur zum Testen
-        this.bezierView.setCellLength(100);
-
-        this.viewWidth = width;
-        this.viewHeight = height;
-
-        String info = String.format(Locale.getDefault(),
-                "DemonstrationActivity: Size in Pixel: -------------> %d, %d", this.viewWidth, this.viewHeight);
-        Log.v(BezierGlobals.TAG, info);
-
-
-        this.task = new DemoOperation();
-        this.task.setRunning(true);
-        this.task.execute();
-    }
-
-    @Override
-    public void changeMode(BezierMode mode) {
-
     }
 
     private class DemoOperation extends AsyncTask<Void, UpdateDescriptor, Void> {
@@ -322,10 +317,11 @@ public class DemonstrationActivity
                 UpdateDescriptor dsc = values[0];
 
                 if (dsc.isAddPoint()) {
-                    DemonstrationActivity.this.bezierView.addControlPoint(dsc.getP());
+                    DemonstrationActivity.this.bezierViewWithGrid.addControlPoint(dsc.getP());
                 } else if (dsc.isChangeT()) {
-                    DemonstrationActivity.this.bezierView.setT(dsc.getT());
+                    DemonstrationActivity.this.bezierViewWithGrid.setT(dsc.getT());
                     String t = String.format(Locale.getDefault(), "%1.2f", dsc.getT());
+                    Log.v(BezierGlobals.TAG, t);
                     DemonstrationActivity.this.textViewT.setText(t);
                 }
             }

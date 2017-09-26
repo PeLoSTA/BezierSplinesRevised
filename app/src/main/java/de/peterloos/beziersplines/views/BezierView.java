@@ -149,26 +149,24 @@ public class BezierView extends View implements View.OnTouchListener {
             public void onGlobalLayout() {
                 BezierView.this.getViewTreeObserver().removeOnGlobalLayoutListener(this);
 
-                int width = BezierView.this.getMeasuredWidth();
-                int height = BezierView.this.getMeasuredHeight();
-
-                BezierView.this.setActualViewSize(width, height);
+                BezierView.this.viewWidth = BezierView.this.getMeasuredWidth();;
+                BezierView.this.viewHeight = BezierView.this.getMeasuredHeight();;
 
                 if (BezierView.this.listener != null) {
-                    BezierView.this.listener.setSize(width, height);
+                    BezierView.this.listener.setSize(BezierView.this.viewWidth, BezierView.this.viewHeight);
                 }
             }
         });
     }
 
-    protected void setActualViewSize(int width, int height) {
-
-        String msg = String.format(Locale.getDefault(), "====> BezierGrid::setActualViewSize: %d - %d", width, height);
-        Log.v(BezierGlobals.TAG, msg);
-
-        this.viewWidth = width;
-        this.viewHeight = height;
-    }
+//    protected void setActualViewSize(int width, int height) {
+//
+//        String msg = String.format(Locale.getDefault(), "====> BezierGrid::setActualViewSize: %d - %d", width, height);
+//        Log.v(BezierGlobals.TAG, msg);
+//
+//        this.viewWidth = width;
+//        this.viewHeight = height;
+//    }
 
     // getter/setter
     public void setResolution(int resolution) {

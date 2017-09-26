@@ -48,15 +48,15 @@ public class BezierGridView extends BezierView {
         this.linePaint.setStrokeCap(Paint.Cap.ROUND);
     }
 
-    @Override
-    protected void setActualViewSize(int width, int height) {
-
-        String msg = String.format(Locale.getDefault(), "====> BezierGridView::setActualViewSize: %d - %d", width, height);
-        Log.v(BezierGlobals.TAG, msg);
-
-        super.setActualViewSize(width, height);
-        // this.calculateNumOfGridLines();
-    }
+//    @Override
+//    protected void setActualViewSize(int width, int height) {
+//
+//        String msg = String.format(Locale.getDefault(), "====> BezierGridView::setActualViewSize: %d - %d", width, height);
+//        Log.v(BezierGlobals.TAG, msg);
+//
+//        super.setActualViewSize(width, height);
+//        // this.calculateNumOfGridLines();
+//    }
 
     @Override
     public void addControlPoint(BezierPoint p) {
