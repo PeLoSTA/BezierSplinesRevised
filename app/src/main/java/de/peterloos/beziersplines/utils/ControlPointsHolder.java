@@ -18,24 +18,19 @@ public class ControlPointsHolder {
     // representing application global data
     private List<BezierPoint> model;
 
-    // life guard
-    // private boolean isAlive;
-
     // restrict the constructor from being instantiated
     private ControlPointsHolder () {
         // this.isAlive = false;
         this.model = new ArrayList<>();
     }
 
-//    public void setData (List<BezierPoint> model) {
-//        this.model = model;
-//        // this.isAlive = true;
-//    }
-//
-//    public List<BezierPoint> getData () {
-//        // return (this.isAlive) ? this.model : null;
-//        return this.model;
-//    }
+    public void set (List<BezierPoint> model) {
+        this.model = model;
+    }
+
+    public List<BezierPoint> get () {
+        return this.model;
+    }
 
     public static synchronized ControlPointsHolder getInstance () {
 

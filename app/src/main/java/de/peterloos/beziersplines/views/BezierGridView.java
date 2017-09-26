@@ -21,9 +21,7 @@ import de.peterloos.beziersplines.utils.BezierUtils;
 
 public class BezierGridView extends BezierView {
 
-    // TODO: Die ist - glaube ich - uberflüssig
-    private int density;
-    // private int densities[];
+    private int indexGridLines;
 
     // grid specific variables
     private double cellLength;
@@ -52,12 +50,7 @@ public class BezierGridView extends BezierView {
         this.linePaint.setStrokeCap(Paint.Cap.ROUND);
 
         // setup density of gridlines
-        this.density = 1;  // 0, 1 or 2
-//        this.densities = new int[]{
-//            BezierGlobals.GridlinesDensityLow,
-//            BezierGlobals.GridlinesDensityNormal,
-//            BezierGlobals.GridlinesDensityHigh
-//        };
+        this.indexGridLines = BezierGlobals.GridlineIndexDefault;
     }
 
     @Override
@@ -79,22 +72,31 @@ public class BezierGridView extends BezierView {
     }
 
     // public interface
-    public void setDensityOfGridlines(int density) {
-        this.density = density;
-        this.cellLength = BezierUtils.getCellLength(density);
+    public void setDensityOfGridlines(int index) {
+
+        this.cellLength = BezierUtils.getCellLength(index);
+
+        if (index < this.indexGridLines) {
+            this.snapAllPoints();
+        }
+
+        this.indexGridLines = index;
+
         this.calculateNumOfGridLines();
         this.invalidate();
     }
 
     // private helper methods
     private void calculateNumOfGridLines() {
+
         // calculate number of grid lines (horizontally and vertically)
         // (cut off decimal part, no rounding)
-
         this.numCellCols = (int) (this.viewWidth / this.cellLength);
         this.numCellRows = (int) (this.viewHeight / this.cellLength);
 
-        String msg = String.format(Locale.getDefault(), "====> BezierGridView::calculateNumOfGridLines: Cols=%d - Rows=%d", this.numCellCols, this.numCellRows);
+        String msg = String.format(Locale.getDefault(),
+                "====> BezierGridView::calculateNumOfGridLines: Cols=%d - Rows=%d",
+                this.numCellCols, this.numCellRows);
         Log.v(BezierGlobals.TAG, msg);
     }
 
@@ -104,7 +106,7 @@ public class BezierGridView extends BezierView {
             return;
 
         // draw horizontal lines
-        for (int i = 0; i < this.numCellRows; i++) {
+        for (int i = 0; i <= this.numCellRows; i++) {
             canvas.drawLine(
                 0,
                 (float) (i * this.cellLength),
@@ -114,7 +116,7 @@ public class BezierGridView extends BezierView {
         }
 
         // draw vertical lines
-        for (int i = 0; i < this.numCellCols; i++) {
+        for (int i = 0; i <= this.numCellCols; i++) {
             canvas.drawLine(
                 (float) (i * this.cellLength),
                 0,

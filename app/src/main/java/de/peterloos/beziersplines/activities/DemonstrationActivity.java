@@ -24,6 +24,7 @@ import de.peterloos.beziersplines.utils.BezierMode;
 import de.peterloos.beziersplines.utils.BezierPoint;
 import de.peterloos.beziersplines.R;
 import de.peterloos.beziersplines.utils.BezierUtils;
+import de.peterloos.beziersplines.utils.ControlPointsHolder;
 import de.peterloos.beziersplines.utils.SharedPreferencesUtils;
 import de.peterloos.beziersplines.views.BezierGridView;
 import de.peterloos.beziersplines.views.BezierListener;
@@ -59,6 +60,8 @@ public class DemonstrationActivity
     // TODO: Oder anders herum: Warum sind da unten mehrere unused Methoden ?!?!?!?
     private List<BezierPoint> demoControlPoints;
 
+    private List<BezierPoint> previousControlPoints;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -70,10 +73,6 @@ public class DemonstrationActivity
         this.viewWidth = -1;
         this.viewHeight = -1;
 
-        // retrieve control references
-        this.bezierViewWithGrid = (BezierGridView) this.findViewById(R.id.bezier_view_demo);
-        this.bezierViewWithGrid.clear();
-
         // prefer action bar title with two lines
         ActionBar actionBar = this.getSupportActionBar();
         if (actionBar != null) {
@@ -81,8 +80,10 @@ public class DemonstrationActivity
             actionBar.setSubtitle(this.getString(R.string.app_main_title));
         }
 
-        // TODO: DAS MUSS ANGEPASST WERDEN !!!!!!!!!!!!!!!!
-        // this.bezierView.setDensityOfGridlines(2);
+        // retrieve control references
+        this.bezierViewWithGrid = (BezierGridView) this.findViewById(R.id.bezier_view_demo);
+        this.bezierViewWithGrid.clear();
+        this.bezierViewWithGrid.setDensityOfGridlines(BezierGlobals.GridlineIndexHigh);
 
         this.textViewResolution = (TextView) this.findViewById(R.id.textview_resolution);
         this.textViewT = (TextView) this.findViewById(R.id.textview_t);
@@ -113,6 +114,13 @@ public class DemonstrationActivity
         this.demoControlPoints = new ArrayList<>();
         this.task = null;
 
+        // retrieve singleton data object, to access control points
+        ControlPointsHolder holder = ControlPointsHolder.getInstance();
+
+        // save current control points
+        this.previousControlPoints = holder.get();
+        holder.clear();
+
         // connect event sink with client
         this.bezierViewWithGrid.registerListener(new BezierListener() {
             @Override
@@ -132,7 +140,7 @@ public class DemonstrationActivity
                 // calculate some cell lengths (according to unit 'cm')
                 BezierUtils.calculateCellLengths(dm, width, height);
 
-                DemonstrationActivity.this.bezierViewWithGrid.setDensityOfGridlines(1);
+                DemonstrationActivity.this.bezierViewWithGrid.setDensityOfGridlines(BezierGlobals.GridlineIndexHigh);
 
                 String info =
                         String.format(Locale.getDefault(),
@@ -142,9 +150,7 @@ public class DemonstrationActivity
 
                 DemonstrationActivity.this.task = new DemoOperation();
                 DemonstrationActivity.this.task.setRunning(true);
-
-                // TODO: Das muss natürlich wieder weg
-                // DemonstrationActivity.this.task.execute();
+                DemonstrationActivity.this.task.execute();
             }
 
             @Override
@@ -161,6 +167,14 @@ public class DemonstrationActivity
         // therefore I'm overriding onOptionsItemSelected and just 'finish' the current activity
         switch (item.getItemId()) {
             case android.R.id.home:
+
+                // retrieve singleton data object, to access control points
+                ControlPointsHolder holder = ControlPointsHolder.getInstance();
+
+                // restore former control points
+                holder.clear();
+                holder.set(this.previousControlPoints);
+
                 // up arrow in action bar clicked - goto main activity
                 this.finish();
                 return true;

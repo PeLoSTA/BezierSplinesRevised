@@ -157,15 +157,6 @@ public class BezierView extends View implements View.OnTouchListener {
         });
     }
 
-//    protected void setActualViewSize(int width, int height) {
-//
-//        String msg = String.format(Locale.getDefault(), "====> BezierGrid::setActualViewSize: %d - %d", width, height);
-//        Log.v(BezierGlobals.TAG, msg);
-//
-//        this.viewWidth = width;
-//        this.viewHeight = height;
-//    }
-
     // getter/setter
     public void setResolution(int resolution) {
         this.resolution = resolution;

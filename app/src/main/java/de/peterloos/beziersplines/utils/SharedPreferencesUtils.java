@@ -25,7 +25,7 @@ public class SharedPreferencesUtils {
 
         SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(context);
         String key = context.getString(R.string.shared_pref_gridlines);
-        int gridlinesFactor = sharedPref.getInt(key, BezierGlobals.DefaultGridlineFactor);
+        int gridlinesFactor = sharedPref.getInt(key, BezierGlobals.GridlineIndexDefault);
         String msg = String.format(Locale.getDefault(), "reading gridlines factor ==> %d", gridlinesFactor);
         Log.v("PeLo", msg);
 

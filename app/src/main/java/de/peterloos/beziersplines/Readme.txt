@@ -1,4 +1,5 @@
 TODO: WICHTIG:
+
 Die Demontration-View hat eine andere Größe ....
 Da muss die CellLength geändert werden !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 
@@ -25,13 +26,6 @@ Allgemein: Wann muss die Liste der Punkte eigentlich gelöscht werden
 // --------------------------------------------------------------------------------
 
 "App is not indexable by Google Search (android lint)"
-
-// --------------------------------------------------------------------------------
-
-"Wo wird verhindert, dass die App zwischen Landscape und Portrait wechselt ????"
-
-DERZEIT wird nur der Portrait-Modus unterstützt ... sollte evtl. auch so
-bleiben ?!?!?!
 
 // --------------------------------------------------------------------------------
 

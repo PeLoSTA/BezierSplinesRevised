@@ -8,8 +8,6 @@ package de.peterloos.beziersplines;
 
 public class BezierGlobals {
 
-    public static final String VersionReadable = "Redesign including new snap lines algorithm - test";
-
     public static final String TAG = "PeLo";
 
     // language settings
@@ -22,10 +20,9 @@ public class BezierGlobals {
     public static final float[] StrokewidthFactors = new float[]{0.5F, 0.75F, 1.0F, 1.25F, 1.5F};
 
     // gridlines factor
-    public static final int DefaultGridlineFactor = 1;   // 0 (low), 1 (normal) or 2 (high)
-    public static final int GridlinesDensityLow = 20;
-    public static final int GridlinesDensityNormal = 30;
-    public static final int GridlinesDensityHigh = 40;
+    public static final int GridlineIndexLow = 1;       // less grid lines
+    public static final int GridlineIndexDefault = 1;   // regular grid lines
+    public static final int GridlineIndexHigh = 1;      // many grid lines
 
     // density-independent pixels for lines
     public static final float StrokeWidthControlPointsDp = 3.5F;

@@ -371,4 +371,12 @@ public class MainActivity
     public void onNothingSelected(AdapterView<?> adapterView) {
         Log.v("PeLo", "onNothingSelected");
     }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+
+        this.bezierViewWithoutGrid.invalidate();
+        this.bezierViewWithGrid.invalidate();
+    }
 }
