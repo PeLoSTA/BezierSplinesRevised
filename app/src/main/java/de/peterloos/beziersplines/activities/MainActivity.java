@@ -155,7 +155,9 @@ public class MainActivity
 
             @Override
             public void setSize(int width, int height) {
-                String info = String.format(Locale.getDefault(),
+
+                String info =
+                        String.format(Locale.getDefault(),
                         "MainActivity: Size in Pixel: -------------> %d, %d", width, height);
                 Log.v(BezierGlobals.TAG, info);
 

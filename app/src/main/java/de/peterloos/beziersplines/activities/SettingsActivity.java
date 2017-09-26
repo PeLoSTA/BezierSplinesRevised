@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -103,6 +104,21 @@ public class SettingsActivity extends AppCompatActivity {
         this.textviewGridlines.setText(currentGridlinesFactor);
     }
 
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+
+        // want 'up' button to have the same functionality as the 'back' button;
+        // therefore I'm overriding onOptionsItemSelected and just 'finish' the current activity
+        switch (item.getItemId()) {
+            case android.R.id.home:
+                // up arrow in action bar clicked - goto main activity
+                this.finish();
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
+    }
+
     private void showAlertDialogStrokeWidth() {
 
         // need temporary variable in case of user cancels dialog
@@ -134,7 +150,7 @@ public class SettingsActivity extends AppCompatActivity {
                 SettingsActivity.this.indexStrokewidthFactor =
                         SettingsActivity.this.indexTmpStrokewidthFactor;
 
-                // persist strokewidth factor
+                // persist stroke width factor
                 Context context = SettingsActivity.this.getApplicationContext();
                 SharedPreferencesUtils.persistStrokewidthFactor(context, SettingsActivity.this.indexStrokewidthFactor);
 

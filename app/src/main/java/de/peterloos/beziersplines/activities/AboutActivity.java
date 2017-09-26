@@ -4,6 +4,7 @@ import android.content.pm.ActivityInfo;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.MenuItem;
 
 import de.peterloos.beziersplines.R;
 
@@ -26,6 +27,21 @@ public class AboutActivity extends AppCompatActivity {
         if (actionBar != null) {
             actionBar.setTitle(R.string.title_activity_about);
             actionBar.setSubtitle(this.getString(R.string.app_main_title));
+        }
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+
+        // want 'up' button to have the same functionality as the 'back' button;
+        // therefore I'm overriding onOptionsItemSelected and just 'finish' the current activity
+        switch (item.getItemId()) {
+            case android.R.id.home:
+                // up arrow in action bar clicked - goto main activity
+                this.finish();
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
         }
     }
 }

@@ -9,6 +9,7 @@ import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.util.DisplayMetrics;
 import android.util.Log;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
@@ -134,7 +135,8 @@ public class DemonstrationActivity
 
                 DemonstrationActivity.this.bezierViewWithGrid.setDensityOfGridlines(1);
 
-                String info = String.format(Locale.getDefault(),
+                String info =
+                        String.format(Locale.getDefault(),
                         "DemonstrationActivity: Size in Pixel: -------------> %d, %d",
                         DemonstrationActivity.this.viewWidth, DemonstrationActivity.this.viewHeight);
                 Log.v(BezierGlobals.TAG, info);
@@ -151,6 +153,21 @@ public class DemonstrationActivity
 
             }
         });
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+
+        // want 'up' button to have the same functionality as the 'back' button;
+        // therefore I'm overriding onOptionsItemSelected and just 'finish' the current activity
+        switch (item.getItemId()) {
+            case android.R.id.home:
+                // up arrow in action bar clicked - goto main activity
+                this.finish();
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
     }
 
     // private helper methods

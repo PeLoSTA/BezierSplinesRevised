@@ -8,6 +8,7 @@ import android.support.v4.view.ViewPager.OnPageChangeListener;
 import android.os.Bundle;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
+import android.view.MenuItem;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 
@@ -60,6 +61,21 @@ public class DocumentationActivity extends AppCompatActivity implements OnPageCh
         viewPager.addOnPageChangeListener(this);
 
         this.setUiPageViewController();
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+
+        // want 'up' button to have the same functionality as the 'back' button;
+        // therefore I'm overriding onOptionsItemSelected and just 'finish' the current activity
+        switch (item.getItemId()) {
+            case android.R.id.home:
+                // up arrow in action bar clicked - goto main activity
+                this.finish();
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
     }
 
     private void setUiPageViewController() {
