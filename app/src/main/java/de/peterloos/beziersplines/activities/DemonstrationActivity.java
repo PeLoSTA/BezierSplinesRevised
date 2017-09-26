@@ -63,10 +63,9 @@ public class DemonstrationActivity
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_demo);
+        this.setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
 
         Log.v(BezierGlobals.TAG, "DemonstrationActivity::onCreate");
-
-        this.setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
 
         this.viewWidth = -1;
         this.viewHeight = -1;
@@ -371,6 +370,37 @@ public class DemonstrationActivity
     @Override
     protected void onDestroy() {
         super.onDestroy();
+    }
+
+    class UpdateDescriptor {
+
+        private boolean addPoint;
+        private boolean changeT;
+        private BezierPoint p;
+        private float t;
+
+        public UpdateDescriptor(BezierPoint p, float t, boolean addPoint, boolean changeT) {
+            this.p = p;
+            this.t = t;
+            this.addPoint = addPoint;
+            this.changeT = changeT;
+        }
+
+        public BezierPoint getP() {
+            return this.p;
+        }
+
+        public float getT() {
+            return this.t;
+        }
+
+        public boolean isAddPoint() {
+            return this.addPoint;
+        }
+
+        public boolean isChangeT() {
+            return this.changeT;
+        }
     }
 }
 

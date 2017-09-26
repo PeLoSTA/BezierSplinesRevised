@@ -8,11 +8,13 @@ import android.os.Bundle;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import de.peterloos.beziersplines.BezierGlobals;
 import de.peterloos.beziersplines.R;
 import de.peterloos.beziersplines.utils.SharedPreferencesUtils;
 
@@ -47,6 +49,8 @@ public class SettingsActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_settings);
+
+        Log.v(BezierGlobals.TAG, "SettingsActivity::onCreate");
 
         // prefer action bar title with two lines
         ActionBar actionBar = this.getSupportActionBar();

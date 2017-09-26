@@ -8,10 +8,12 @@ import android.support.v4.view.ViewPager.OnPageChangeListener;
 import android.os.Bundle;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.MenuItem;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 
+import de.peterloos.beziersplines.BezierGlobals;
 import de.peterloos.beziersplines.R;
 import de.peterloos.beziersplines.adapters.ViewPagerAdapter;
 
@@ -40,6 +42,8 @@ public class DocumentationActivity extends AppCompatActivity implements OnPageCh
         super.onCreate(savedInstanceState);
         this.setContentView(R.layout.activity_documentation);
         this.setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
+
+        Log.v(BezierGlobals.TAG, "DocumentationActivity::onCreate");
 
         // prefer action bar title with two lines
         ActionBar actionBar = this.getSupportActionBar();
