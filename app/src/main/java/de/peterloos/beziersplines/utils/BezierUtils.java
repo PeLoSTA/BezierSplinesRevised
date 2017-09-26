@@ -116,8 +116,7 @@ public class BezierUtils {
         // TODO: Das muss noch entsprechend erweitert werden !!!!!!!!!!!!!!!!
         // this.bezierViewWithGrid.setCellLength(numPixelsHorizontalPerCm / 4.0);
 
-        return numPixelsHorizontalPerCm / 2.0;
-
+        return numPixelsHorizontalPerCm / 4.0;
     }
 
     // ============================================================================================

@@ -70,33 +70,4 @@
             android:gravity="start" />
     </RelativeLayout>
 
-    <RelativeLayout
-        android:id="@+id/relative_layout_languages"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="15dp"
-        android:background="@drawable/ripple"
-        android:clickable="true">
-
-        <TextView
-            android:id="@+id/textview_header_languages"
-            style="@style/ThemeOverlay.MyTitleText"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_alignParentEnd="true"
-            android:layout_alignParentTop="true"
-            android:layout_marginStart="5dp"
-            android:gravity="start" />
-
-        <TextView
-            android:id="@+id/textview_languages"
-            style="@style/ThemeOverlay.MyTextDetail"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/textview_header_languages"
-            android:layout_marginStart="5dp"
-            android:fontFamily="sans-serif-light"
-            android:gravity="start" />
-    </RelativeLayout>
-
 </LinearLayout>

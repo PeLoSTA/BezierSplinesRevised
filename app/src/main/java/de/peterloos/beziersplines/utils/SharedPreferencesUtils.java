@@ -19,40 +19,6 @@ import de.peterloos.beziersplines.BezierGlobals;
 public class SharedPreferencesUtils {
 
     /*
-     * language settings
-     */
-    public static boolean existsLanguagePreference(Context context) {
-
-        SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(context);
-        String key = context.getString(R.string.shared_pref_language);
-        return sharedPref.contains(key);
-    }
-
-    public static String getPersistedLanguage(Context context) {
-
-        SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(context);
-
-        String key = context.getString(R.string.shared_pref_language);
-        String language = sharedPref.getString(key, BezierGlobals.DefaultLanguage);
-        String msg = String.format("reading language ==> %s", language);
-        Log.v("PeLo", msg);
-        return language;
-    }
-
-    public static void persistLanguage(Context context, String language) {
-
-        SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(context);
-
-        String msg = String.format("writing language ==> %s", language);
-        Log.v("PeLo", msg);
-
-        SharedPreferences.Editor editor = sharedPref.edit();
-        String key = context.getString(R.string.shared_pref_language);
-        editor.putString(key, language);
-        editor.apply();
-    }
-
-    /*
      * gridlines settings
      */
     public static int getPersistedGridlinesFactor(Context context) {
