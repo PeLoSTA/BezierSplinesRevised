@@ -82,7 +82,7 @@ public class DemonstrationActivity
 
         // retrieve control references
         this.bezierViewWithGrid = (BezierGridView) this.findViewById(R.id.bezier_view_demo);
-        this.bezierViewWithGrid.clear();
+        // this.bezierViewWithGrid.clear();  // TODO WOZU WAR DAS DRIN ???????????????????????????????????????????
         this.bezierViewWithGrid.setDensityOfGridlines(BezierGlobals.GridlineIndexHigh);
 
         this.textViewResolution = (TextView) this.findViewById(R.id.textview_resolution);
@@ -120,6 +120,9 @@ public class DemonstrationActivity
         // save current control points
         this.previousControlPoints = holder.get();
         holder.clear();
+
+        String s1 = String.format("##################> Number of saved points: %d", this.previousControlPoints.size());
+        Log.v(BezierGlobals.TAG, s1);
 
         // connect event sink with client
         this.bezierViewWithGrid.registerListener(new BezierListener() {
@@ -174,6 +177,9 @@ public class DemonstrationActivity
                 // restore former control points
                 holder.clear();
                 holder.set(this.previousControlPoints);
+
+                String s1 = String.format("##################> Number of restored points: %d", holder.size());
+                Log.v(BezierGlobals.TAG, s1);
 
                 // up arrow in action bar clicked - goto main activity
                 this.finish();

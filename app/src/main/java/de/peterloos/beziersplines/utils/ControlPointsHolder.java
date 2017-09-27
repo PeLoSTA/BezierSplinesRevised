@@ -1,7 +1,11 @@
 package de.peterloos.beziersplines.utils;
 
+import android.util.Log;
+
 import java.util.ArrayList;
 import java.util.List;
+
+import de.peterloos.beziersplines.BezierGlobals;
 
 /**
  * Created by Peter on 22.09.2017.
@@ -20,7 +24,7 @@ public class ControlPointsHolder {
 
     // restrict the constructor from being instantiated
     private ControlPointsHolder () {
-        // this.isAlive = false;
+
         this.model = new ArrayList<>();
     }
 
@@ -28,8 +32,13 @@ public class ControlPointsHolder {
         this.model = model;
     }
 
+    // TODO: DA MUSS MAN DOCH EINE KOPIE RAUSGEBEN ?!?!?!?!
+//    public List<BezierPoint> get () {
+//        return this.model;
+//    }
+
     public List<BezierPoint> get () {
-        return this.model;
+        return new ArrayList<> (this.model);
     }
 
     public static synchronized ControlPointsHolder getInstance () {
@@ -42,8 +51,6 @@ public class ControlPointsHolder {
     }
 
     // =====================================================================
-
-    // TODO: NEW INTERFACE
 
     // public interface
     public void clear() {

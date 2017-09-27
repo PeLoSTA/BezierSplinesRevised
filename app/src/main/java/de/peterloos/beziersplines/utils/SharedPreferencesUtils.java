@@ -27,7 +27,7 @@ public class SharedPreferencesUtils {
         String key = context.getString(R.string.shared_pref_gridlines);
         int gridlinesFactor = sharedPref.getInt(key, BezierGlobals.GridlineIndexDefault);
         String msg = String.format(Locale.getDefault(), "reading gridlines factor ==> %d", gridlinesFactor);
-        Log.v("PeLo", msg);
+        Log.v(BezierGlobals.TAG, msg);
 
         return gridlinesFactor;
     }
@@ -37,7 +37,7 @@ public class SharedPreferencesUtils {
         SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(context);
 
         String msg = String.format(Locale.getDefault(), "writing gridlines factor ==> %d", gridlinesFactor);
-        Log.v("PeLo", msg);
+        Log.v(BezierGlobals.TAG, msg);
 
         SharedPreferences.Editor editor = sharedPref.edit();
         String key = context.getString(R.string.shared_pref_gridlines);
@@ -54,7 +54,7 @@ public class SharedPreferencesUtils {
         String key = context.getString(R.string.shared_pref_strokewidthfactor);
         int strokewidthFactor = sharedPref.getInt(key, BezierGlobals.DefaultStrokewidthFactor);
         String msg = String.format(Locale.getDefault(), "reading strokewidth factor ==> %d", strokewidthFactor);
-        Log.v("PeLo", msg);
+        Log.v(BezierGlobals.TAG, msg);
 
         return strokewidthFactor;
     }
@@ -64,7 +64,7 @@ public class SharedPreferencesUtils {
         SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(context);
 
         String msg = String.format(Locale.getDefault(), "writing strokewidth factor ==> %d", strokewidthFactor);
-        Log.v("PeLo", msg);
+        Log.v(BezierGlobals.TAG, msg);
 
         SharedPreferences.Editor editor = sharedPref.edit();
         String key = context.getString(R.string.shared_pref_strokewidthfactor);

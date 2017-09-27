@@ -334,7 +334,7 @@ public class MainActivity
 
     @Override
     public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-        Log.v("PeLo", "onItemSelected: " + Integer.toString(i) + ", " + Long.toString(l));
+        Log.v(BezierGlobals.TAG, "onItemSelected: " + Integer.toString(i) + ", " + Long.toString(l));
 
         switch (i) {
             case 0:  // create mode
@@ -369,12 +369,14 @@ public class MainActivity
 
     @Override
     public void onNothingSelected(AdapterView<?> adapterView) {
-        Log.v("PeLo", "onNothingSelected");
+        Log.v(BezierGlobals.TAG, "onNothingSelected");
     }
 
     @Override
     protected void onResume() {
         super.onResume();
+
+        Log.v(BezierGlobals.TAG, "(1) in onResume");
 
         this.bezierViewWithoutGrid.invalidate();
         this.bezierViewWithGrid.invalidate();

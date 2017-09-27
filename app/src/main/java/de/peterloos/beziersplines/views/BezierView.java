@@ -230,6 +230,8 @@ public class BezierView extends View implements View.OnTouchListener {
     protected void onDraw(Canvas canvas) {
         super.onDraw(canvas);
 
+        Log.v(BezierGlobals.TAG, "(2) in onDraw");
+
         if (this.showControlPoints)
             this.drawControlPoints(canvas);
         if (this.showBezierCurve)
