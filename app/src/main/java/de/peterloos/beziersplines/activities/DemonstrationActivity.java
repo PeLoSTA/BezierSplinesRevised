@@ -60,8 +60,6 @@ public class DemonstrationActivity
     // TODO: Oder anders herum: Warum sind da unten mehrere unused Methoden ?!?!?!?
     private List<BezierPoint> demoControlPoints;
 
-    private List<BezierPoint> previousControlPoints;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -82,9 +80,6 @@ public class DemonstrationActivity
 
         // retrieve control references
         this.bezierViewWithGrid = (BezierGridView) this.findViewById(R.id.bezier_view_demo);
-        // this.bezierViewWithGrid.clear();  // TODO WOZU WAR DAS DRIN ???????????????????????????????????????????
-        this.bezierViewWithGrid.setDensityOfGridlines(BezierGlobals.GridlineIndexHigh);
-
         this.textViewResolution = (TextView) this.findViewById(R.id.textview_resolution);
         this.textViewT = (TextView) this.findViewById(R.id.textview_t);
         this.buttonStop = (Button) this.findViewById(R.id.button_stop);
@@ -114,15 +109,9 @@ public class DemonstrationActivity
         this.demoControlPoints = new ArrayList<>();
         this.task = null;
 
-        // retrieve singleton data object, to access control points
+        // clear last spline
         ControlPointsHolder holder = ControlPointsHolder.getInstance();
-
-        // save current control points
-        this.previousControlPoints = holder.get();
         holder.clear();
-
-        String s1 = String.format("##################> Number of saved points: %d", this.previousControlPoints.size());
-        Log.v(BezierGlobals.TAG, s1);
 
         // connect event sink with client
         this.bezierViewWithGrid.registerListener(new BezierListener() {
@@ -171,15 +160,18 @@ public class DemonstrationActivity
         switch (item.getItemId()) {
             case android.R.id.home:
 
-                // retrieve singleton data object, to access control points
+                Log.v(BezierGlobals.TAG, "%%%%%%%%%%%%%%> onHOMEPressed");
+
+                // cancel current task, if any
+                if (this.task != null) {
+
+                    this.task.setRunning(false);
+                    this.task.cancel( false);
+                }
+
+                // clearing control points
                 ControlPointsHolder holder = ControlPointsHolder.getInstance();
-
-                // restore former control points
                 holder.clear();
-                holder.set(this.previousControlPoints);
-
-                String s1 = String.format("##################> Number of restored points: %d", holder.size());
-                Log.v(BezierGlobals.TAG, s1);
 
                 // up arrow in action bar clicked - goto main activity
                 this.finish();
@@ -188,6 +180,27 @@ public class DemonstrationActivity
                 return super.onOptionsItemSelected(item);
         }
     }
+
+    /** Called when user press the back button */
+    @Override
+    public void onBackPressed()
+    {
+        Log.v(BezierGlobals.TAG, "%%%%%%%%%%%%%%> onBACKPressed");
+
+        if (this.task != null) {
+
+            this.task.setRunning(false);
+            this.task.cancel( false);
+        }
+
+        // clearing control points
+        ControlPointsHolder holder = ControlPointsHolder.getInstance();
+        holder.clear();
+
+        super.onBackPressed();
+    }
+
+
 
     // private helper methods
     @SuppressWarnings("unused")
@@ -272,6 +285,17 @@ public class DemonstrationActivity
 
         public void setRunning(boolean running) {
             this.running = running;
+        }
+
+        @Override
+        protected void onCancelled(){
+            Log.v(BezierGlobals.TAG, "ARGHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHH> onCancelled");
+
+            // clearing control points
+            ControlPointsHolder holder = ControlPointsHolder.getInstance();
+            holder.clear();
+
+            super.onCancelled();
         }
 
         @Override

@@ -275,6 +275,8 @@ public class MainActivity
         } else if (view == this.checkboxSnaptogrid) {
             if (this.checkboxSnaptogrid.isChecked()) {
                 this.gridIsVisible = true;
+
+                // TODO: Wozu habe ich hier mal den Mode gesetzt ?!?!?!?!?!?
                 // this.bezierViewWithGrid.setMode(BezierMode.Create);
                 // this.bezierViewWithGrid.clear();
 
@@ -284,6 +286,8 @@ public class MainActivity
 
             } else {
                 this.gridIsVisible = false;
+
+                // TODO: Wozu habe ich hier mal den Mode gesetzt ?!?!?!?!?!?
                 // this.bezierViewWithoutGrid.clear();
                 // this.bezierViewWithoutGrid.setMode(BezierMode.Create);
                 this.viewSwitcher.showPrevious();
@@ -376,7 +380,7 @@ public class MainActivity
     protected void onResume() {
         super.onResume();
 
-        Log.v(BezierGlobals.TAG, "(1) in onResume");
+        Log.v(BezierGlobals.TAG, "MainActivity in onResume");
 
         this.bezierViewWithoutGrid.invalidate();
         this.bezierViewWithGrid.invalidate();

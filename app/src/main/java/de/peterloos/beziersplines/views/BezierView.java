@@ -207,10 +207,6 @@ public class BezierView extends View implements View.OnTouchListener {
         this.invalidate();
     }
 
-//    public void setControlPoints (List<BezierPoint> model) {  // for demo mode
-//        this.holder.set (model);
-//    }
-
     public void addControlPoints(List<BezierPoint> points) {
         for (BezierPoint point : points) {
             this.addControlPoint(point);
@@ -229,8 +225,6 @@ public class BezierView extends View implements View.OnTouchListener {
     @Override
     protected void onDraw(Canvas canvas) {
         super.onDraw(canvas);
-
-        Log.v(BezierGlobals.TAG, "(2) in onDraw");
 
         if (this.showControlPoints)
             this.drawControlPoints(canvas);

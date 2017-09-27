@@ -1,3 +1,77 @@
+WEITERARBEIT:
+
+Im Augenblick stehe ich vor dem Problem,
+dass der Wechsel zwischen Normal-Mode und Demo-Mode "klemmt".
+
+Soll heißen:
+
+Ich bin im Demo-Mode und habe eine Task laufen.
+
+Drücke ich die Back-Taste,  dann müsste ich die Task anhalten,
+die Punkteliste löschen,
+die alte Punkte liste restaurieren und
+dann möglicherweise in der darunterliegenden View diese aktualisieren.
+
+DAS IST ZU KOMPLIZIERT.
+
+LÖSUNG:
+
+Im Holder habe ich zwei LISTEN von Punkten.
+
+Ich kann den Holder in ZWEI Modi versetzen:
+
+holder.setNormalMode();
+holder.setDemoMode();
+
+Im Holder verwende ich folgenden Trick;
+
+    // representing application global data
+    private List<BezierPoint> userData;
+    private List<BezierPoint> demoData;
+    private List<BezierPoint> data;
+
+    holder.setNormalMode() {
+        data = userData;
+    }
+
+    holder.setDemoMode() {
+         data = demoData;
+    }
+
+    Möglicherweise mache ich beide Methoden synchronized ... da ich
+    wiederum möglicherweise die eine oder andere Methode NICHT um UI Thread aufrufe ....
+
+Dann müsste es ohne Probleme möglich sein, dass
+
+im Normalmode irgendeine Liste sichtbar ist
+diese auch dann sichtar ist bzw. bleibt, wenn sich irgend eine Aktivität darüber legt
+bei Wechsel in den DemoMode eine zweite Liste zur Anzweige kommt
+beim Wechsel zurück in den Normalmode wieder die alte Liste da ist
+
+Wann immer man in den DemoMode wechselt, sollte / könnte man möglicherweise
+die alte Demo-Liste leeren ......
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// --------------------------------------------------------------------------------
+
 TODO: WICHTIG:
 
 Die Demontration-View hat eine andere Größe ....
@@ -9,10 +83,6 @@ Es müsste die Toolbar eingeführt werden.
 
 Damit ich beim Rücksprung in den entsprechenden Events auch
 den Holder löschen kann.
-
-// --------------------------------------------------------------------------------
-
-Demo geht wieder --- aber jetzt werden die Punkte DOPPELT gemalt
 
 // --------------------------------------------------------------------------------
 
