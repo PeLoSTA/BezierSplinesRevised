@@ -42,10 +42,7 @@ dann läuft nach Wiederanwahl die Task NICHT WEITER ?!?!?!?!?!? FEHLER !!!!!!!!!
 
 // --------------------------------------------------------------------------------
 
-
-
 Irgendwie geht bei großen Gitternetzen das Verschieben NICHT ?!?!?!?
-
 
 // --------------------------------------------------------------------------------
 
@@ -60,15 +57,6 @@ Es müsste die Toolbar eingeführt werden.
 
 Damit ich beim Rücksprung in den entsprechenden Events auch
 den Holder löschen kann.
-
-// --------------------------------------------------------------------------------
-
-Fehler: Die Demonstration-View muss nach der Rückkehr
-die Liste der Punkte löschen
-
-// --------------------------------------------------------------------------------
-
-Allgemein: Wann muss die Liste der Punkte eigentlich gelöscht werden
 
 // --------------------------------------------------------------------------------
 
