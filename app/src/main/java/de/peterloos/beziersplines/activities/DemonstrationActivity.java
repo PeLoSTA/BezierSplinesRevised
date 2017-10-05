@@ -204,40 +204,44 @@ public class DemonstrationActivity
         float centerX = this.viewWidth / 2;
         float centerY = this.viewHeight / 2;
 
-        this.demoControlPoints = BezierUtils.getDemoRectangle(centerX, centerY, deltaX, deltaY, numEdges - 1);
-        this.task = new DemoOperation();
-        this.task.setRunning(true);
-        this.task.execute();
-    }
+        // this.demoControlPoints = BezierUtils.getDemoRectangle(centerX, centerY, deltaX, deltaY, numEdges - 1);
+        // this.demoControlPoints = BezierUtils.getDemoRectangle(centerX, centerX, deltaX, deltaY, numEdges - 1);
 
-    @SuppressWarnings("unused")
-    private void computeControlPointsTest_VariantWithCircle() {
-
-        if (this.viewWidth == -1 || this.viewHeight == -1)
-            return;
-
-        int squareLength = (this.viewWidth < this.viewHeight) ? this.viewWidth : this.viewHeight;
-
-        Resources res = this.getResources();
-        float offsetFromBorder = BezierView.convertDpToPixel(res, OffsetFromBorderDp);
-        float radius = squareLength / 2 - 2 * offsetFromBorder;
-
-        float centerX = this.viewWidth / 2;
-        float centerY = this.viewHeight / 2;
-
-        float arcLength = (float) (2 * Math.PI / 40);
-
-        this.demoControlPoints =
-                BezierUtils.getDemo_SingleCircleOppositeConnected(
-                        centerX,
-                        centerY,
-                        radius,
-                        arcLength);
+        this.demoControlPoints = ControlPointsHolder.getDemoPoints();
 
         this.task = new DemoOperation();
         this.task.setRunning(true);
         this.task.execute();
     }
+
+//    @SuppressWarnings("unused")
+//    private void computeControlPointsTest_VariantWithCircle() {
+//
+//        if (this.viewWidth == -1 || this.viewHeight == -1)
+//            return;
+//
+//        int squareLength = (this.viewWidth < this.viewHeight) ? this.viewWidth : this.viewHeight;
+//
+//        Resources res = this.getResources();
+//        float offsetFromBorder = BezierView.convertDpToPixel(res, OffsetFromBorderDp);
+//        float radius = squareLength / 2 - 2 * offsetFromBorder;
+//
+//        float centerX = this.viewWidth / 2;
+//        float centerY = this.viewHeight / 2;
+//
+//        float arcLength = (float) (2 * Math.PI / 40);
+//
+//        this.demoControlPoints =
+//                BezierUtils.getDemo_SingleCircleOppositeConnected(
+//                        centerX,
+//                        centerY,
+//                        radius,
+//                        arcLength);
+//
+//        this.task = new DemoOperation();
+//        this.task.setRunning(true);
+//        this.task.execute();
+//    }
 
     @Override
     public void onClick(View view) {
@@ -284,17 +288,20 @@ public class DemonstrationActivity
         @Override
         protected void onPreExecute() {
 
-            int numEdges = 8;
+//            int numEdges = 8;
+//
+//            float deltaX = DemonstrationActivity.this.viewWidth / (float) numEdges;
+//            float deltaY = DemonstrationActivity.this.viewHeight / (float) numEdges;
+//
+//            float centerX = DemonstrationActivity.this.viewWidth / 2;
+//            float centerY = DemonstrationActivity.this.viewHeight / 2;
+//
+//            // TODO: DA FEHLT DAS SNAPPING NOCH ?!?!?!?!?!?
+//
+//            this.demoPoints = BezierUtils.getDemoRectangle(centerX, centerY, deltaX, deltaY, numEdges - 1);
 
-            float deltaX = DemonstrationActivity.this.viewWidth / (float) numEdges;
-            float deltaY = DemonstrationActivity.this.viewHeight / (float) numEdges;
+            // calculate demo points (and some more lists of points for screen shot purposes)
 
-            float centerX = DemonstrationActivity.this.viewWidth / 2;
-            float centerY = DemonstrationActivity.this.viewHeight / 2;
-
-            // TODO: DA FEHLT DAS SNAPPING NOCH ?!?!?!?!?!?
-
-            this.demoPoints = BezierUtils.getDemoRectangle(centerX, centerY, deltaX, deltaY, numEdges - 1);
         }
 
         @Override

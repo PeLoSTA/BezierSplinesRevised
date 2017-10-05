@@ -49,15 +49,6 @@ public class MainActivity
 
     private static final int REQUESTCODE_SETTINGS = 1;
 
-    // keys for generating screenshots (Google Play Store)
-    public static final int SCREENSHOT_TOTALLY_RANDOM = 0;
-    public static final int SCREENSHOT_SINGLE_CIRCLE = 1;
-    public static final int SCREENSHOT_SINGLE_CIRCLE_OPPOSITE_CONNECTED = 2;
-    public static final int SCREENSHOT_CONCENTRIC_CIRCLES = 3;
-    public static final int SCREENSHOT_CASCADING_RECTANGLES = 4;
-    public static final int SCREENSHOT_NICE_FIGURE = 5;
-    public static final int SCREENSHOT_NICE_FIGURE_02 = 6;
-
     // controls
     private ViewSwitcher viewSwitcher;
     private BezierView bezierViewWithoutGrid;
@@ -72,12 +63,17 @@ public class MainActivity
     private Spinner spinnerMode;
     private TableRow tableRowConstruction;
 
+    // miscellaneous
     private String resultGridlines;
     private String resultStrokewidth;
 
     private int resolution;
     private boolean gridIsVisible;
     private boolean constructionIsVisible;
+
+    // size of underlying bezier view(s) (data type Size only at API level 21 supported)
+    private int viewWidth;
+    private int viewHeight;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -162,11 +158,14 @@ public class MainActivity
                         "MainActivity: Size in Pixel: -------------> %d, %d", width, height);
                 Log.v(BezierGlobals.TAG, info);
 
+                MainActivity.this.viewWidth = width;
+                MainActivity.this.viewHeight = height;
+
                 // retrieve display metrics that describe the size and density of this display
                 DisplayMetrics dm = new DisplayMetrics();
                 MainActivity.this.getWindowManager().getDefaultDisplay().getMetrics(dm);
 
-                // calculate some cell lengths (according to unit 'cm')
+                // calculate cell lengths (according to unit 'cm')
                 BezierUtils.calculateCellLengths(dm, width, height);
 
                 MainActivity.this.bezierViewWithGrid.setDensityOfGridlines(gridlinesFactor);
@@ -341,6 +340,9 @@ public class MainActivity
     public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
         Log.v(BezierGlobals.TAG, "onItemSelected: " + Integer.toString(i) + ", " + Long.toString(l));
 
+        ControlPointsHolder holder = ControlPointsHolder.getInstance();
+        holder.setNormalMode();
+
         switch (i) {
             case 0:  // create mode
                 this.bezierViewWithoutGrid.setMode(BezierMode.Create);
@@ -364,10 +366,16 @@ public class MainActivity
                 this.spinnerMode.setSelection(0);
                 break;
             case 4:  // demo mode
+
+                // TODO: Hier etwas aufräumen
+
                 this.bezierViewWithoutGrid.setMode(BezierMode.Demo);
-                this.bezierViewWithoutGrid.showScreenshot(SCREENSHOT_CONCENTRIC_CIRCLES);
+                // this.bezierViewWithoutGrid.showScreenshot(SCREENSHOT_CONCENTRIC_CIRCLES);
+
                 this.bezierViewWithGrid.setMode(BezierMode.Demo);
-                this.bezierViewWithGrid.showScreenshot(SCREENSHOT_CONCENTRIC_CIRCLES);
+                // this.bezierViewWithGrid.showScreenshot(SCREENSHOT_CONCENTRIC_CIRCLES);
+
+                holder.setScreenshot(ControlPointsHolder.SCREENSHOT_CONCENTRIC_CIRCLES, this.viewWidth, this.viewHeight);
                 break;
         }
     }
