@@ -49,7 +49,7 @@ public class BezierGridView extends BezierView {
         this.linePaint.setColor(Color.WHITE);
         this.linePaint.setStrokeCap(Paint.Cap.ROUND);
 
-        // setup density of gridlines
+        // setup density of grid lines
         this.indexGridLines = BezierGlobals.GridlineIndexDefault;
     }
 
@@ -89,8 +89,8 @@ public class BezierGridView extends BezierView {
     // private helper methods
     private void calculateNumOfGridLines() {
 
-        // calculate number of grid lines (horizontally and vertically)
-        // (cut off decimal part, no rounding)
+        // calculate number of grid lines (horizontally and vertically) -
+        // cut off decimal part, no rounding
         this.numCellCols = (int) (this.viewWidth / this.cellLength);
         this.numCellRows = (int) (this.viewHeight / this.cellLength);
 

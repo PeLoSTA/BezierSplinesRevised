@@ -14,7 +14,6 @@ import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.TextView;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 
@@ -53,10 +52,6 @@ public class DemonstrationActivity
     private Button buttonRestart;
     private TextView textViewResolution;
     private TextView textViewT;
-
-    // TODO: Das muss irgendwie in einer Demo-Klasse !!!
-    // TODO: Oder anders herum: Warum sind da unten mehrere unused Methoden ?!?!?!?
-    private List<BezierPoint> demoControlPoints;
 
     private ControlPointsHolder holder;
 
@@ -106,7 +101,6 @@ public class DemonstrationActivity
         String t = String.format(Locale.getDefault(), "%1.2f", 0.0);
         this.textViewT.setText(t);
 
-        this.demoControlPoints = new ArrayList<>();
         this.task = null;
 
         // switch control points container to demo mode
@@ -132,7 +126,6 @@ public class DemonstrationActivity
 
                 // calculate some cell lengths (according to unit 'cm')
                 BezierUtils.calculateCellLengths(dm, width, height);
-
                 DemonstrationActivity.this.bezierViewWithGrid.setDensityOfGridlines(BezierGlobals.GridlineIndexHigh);
 
                 String info =
@@ -140,6 +133,8 @@ public class DemonstrationActivity
                         "DemonstrationActivity: Size in Pixel: -------------> %d, %d",
                         DemonstrationActivity.this.viewWidth, DemonstrationActivity.this.viewHeight);
                 Log.v(BezierGlobals.TAG, info);
+
+                DemonstrationActivity.this.holder.computeDemoRectangle(width, height);
 
                 DemonstrationActivity.this.task = new DemoOperation();
                 DemonstrationActivity.this.task.setRunning(true);
@@ -161,8 +156,6 @@ public class DemonstrationActivity
         switch (item.getItemId()) {
             case android.R.id.home:
 
-                Log.v(BezierGlobals.TAG, "%%%%%%%%%%%%%%> onHOMEPressed");
-
                 // cancel current task, if any
                 if (this.task != null) {
                     this.task.setRunning(false);
@@ -176,12 +169,10 @@ public class DemonstrationActivity
         }
     }
 
-    /** Called when user press the back button */
+    /** called when user press the back button */
     @Override
     public void onBackPressed()
     {
-        Log.v(BezierGlobals.TAG, "%%%%%%%%%%%%%%> onBACKPressed");
-
         if (this.task != null) {
             this.task.setRunning(false);
         }
@@ -216,20 +207,18 @@ public class DemonstrationActivity
 
     private class DemoOperation extends AsyncTask<Void, UpdateDescriptor, Void> {
 
+        /** need thread safe access to 'running' state of async task (!) */
         private boolean running;
 
-        private List<BezierPoint> demoPoints;
-
-        public void setRunning(boolean running) {
+        public synchronized void setRunning(boolean running) {
             this.running = running;
         }
 
-        @Override
-        protected void onCancelled(){
-            Log.v(BezierGlobals.TAG, "ARGHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHH> onCancelled");
-
-            super.onCancelled();
+        public synchronized boolean isRunning() {
+            return this.running;
         }
+
+        private List<BezierPoint> demoPoints;
 
         @Override
         protected void onPreExecute() {
@@ -246,7 +235,7 @@ public class DemonstrationActivity
 
             for (int i = 0; i < this.demoPoints.size(); i++) {
 
-                if (!this.running)
+                if (! this.isRunning())
                     return null;
 
                 try {
@@ -263,7 +252,7 @@ public class DemonstrationActivity
 
             for (int i = 0; i <= 100; i++) {
 
-                if (!this.running)
+                if (! this.isRunning())
                     return null;
 
                 try {
@@ -279,7 +268,7 @@ public class DemonstrationActivity
 
             for (int i = 100; i >= 0; i--) {
 
-                if (!this.running)
+                if (!this.isRunning())
                     return null;
 
                 try {
@@ -306,13 +295,22 @@ public class DemonstrationActivity
         @Override
         protected void onProgressUpdate(UpdateDescriptor... values) {
 
+            // ignore late arriving progress updates
+            if (! isRunning()) {
+
+                Log.v(BezierGlobals.TAG, "info: ignored late arriving progress updates");
+                return;
+            }
+
             if (values.length == 1) {
 
                 UpdateDescriptor dsc = values[0];
 
                 if (dsc.isAddPoint()) {
+
                     DemonstrationActivity.this.bezierViewWithGrid.addControlPoint(dsc.getP());
                 } else if (dsc.isChangeT()) {
+
                     DemonstrationActivity.this.bezierViewWithGrid.setT(dsc.getT());
                     String t = String.format(Locale.getDefault(), "%1.2f", dsc.getT());
                     Log.v(BezierGlobals.TAG, t);
@@ -320,11 +318,6 @@ public class DemonstrationActivity
                 }
             }
         }
-    }
-
-    @Override
-    protected void onPause() {
-        super.onPause();
     }
 
     @Override
@@ -336,11 +329,6 @@ public class DemonstrationActivity
         }
 
         super.onStop();
-    }
-
-    @Override
-    protected void onDestroy() {
-        super.onDestroy();
     }
 
     class UpdateDescriptor {

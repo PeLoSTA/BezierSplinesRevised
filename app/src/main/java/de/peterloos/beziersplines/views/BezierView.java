@@ -24,10 +24,8 @@ import java.util.Locale;
 
 import de.peterloos.beziersplines.R;
 import de.peterloos.beziersplines.BezierGlobals;
-import de.peterloos.beziersplines.activities.MainActivity;
 import de.peterloos.beziersplines.utils.BezierMode;
 import de.peterloos.beziersplines.utils.BezierPoint;
-import de.peterloos.beziersplines.utils.BezierUtils;
 import de.peterloos.beziersplines.utils.ControlPointsHolder;
 
 /**
@@ -80,7 +78,7 @@ public class BezierView extends View implements View.OnTouchListener {
     // share controls points between different views (singleton object)
     protected ControlPointsHolder holder;
 
-    // some bézier view specific informations can be read (event based)
+    // some bézier view specific information can be read (event based)
     private BezierListener listener;
 
     // miscellaneous
@@ -152,13 +150,6 @@ public class BezierView extends View implements View.OnTouchListener {
 
                 if (BezierView.this.listener != null) {
                     BezierView.this.listener.setSize(BezierView.this.viewWidth, BezierView.this.viewHeight);
-                }
-
-                if (BezierView.this.mode == BezierMode.Demo) {
-
-                    // TODO: Hier haben wir eine Race condition: Was ist, wenn der Mode
-                    // später gesetzt wird ?!?!?!?
-                    BezierView.this.holder.computeDemoRectangle(BezierView.this.viewWidth, BezierView.this.viewHeight);
                 }
             }
         });

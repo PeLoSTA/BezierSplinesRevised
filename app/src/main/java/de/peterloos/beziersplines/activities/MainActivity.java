@@ -153,11 +153,6 @@ public class MainActivity
             @Override
             public void setSize(int width, int height) {
 
-                String info =
-                        String.format(Locale.getDefault(),
-                        "MainActivity: Size in Pixel: -------------> %d, %d", width, height);
-                Log.v(BezierGlobals.TAG, info);
-
                 MainActivity.this.viewWidth = width;
                 MainActivity.this.viewHeight = height;
 
@@ -167,7 +162,6 @@ public class MainActivity
 
                 // calculate cell lengths (according to unit 'cm')
                 BezierUtils.calculateCellLengths(dm, width, height);
-
                 MainActivity.this.bezierViewWithGrid.setDensityOfGridlines(gridlinesFactor);
             }
 
@@ -348,14 +342,17 @@ public class MainActivity
                 this.bezierViewWithoutGrid.setMode(BezierMode.Create);
                 this.bezierViewWithGrid.setMode(BezierMode.Create);
                 break;
+
             case 1:  // edit mode
                 this.bezierViewWithoutGrid.setMode(BezierMode.Edit);
                 this.bezierViewWithGrid.setMode(BezierMode.Edit);
                 break;
+
             case 2:  // delete single mode
                 this.bezierViewWithoutGrid.setMode(BezierMode.Delete);
                 this.bezierViewWithGrid.setMode(BezierMode.Delete);
                 break;
+
             case 3:  // delete all mode
                 this.bezierViewWithoutGrid.clear();
                 this.bezierViewWithGrid.clear();
@@ -365,18 +362,11 @@ public class MainActivity
                 this.seekBarT.setProgress(50);
                 this.spinnerMode.setSelection(0);
                 break;
+
             case 4:  // demo mode
-
-                // TODO: Hier etwas aufräumen
-
                 this.bezierViewWithoutGrid.setMode(BezierMode.Demo);
-                // this.bezierViewWithoutGrid.showScreenshot(SCREENSHOT_CONCENTRIC_CIRCLES);
-
                 this.bezierViewWithGrid.setMode(BezierMode.Demo);
-                // this.bezierViewWithGrid.showScreenshot(SCREENSHOT_CONCENTRIC_CIRCLES);
-
                 holder.setControlPointsForScreenshot(ControlPointsHolder.SCREENSHOT_NICE_FIGURE_02, this.viewWidth, this.viewHeight);
-
                 this.bezierViewWithoutGrid.invalidate();
                 this.bezierViewWithGrid.invalidate();
                 break;
