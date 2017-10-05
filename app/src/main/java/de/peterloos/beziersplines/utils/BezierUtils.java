@@ -3,10 +3,6 @@ package de.peterloos.beziersplines.utils;
 import android.util.DisplayMetrics;
 import android.util.Log;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Random;
-
 import de.peterloos.beziersplines.BezierGlobals;
 
 /**
@@ -25,69 +21,6 @@ public class BezierUtils {
         cellLengths[1] = -1;
         cellLengths[2] = -1;
     }
-
-//    private enum Direction {ToTheRight, ToTheBottom, ToTheLeft, ToTheTop}
-//
-//    // just for concentric rectangles
-//    private static float currentX;
-//    private static float currentY;
-//    private static float nextX;
-//    private static float nextY;
-//
-//    public static List<BezierPoint> getDemoRectangle(float centerX, float centerY, float deltaX, float deltaY, int numEdges) {
-//
-//        List<BezierPoint> result = new ArrayList<>();
-//
-//        currentX = centerX;
-//        currentY = centerY;
-//        nextX = currentX;
-//        nextY = currentY;
-//
-//        Direction direction = Direction.ToTheRight;
-//
-//        for (int i = 1; i < numEdges; i++) {
-//            computeLine(result, i, direction, deltaX, deltaY);
-//            direction = switchDirection(direction);
-//            computeLine(result, i, direction, deltaX, deltaY);
-//            direction = switchDirection(direction);
-//        }
-//
-//        return result;
-//    }
-//
-//    private static void computeLine(List<BezierPoint> list, int count, Direction direction, float deltaX, float deltaY) {
-//        for (int j = 0; j < count; j++) {
-//            if (direction == Direction.ToTheRight) {
-//                nextX += deltaX;
-//            } else if (direction == Direction.ToTheBottom) {
-//                nextY += deltaY;
-//            } else if (direction == Direction.ToTheLeft) {
-//                nextX -= deltaX;
-//            } else if (direction == Direction.ToTheTop) {
-//                nextY -= deltaY;
-//            }
-//
-//            BezierPoint point = new BezierPoint(currentX, currentY);
-//            list.add(point);
-//
-//            // advance last point
-//            currentX = nextX;
-//            currentY = nextY;
-//        }
-//    }
-//
-//    private static Direction switchDirection(Direction direction) {
-//        // switch direction
-//        if (direction == Direction.ToTheRight) {
-//            return Direction.ToTheBottom;
-//        } else if (direction == Direction.ToTheBottom) {
-//            return Direction.ToTheLeft;
-//        } else if (direction == Direction.ToTheLeft) {
-//            return Direction.ToTheTop;
-//        } else {
-//            return Direction.ToTheRight;
-//        }
-//    }
 
     public static void snapPoint(BezierPoint p, double cellLength) {
 

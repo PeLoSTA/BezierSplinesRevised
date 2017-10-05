@@ -2,7 +2,6 @@ package de.peterloos.beziersplines.activities;
 
 import android.content.Context;
 import android.content.pm.ActivityInfo;
-import android.content.res.Resources;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.app.ActionBar;
@@ -28,7 +27,6 @@ import de.peterloos.beziersplines.utils.ControlPointsHolder;
 import de.peterloos.beziersplines.utils.SharedPreferencesUtils;
 import de.peterloos.beziersplines.views.BezierGridView;
 import de.peterloos.beziersplines.views.BezierListener;
-import de.peterloos.beziersplines.views.BezierView;
 
 /**
  * Project: Bézier Splines Simulation
@@ -59,6 +57,8 @@ public class DemonstrationActivity
     // TODO: Das muss irgendwie in einer Demo-Klasse !!!
     // TODO: Oder anders herum: Warum sind da unten mehrere unused Methoden ?!?!?!?
     private List<BezierPoint> demoControlPoints;
+
+    private ControlPointsHolder holder;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -110,9 +110,9 @@ public class DemonstrationActivity
         this.task = null;
 
         // switch control points container to demo mode
-        ControlPointsHolder holder = ControlPointsHolder.getInstance();
-        holder.setDemoMode();
-        holder.clear();
+        this.holder = ControlPointsHolder.getInstance();
+        this.holder.setDemoMode();
+        this.holder.clear();
 
         // connect event sink with client
         this.bezierViewWithGrid.registerListener(new BezierListener() {
@@ -189,60 +189,6 @@ public class DemonstrationActivity
         super.onBackPressed();
     }
 
-    // private helper methods
-    @SuppressWarnings("unused")
-    private void computeDemoControlPoints() {
-
-        if (this.viewWidth == -1 || this.viewHeight == -1)
-            return;
-
-        int numEdges = 8;
-
-        float deltaX = this.viewWidth / (float) numEdges;
-        float deltaY = this.viewHeight / (float) numEdges;
-
-        float centerX = this.viewWidth / 2;
-        float centerY = this.viewHeight / 2;
-
-        // this.demoControlPoints = BezierUtils.getDemoRectangle(centerX, centerY, deltaX, deltaY, numEdges - 1);
-        // this.demoControlPoints = BezierUtils.getDemoRectangle(centerX, centerX, deltaX, deltaY, numEdges - 1);
-
-        this.demoControlPoints = ControlPointsHolder.getDemoPoints();
-
-        this.task = new DemoOperation();
-        this.task.setRunning(true);
-        this.task.execute();
-    }
-
-//    @SuppressWarnings("unused")
-//    private void computeControlPointsTest_VariantWithCircle() {
-//
-//        if (this.viewWidth == -1 || this.viewHeight == -1)
-//            return;
-//
-//        int squareLength = (this.viewWidth < this.viewHeight) ? this.viewWidth : this.viewHeight;
-//
-//        Resources res = this.getResources();
-//        float offsetFromBorder = BezierView.convertDpToPixel(res, OffsetFromBorderDp);
-//        float radius = squareLength / 2 - 2 * offsetFromBorder;
-//
-//        float centerX = this.viewWidth / 2;
-//        float centerY = this.viewHeight / 2;
-//
-//        float arcLength = (float) (2 * Math.PI / 40);
-//
-//        this.demoControlPoints =
-//                BezierUtils.getDemo_SingleCircleOppositeConnected(
-//                        centerX,
-//                        centerY,
-//                        radius,
-//                        arcLength);
-//
-//        this.task = new DemoOperation();
-//        this.task.setRunning(true);
-//        this.task.execute();
-//    }
-
     @Override
     public void onClick(View view) {
 
@@ -288,20 +234,11 @@ public class DemonstrationActivity
         @Override
         protected void onPreExecute() {
 
-//            int numEdges = 8;
-//
-//            float deltaX = DemonstrationActivity.this.viewWidth / (float) numEdges;
-//            float deltaY = DemonstrationActivity.this.viewHeight / (float) numEdges;
-//
-//            float centerX = DemonstrationActivity.this.viewWidth / 2;
-//            float centerY = DemonstrationActivity.this.viewHeight / 2;
-//
-//            // TODO: DA FEHLT DAS SNAPPING NOCH ?!?!?!?!?!?
-//
-//            this.demoPoints = BezierUtils.getDemoRectangle(centerX, centerY, deltaX, deltaY, numEdges - 1);
-
-            // calculate demo points (and some more lists of points for screen shot purposes)
-
+            // retrieve demo points (demo or for screen shot purposes)
+            this.demoPoints = DemonstrationActivity.this.holder.getControlPointsForScreenshot(
+                    ControlPointsHolder.SCREENSHOT_CASCADING_RECTANGLES,
+                    DemonstrationActivity.this.viewWidth,
+                    DemonstrationActivity.this.viewHeight);
         }
 
         @Override

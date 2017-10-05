@@ -375,7 +375,10 @@ public class MainActivity
                 this.bezierViewWithGrid.setMode(BezierMode.Demo);
                 // this.bezierViewWithGrid.showScreenshot(SCREENSHOT_CONCENTRIC_CIRCLES);
 
-                holder.setScreenshot(ControlPointsHolder.SCREENSHOT_CONCENTRIC_CIRCLES, this.viewWidth, this.viewHeight);
+                holder.setControlPointsForScreenshot(ControlPointsHolder.SCREENSHOT_NICE_FIGURE_02, this.viewWidth, this.viewHeight);
+
+                this.bezierViewWithoutGrid.invalidate();
+                this.bezierViewWithGrid.invalidate();
                 break;
         }
     }

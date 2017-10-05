@@ -53,11 +53,19 @@ beim Wechsel zurück in den Normalmode wieder die alte Liste da ist
 Wann immer man in den DemoMode wechselt, sollte / könnte man möglicherweise
 die alte Demo-Liste leeren ......
 
+// --------------------------------------------------------------------------------
 
+Thread bzw. Demo Klasse:
 
+Wie sieht das mit Start und Stopp aus ???
+Ist anhalten der Demo nicht besser ?!?!?
+Vielleicht doch nicht ....
 
+// --------------------------------------------------------------------------------
 
+IN der Holder Klasse müsste meines Erachtens ÜERALL ein static hin ..........
 
+Sonst schaut das Ganze irgendwie SCHIEF aus .......
 
 // --------------------------------------------------------------------------------
 

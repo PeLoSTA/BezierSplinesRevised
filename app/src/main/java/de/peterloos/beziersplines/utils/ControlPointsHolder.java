@@ -105,22 +105,48 @@ public class ControlPointsHolder {
     private static float nextX;
     private static float nextY;
 
-    private static List<BezierPoint> demoPoints;
-
-    public static void computeDemoRectangle(float viewWidth, float viewHeight) {
-
-        if (demoPoints != null) {
-
-            return;  // computation took already place
-        }
-
-        demoPoints = new ArrayList<>();
+    public void computeDemoRectangle(float viewWidth, float viewHeight) {
 
         float centerX = viewWidth / 2;
         float centerY = viewHeight / 2;
 
         float deltaX = viewWidth / (float) NumDemoEdges;
         float deltaY = viewHeight / (float) NumDemoEdges;
+
+        demoData = getDemoRectangle (centerX, centerY, deltaX, deltaY);
+    }
+
+
+//    public static void computeDemoRectangle(float viewWidth, float viewHeight) {
+//
+//        List<BezierPoint> points = new ArrayList<>();
+//
+//        float centerX = viewWidth / 2;
+//        float centerY = viewHeight / 2;
+//
+//        float deltaX = viewWidth / (float) NumDemoEdges;
+//        float deltaY = viewHeight / (float) NumDemoEdges;
+//
+//        currentX = centerX;
+//        currentY = centerY;
+//        nextX = currentX;
+//        nextY = currentY;
+//
+//        Direction direction = Direction.ToTheRight;
+//
+//        for (int i = 1; i < NumDemoEdges; i++) {
+//            computeLine(points, i, direction, deltaX, deltaY);
+//            direction = switchDirection(direction);
+//            computeLine(points, i, direction, deltaX, deltaY);
+//            direction = switchDirection(direction);
+//        }
+//    }
+
+
+
+    public static List<BezierPoint> getDemoRectangle(float centerX, float centerY, float deltaX, float deltaY) {
+
+        List<BezierPoint> points = new ArrayList<>();
 
         currentX = centerX;
         currentY = centerY;
@@ -130,16 +156,21 @@ public class ControlPointsHolder {
         Direction direction = Direction.ToTheRight;
 
         for (int i = 1; i < NumDemoEdges; i++) {
-            computeLine(demoPoints, i, direction, deltaX, deltaY);
+            computeLine(points, i, direction, deltaX, deltaY);
             direction = switchDirection(direction);
-            computeLine(demoPoints, i, direction, deltaX, deltaY);
+            computeLine(points, i, direction, deltaX, deltaY);
             direction = switchDirection(direction);
         }
+
+        return points;
     }
 
-    public static List<BezierPoint> getDemoPoints() {
-        return demoPoints;
-    }
+
+//    public static List<BezierPoint> getDemoRectangle(float viewWidth, float viewHeight) {
+//
+//        computeDemoRectangle(viewWidth, viewHeight);
+//        return demoPoints;
+//    }
 
     private static void computeLine(List<BezierPoint> list, int count, Direction direction, float deltaX, float deltaY) {
 
@@ -179,6 +210,7 @@ public class ControlPointsHolder {
 
     // =====================================================================
 
+
     /*
      *  test interface - screenshots for Google Play Services
      */
@@ -193,47 +225,64 @@ public class ControlPointsHolder {
     public static final int SCREENSHOT_NICE_FIGURE_02 = 6;
 
     @SuppressWarnings("unused")
-    public void setScreenshot(int number, int viewWidth, int viewHeight) {
+    public void setControlPointsForScreenshot(int number, int viewWidth, int viewHeight) {
 
-//        if (number == SCREENSHOT_SINGLE_CIRCLE) {
-//            userData = this.showScreenshot_SingleCircle();
-//        } else if (number == SCREENSHOT_SINGLE_CIRCLE_OPPOSITE_CONNECTED) {
-//            userData = this.showScreenshot_SingleCircle_OppositeConnected();
-//        } else if (number == SCREENSHOT_CONCENTRIC_CIRCLES) {
-//            userData = this.showScreenshot_TwoConcentricCircles(viewWidth, viewHeight);
-//        } else if (number == SCREENSHOT_CASCADING_RECTANGLES) {
-//            userData = this.showScreenshot_Cascading_Rectangles();
-//        } else if (number == SCREENSHOT_TOTALLY_RANDOM) {
-//            userData = this.showScreenshotTotallyRandom();
-//        } else if (number == SCREENSHOT_NICE_FIGURE) {
-//            userData = this.showScreenshot_NiceFigure();
-//        } else if (number == SCREENSHOT_NICE_FIGURE_02) {
-//            userData = this.showScreenshot_NiceFigure_02();
-//        }
+        List<BezierPoint> points = getControlPointsForScreenshot(number, viewWidth, viewHeight);
+
+        for (int i = 0; i < points.size(); i++) {
+
+            this.add(points.get(i));
+        }
     }
 
-//    @SuppressWarnings("unused")
-//    private List<BezierPoint> showScreenshotTotallyRandom() {
-//        return getTotallyRandom(this.getWidth(), this.getHeight(), 50);
-//    }
-//
-//    @SuppressWarnings("unused")
-//    private List<BezierPoint> showScreenshot_SingleCircle() {
-//        float centerX = this.getWidth() / 2;
-//        float centerY = this.getHeight() / 2;
-//        float squareLength = (this.getWidth() < this.getHeight()) ? this.getWidth() : this.getHeight();
-//        float arcLength = (float) (2 * Math.PI / 25);
-//        return getDemo_SingleCircle(centerX, centerY, squareLength / 2 - 100, arcLength);
-//    }
-//
-//    @SuppressWarnings("unused")
-//    private List<BezierPoint> showScreenshot_SingleCircle_OppositeConnected() {
-//        float centerX = this.getWidth() / 2;
-//        float centerY = this.getHeight() / 2;
-//        float squareLength = (this.getWidth() < this.getHeight()) ? this.getWidth() : this.getHeight();
-//        float arcLength = (float) (2 * Math.PI / 25);
-//        return getDemo_SingleCircleOppositeConnected(centerX, centerY, squareLength / 2 - 100, arcLength);
-//    }
+    @SuppressWarnings("unused")
+    public List<BezierPoint> getControlPointsForScreenshot(int number, int viewWidth, int viewHeight) {
+
+        List<BezierPoint> points;
+
+        if (number == SCREENSHOT_SINGLE_CIRCLE) {
+            points = this.showScreenshot_SingleCircle(viewWidth, viewHeight);
+        } else if (number == SCREENSHOT_SINGLE_CIRCLE_OPPOSITE_CONNECTED) {
+            points = this.showScreenshot_SingleCircle_OppositeConnected(viewWidth, viewHeight);
+        } else if (number == SCREENSHOT_CONCENTRIC_CIRCLES) {
+            points = this.showScreenshot_TwoConcentricCircles(viewWidth, viewHeight);
+        } else if (number == SCREENSHOT_CASCADING_RECTANGLES) {
+            points = this.showScreenshot_Cascading_Rectangles(viewWidth, viewHeight);
+        } else if (number == SCREENSHOT_TOTALLY_RANDOM) {
+            points = this.showScreenshotTotallyRandom(viewWidth, viewHeight);
+        } else if (number == SCREENSHOT_NICE_FIGURE) {
+            points = this.showScreenshot_NiceFigure(viewWidth, viewHeight);
+        } else if (number == SCREENSHOT_NICE_FIGURE_02) {
+            points = this.showScreenshot_NiceFigure_02(viewWidth, viewHeight);
+        } else {
+            points = this.showScreenshot_SingleCircle(viewWidth, viewHeight);
+        }
+
+        return points;
+    }
+
+    @SuppressWarnings("unused")
+    private List<BezierPoint> showScreenshotTotallyRandom(int viewWidth, int viewHeight) {
+        return getTotallyRandom(viewWidth, viewHeight, 50);
+    }
+
+    @SuppressWarnings("unused")
+    private List<BezierPoint> showScreenshot_SingleCircle(int viewWidth, int viewHeight) {
+        float centerX = viewWidth / 2;
+        float centerY = viewHeight / 2;
+        float squareLength = (viewWidth < viewHeight) ? viewWidth : viewHeight;
+        float arcLength = (float) (2 * Math.PI / 25);
+        return getDemo_SingleCircle(centerX, centerY, squareLength / 2 - 100, arcLength);
+    }
+
+    @SuppressWarnings("unused")
+    private List<BezierPoint> showScreenshot_SingleCircle_OppositeConnected(int viewWidth, int viewHeight) {
+        float centerX = viewWidth / 2;
+        float centerY = viewHeight / 2;
+        float squareLength = (viewWidth < viewHeight) ? viewWidth : viewHeight;
+        float arcLength = (float) (2 * Math.PI / 25);
+        return getDemo_SingleCircleOppositeConnected(centerX, centerY, squareLength / 2 - 100, arcLength);
+    }
 
     @SuppressWarnings("unused")
     private List<BezierPoint> showScreenshot_TwoConcentricCircles(int viewWidth, int viewHeight) {
@@ -244,33 +293,33 @@ public class ControlPointsHolder {
         return getDemoConcentricCircles(centerX, centerY, squareLength / 5, squareLength / 2 - 150, arcLength);
     }
 
-//    @SuppressWarnings("unused")
-//    private List<BezierPoint> showScreenshot_Cascading_Rectangles() {
-//        int numEdges = 8;
-//        float centerX = this.getWidth() / 2;
-//        float centerY = this.getHeight() / 2;
-//        float deltaX = this.getWidth() / (float) numEdges;
-//        float deltaY = this.getHeight() / (float) numEdges;
-//        return getDemoRectangle(centerX, centerY, deltaX, deltaY, numEdges - 1);
-//    }
-//
-//    @SuppressWarnings("unused")
-//    private List<BezierPoint> showScreenshot_NiceFigure() {
-//        int numEdges = 7;
-//        float centerX = this.getWidth() / 2;
-//        float centerY = this.getHeight() / 2;
-//        float squareLength = (this.getWidth() < this.getHeight()) ? this.getWidth() : this.getHeight();
-//        return getDemoNiceFigure(centerX, centerY, squareLength / 2 - 100, numEdges - 1);
-//    }
-//
-//    @SuppressWarnings("unused")
-//    private List<BezierPoint> showScreenshot_NiceFigure_02() {
-//        int numEdges = 6;
-//        float centerX = this.getWidth() / 2;
-//        float centerY = this.getHeight() / 2;
-//        float squareLength = (this.getWidth() < this.getHeight()) ? this.getWidth() : this.getHeight();
-//        return getDemoNiceFigure2(centerX, centerY, squareLength / 2 - 100, numEdges - 1);
-//    }
+    @SuppressWarnings("unused")
+    private List<BezierPoint> showScreenshot_Cascading_Rectangles(int viewWidth, int viewHeight) {
+
+        float centerX = viewWidth / 2;
+        float centerY = viewHeight / 2;
+        float deltaX = viewWidth / (float) NumDemoEdges;
+        float deltaY = viewHeight / (float) NumDemoEdges;
+        return getDemoRectangle(centerX, centerY, deltaX, deltaY);
+    }
+
+    @SuppressWarnings("unused")
+    private List<BezierPoint> showScreenshot_NiceFigure(int viewWidth, int viewHeight) {
+        int numEdges = 7;
+        float centerX = viewWidth / 2;
+        float centerY = viewHeight / 2;
+        float squareLength = (viewWidth < viewHeight) ? viewWidth : viewHeight;
+        return getDemoNiceFigure(centerX, centerY, squareLength / 2 - 100, numEdges - 1);
+    }
+
+    @SuppressWarnings("unused")
+    private List<BezierPoint> showScreenshot_NiceFigure_02(int viewWidth, int viewHeight) {
+        int numEdges = 6;
+        float centerX = viewWidth / 2;
+        float centerY = viewHeight / 2;
+        float squareLength = (viewWidth < viewHeight) ? viewWidth : viewHeight;
+        return getDemoNiceFigure2(centerX, centerY, squareLength / 2 - 100, numEdges - 1);
+    }
 
     // =====================================================================
 
@@ -361,7 +410,7 @@ public class ControlPointsHolder {
         return result;
     }
 
-    public static List<BezierPoint> getDemoConcentricCircles(float centerX, float centerY, float radius1, float radius2, float arcLength) {
+    private static List<BezierPoint> getDemoConcentricCircles(float centerX, float centerY, float radius1, float radius2, float arcLength) {
 
         List<BezierPoint> result = new ArrayList<>();
 

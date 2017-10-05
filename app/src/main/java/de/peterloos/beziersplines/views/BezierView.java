@@ -158,7 +158,7 @@ public class BezierView extends View implements View.OnTouchListener {
 
                     // TODO: Hier haben wir eine Race condition: Was ist, wenn der Mode
                     // später gesetzt wird ?!?!?!?
-                    ControlPointsHolder.computeDemoRectangle(BezierView.this.viewWidth, BezierView.this.viewHeight);
+                    BezierView.this.holder.computeDemoRectangle(BezierView.this.viewWidth, BezierView.this.viewHeight);
                 }
             }
         });
