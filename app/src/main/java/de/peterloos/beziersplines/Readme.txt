@@ -30,6 +30,8 @@ Im Holder verwende ich folgenden Trick;
     private List<BezierPoint> demoData;
     private List<BezierPoint> data;
 
+// das muss synchronized sein !!!!!!
+
     holder.setNormalMode() {
         data = userData;
     }
@@ -59,15 +61,22 @@ die alte Demo-Liste leeren ......
 
 
 
+// --------------------------------------------------------------------------------
+
+Ohhhh - noch ein Bug: Wenn ich die App "ikonisiere",
+dann werden die beiden Schaltflächen "Konstruktion" ind "Gitternetzlinien"
+nicht wie beim letzten Mal gesetzt .........
+
+// --------------------------------------------------------------------------------
+
+Ohhhh - noch ein Bug: Wenn ich mit der "linken" Taste die App in den "Liste aller Tasks" Mode versetze,
+dann läuft nach Wiederanwahl die Task NICHT WEITER ?!?!?!?!?!? FEHLER !!!!!!!!!!!!!
+
+// --------------------------------------------------------------------------------
 
 
 
-
-
-
-
-
-
+Irgendwie geht bei großen Gitternetzen das Verschieben NICHT ?!?!?!?
 
 
 // --------------------------------------------------------------------------------

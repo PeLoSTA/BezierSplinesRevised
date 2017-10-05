@@ -109,8 +109,9 @@ public class DemonstrationActivity
         this.demoControlPoints = new ArrayList<>();
         this.task = null;
 
-        // clear last spline
+        // switch control points container to demo mode
         ControlPointsHolder holder = ControlPointsHolder.getInstance();
+        holder.setDemoMode();
         holder.clear();
 
         // connect event sink with client
@@ -164,14 +165,8 @@ public class DemonstrationActivity
 
                 // cancel current task, if any
                 if (this.task != null) {
-
                     this.task.setRunning(false);
-                    this.task.cancel( false);
                 }
-
-                // clearing control points
-                ControlPointsHolder holder = ControlPointsHolder.getInstance();
-                holder.clear();
 
                 // up arrow in action bar clicked - goto main activity
                 this.finish();
@@ -188,19 +183,11 @@ public class DemonstrationActivity
         Log.v(BezierGlobals.TAG, "%%%%%%%%%%%%%%> onBACKPressed");
 
         if (this.task != null) {
-
             this.task.setRunning(false);
-            this.task.cancel( false);
         }
-
-        // clearing control points
-        ControlPointsHolder holder = ControlPointsHolder.getInstance();
-        holder.clear();
 
         super.onBackPressed();
     }
-
-
 
     // private helper methods
     @SuppressWarnings("unused")
@@ -290,10 +277,6 @@ public class DemonstrationActivity
         @Override
         protected void onCancelled(){
             Log.v(BezierGlobals.TAG, "ARGHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHH> onCancelled");
-
-            // clearing control points
-            ControlPointsHolder holder = ControlPointsHolder.getInstance();
-            holder.clear();
 
             super.onCancelled();
         }

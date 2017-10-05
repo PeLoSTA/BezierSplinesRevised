@@ -16,28 +16,17 @@ public class ControlPointsHolder {
     }
 
     // representing application global data
-    private List<BezierPoint> userData;
-    private List<BezierPoint> demoData;
+    private List<BezierPoint> userData;  /* current users beziér spline */
+    private List<BezierPoint> demoData;  /* current demo beziér spline */
+    private List<BezierPoint> data;      /* referencing users or demo spline */
 
     // restrict the constructor from being instantiated
     private ControlPointsHolder () {
 
         this.userData = new ArrayList<>();
         this.demoData = new ArrayList<>();
+        this.data = this.userData;
     }
-
-//    public void set (List<BezierPoint> model) {
-//        this.userData = model;
-//    }
-//
-//    // TODO: DA MUSS MAN DOCH EINE KOPIE RAUSGEBEN ?!?!?!?!
-////    public List<BezierPoint> get () {
-////        return this.userData;
-////    }
-//
-//    public List<BezierPoint> get () {
-//        return new ArrayList<> (this.userData);
-//    }
 
     public static synchronized ControlPointsHolder getInstance () {
 
@@ -52,37 +41,50 @@ public class ControlPointsHolder {
 
     // public interface
     public void clear() {
-        this.userData.clear();
+        this.data.clear();
     }
 
     public void add(BezierPoint p) {
-        this.userData.add(p);
+        this.data.add(p);
     }
 
     public BezierPoint get(int index) {
-        return this.userData.get(index);
+        return this.data.get(index);
     }
 
     public void update(int index, BezierPoint p) {
-        this.userData.set(index, p);
+        this.data.set(index, p);
     }
 
     public void remove(int index) {
-        this.userData.remove(index);
+        this.data.remove(index);
     }
 
     public int size() {
-        return this.userData.size();
+        return this.data.size();
     }
 
     public void toArray(BezierPoint[] src) {
-        this.userData.toArray(src);
+        this.data.toArray(src);
     }
 
     public void snapAllPoints(double cellLength) {
 
-        for (BezierPoint p : this.userData) {
+        for (BezierPoint p : this.data) {
             BezierUtils.snapPoint(p, cellLength);
         }
+    }
+
+    // =====================================================================
+
+    // switching between user and demo mode
+    public synchronized void setNormalMode() {
+
+        this.data = this.userData;
+    }
+
+    public synchronized void setDemoMode() {
+
+        this.data = this.demoData;
     }
 }

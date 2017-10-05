@@ -30,6 +30,7 @@ import java.util.Locale;
 import de.peterloos.beziersplines.BezierGlobals;
 import de.peterloos.beziersplines.utils.BezierMode;
 import de.peterloos.beziersplines.utils.BezierUtils;
+import de.peterloos.beziersplines.utils.ControlPointsHolder;
 import de.peterloos.beziersplines.utils.SharedPreferencesUtils;
 import de.peterloos.beziersplines.views.BezierGridView;
 import de.peterloos.beziersplines.views.BezierListener;
@@ -381,6 +382,10 @@ public class MainActivity
         super.onResume();
 
         Log.v(BezierGlobals.TAG, "MainActivity in onResume");
+
+        // switch control points container back to users mode
+        ControlPointsHolder holder = ControlPointsHolder.getInstance();
+        holder.setNormalMode();
 
         this.bezierViewWithoutGrid.invalidate();
         this.bezierViewWithGrid.invalidate();
