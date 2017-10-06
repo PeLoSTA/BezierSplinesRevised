@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.content.res.Resources;
+import android.os.PersistableBundle;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -40,7 +41,7 @@ import de.peterloos.beziersplines.R;
 /**
  * Project: Bézier Splines Simulation
  * Copyright (c) 2017 by PeLo on 23.01.2017. All rights reserved.
- * Contact info: peterloos@gmx.de
+ * Contact info: peter.loos@gmx.de
  */
 
 public class MainActivity
@@ -378,11 +379,16 @@ public class MainActivity
         Log.v(BezierGlobals.TAG, "onNothingSelected");
     }
 
+     /*
+     * lifecycle methods
+     */
+
     @Override
     protected void onResume() {
         super.onResume();
 
-        Log.v(BezierGlobals.TAG, "MainActivity in onResume");
+        // being called especially, when a second activity (e.g. settings) is finished
+        Log.v(BezierGlobals.TAG, "MainActivity::onResume");
 
         // switch control points container back to users mode
         ControlPointsHolder holder = ControlPointsHolder.getInstance();
@@ -391,4 +397,34 @@ public class MainActivity
         this.bezierViewWithoutGrid.invalidate();
         this.bezierViewWithGrid.invalidate();
     }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+
+        // being called for instance if back button pressed
+        Log.v(BezierGlobals.TAG, "MainActivity::onPause");
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+
+        // being called if app is destroyed
+        Log.v(BezierGlobals.TAG, "MainActivity::onDestroy");
+    }
+
+//    @Override
+//    protected void onSaveInstanceState(Bundle outState) {
+//
+//        Log.v(BezierGlobals.TAG, "MainActivity::onSaveInstanceState");
+//        super.onSaveInstanceState(outState);
+//    }
+//
+//    @Override
+//    protected void onRestoreInstanceState(Bundle savedInstanceState) {
+//
+//        Log.v(BezierGlobals.TAG, "MainActivity::onRestoreInstanceState");
+//        super.onRestoreInstanceState(savedInstanceState);
+//    }
 }

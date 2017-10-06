@@ -46,12 +46,12 @@ public class ControlPointsHolder {
 
     // switching between user and demo mode
     public synchronized void setNormalMode() {
-        Log.v(BezierGlobals.TAG, "==================> set NORMAL Mode");
+        Log.v(BezierGlobals.TAG, "ControlPointsHolder: set normal mode");
         this.data = this.userData;
     }
 
     public synchronized void setDemoMode() {
-        Log.v(BezierGlobals.TAG, "==================> set DEMO lMode");
+        Log.v(BezierGlobals.TAG, "ControlPointsHolder: set demonstration lMode");
         this.data = this.demoData;
     }
 
