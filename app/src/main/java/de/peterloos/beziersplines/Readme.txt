@@ -10,10 +10,9 @@ Ein Singleton
 
 Ein Calculator
 
-
 // --------------------------------------------------------------------------------
 
-Im XML sind einige Fehler enthalten ....
+Im XML sind einige Fehler enthalten .... bzw. die Layouts nochmal ansehen .......
 
 // --------------------------------------------------------------------------------
 

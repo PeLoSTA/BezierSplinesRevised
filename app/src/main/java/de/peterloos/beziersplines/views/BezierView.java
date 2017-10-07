@@ -19,7 +19,6 @@ import android.view.View;
 import android.view.ViewConfiguration;
 import android.view.ViewTreeObserver;
 
-import java.util.List;
 import java.util.Locale;
 
 import de.peterloos.beziersplines.R;
@@ -145,8 +144,8 @@ public class BezierView extends View implements View.OnTouchListener {
             public void onGlobalLayout() {
                 BezierView.this.getViewTreeObserver().removeOnGlobalLayoutListener(this);
 
-                BezierView.this.viewWidth = BezierView.this.getMeasuredWidth();;
-                BezierView.this.viewHeight = BezierView.this.getMeasuredHeight();;
+                BezierView.this.viewWidth = BezierView.this.getMeasuredWidth();
+                BezierView.this.viewHeight = BezierView.this.getMeasuredHeight();
 
                 if (BezierView.this.listener != null) {
                     BezierView.this.listener.setSize(BezierView.this.viewWidth, BezierView.this.viewHeight);
@@ -203,12 +202,6 @@ public class BezierView extends View implements View.OnTouchListener {
     public void addControlPoint(BezierPoint p) {
         this.holder.add(p);
         this.invalidate();
-    }
-
-    public void addControlPoints(List<BezierPoint> points) {
-        for (BezierPoint point : points) {
-            this.addControlPoint(point);
-        }
     }
 
     public void removeControlPoint(int index) {

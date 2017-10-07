@@ -118,27 +118,15 @@ public class MainActivity
         this.seekBarT.setOnSeekBarChangeListener(this);
         this.spinnerMode.setOnItemSelectedListener(this);
 
-        // TODO: PElO
-        // DAS IST JETZT NEU ....
+        // reset controls into initial state
+        this.seekBarResolution.setProgress(this.resolution);
+        this.seekBarT.setProgress(50);
+        this.bezierViewWithoutGrid.setShowConstruction(false);
+        this.bezierViewWithGrid.setShowConstruction(false);
 
-        if (savedInstanceState == null) {
-
-            // reset controls into initial state
-            this.seekBarResolution.setProgress(this.resolution);
-            this.seekBarT.setProgress(50);
-            this.bezierViewWithoutGrid.setShowConstruction(false);
-            this.bezierViewWithGrid.setShowConstruction(false);
-
-            this.checkboxConstruction.setChecked(this.constructionIsVisible);
-            this.checkboxSnaptogrid.setChecked(this.gridIsVisible);
-            this.tableRowConstruction.setVisibility(View.GONE);
-        }
-        else {
-            Log.v(BezierGlobals.TAG, "MainActivity::?????????????????????????????????????????????????????????????");
-        }
-
-
-
+        this.checkboxConstruction.setChecked(this.constructionIsVisible);
+        this.checkboxSnaptogrid.setChecked(this.gridIsVisible);
+        this.tableRowConstruction.setVisibility(View.GONE);
 
         // read language independent strings for settings activity result handshake
         Resources res = this.getResources();
@@ -281,21 +269,11 @@ public class MainActivity
         } else if (view == this.checkboxSnaptogrid) {
             if (this.checkboxSnaptogrid.isChecked()) {
                 this.gridIsVisible = true;
-
-                // TODO: Wozu habe ich hier mal den Mode gesetzt ?!?!?!?!?!?
-                // this.bezierViewWithGrid.setMode(BezierMode.Create);
-                // this.bezierViewWithGrid.clear();
-
                 this.bezierViewWithGrid.snapAllPoints();
-
                 this.viewSwitcher.showNext();
 
             } else {
                 this.gridIsVisible = false;
-
-                // TODO: Wozu habe ich hier mal den Mode gesetzt ?!?!?!?!?!?
-                // this.bezierViewWithoutGrid.clear();
-                // this.bezierViewWithoutGrid.setMode(BezierMode.Create);
                 this.viewSwitcher.showPrevious();
             }
 
@@ -378,7 +356,9 @@ public class MainActivity
             case 4:  // demo mode
                 this.bezierViewWithoutGrid.setMode(BezierMode.Demo);
                 this.bezierViewWithGrid.setMode(BezierMode.Demo);
-                holder.setControlPointsForScreenshot(ControlPointsHolder.SCREENSHOT_NICE_FIGURE_02, this.viewWidth, this.viewHeight);
+                holder.setControlPointsForScreenshot(
+                        ControlPointsHolder.SCREENSHOT_NICE_FIGURE_02,
+                        this.viewWidth, this.viewHeight);
                 this.bezierViewWithoutGrid.invalidate();
                 this.bezierViewWithGrid.invalidate();
                 break;
