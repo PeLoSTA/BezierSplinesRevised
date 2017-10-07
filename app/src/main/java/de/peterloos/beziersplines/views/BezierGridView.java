@@ -95,7 +95,7 @@ public class BezierGridView extends BezierView {
         this.numCellRows = (int) (this.viewHeight / this.cellLength);
 
         String msg = String.format(Locale.getDefault(),
-                "====> BezierGridView::calculateNumOfGridLines: Cols=%d - Rows=%d",
+                "BezierGridView::calculateNumOfGridLines: Cols=%d - Rows=%d",
                 this.numCellCols, this.numCellRows);
         Log.v(BezierGlobals.TAG, msg);
     }

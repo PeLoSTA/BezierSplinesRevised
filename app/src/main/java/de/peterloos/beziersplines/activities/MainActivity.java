@@ -4,7 +4,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.content.res.Resources;
-import android.os.PersistableBundle;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -119,15 +118,27 @@ public class MainActivity
         this.seekBarT.setOnSeekBarChangeListener(this);
         this.spinnerMode.setOnItemSelectedListener(this);
 
-        // initialize controls
-        this.seekBarResolution.setProgress(this.resolution);
-        this.seekBarT.setProgress(50);
-        this.bezierViewWithoutGrid.setShowConstruction(false);
-        this.bezierViewWithGrid.setShowConstruction(false);
+        // TODO: PElO
+        // DAS IST JETZT NEU ....
 
-        this.checkboxConstruction.setChecked(this.constructionIsVisible);
-        this.checkboxSnaptogrid.setChecked(this.gridIsVisible);
-        this.tableRowConstruction.setVisibility(View.GONE);
+        if (savedInstanceState == null) {
+
+            // reset controls into initial state
+            this.seekBarResolution.setProgress(this.resolution);
+            this.seekBarT.setProgress(50);
+            this.bezierViewWithoutGrid.setShowConstruction(false);
+            this.bezierViewWithGrid.setShowConstruction(false);
+
+            this.checkboxConstruction.setChecked(this.constructionIsVisible);
+            this.checkboxSnaptogrid.setChecked(this.gridIsVisible);
+            this.tableRowConstruction.setVisibility(View.GONE);
+        }
+        else {
+            Log.v(BezierGlobals.TAG, "MainActivity::?????????????????????????????????????????????????????????????");
+        }
+
+
+
 
         // read language independent strings for settings activity result handshake
         Resources res = this.getResources();
@@ -384,6 +395,13 @@ public class MainActivity
      */
 
     @Override
+    public void onBackPressed() {
+
+        Log.v(BezierGlobals.TAG, "MainActivity::onBackPressed");
+        super.onBackPressed();
+    }
+
+    @Override
     protected void onResume() {
         super.onResume();
 
@@ -400,31 +418,49 @@ public class MainActivity
 
     @Override
     protected void onPause() {
-        super.onPause();
 
-        // being called for instance if back button pressed
         Log.v(BezierGlobals.TAG, "MainActivity::onPause");
+        super.onPause();
     }
 
     @Override
     protected void onDestroy() {
-        super.onDestroy();
 
-        // being called if app is destroyed
+        // main activity is going to be destroyed
         Log.v(BezierGlobals.TAG, "MainActivity::onDestroy");
+
+        // need to clear current list of controls points - on restart the main canvas should be empty
+        ControlPointsHolder holder = ControlPointsHolder.getInstance();
+        holder.clear();
+
+        super.onDestroy();
     }
 
-//    @Override
-//    protected void onSaveInstanceState(Bundle outState) {
-//
-//        Log.v(BezierGlobals.TAG, "MainActivity::onSaveInstanceState");
-//        super.onSaveInstanceState(outState);
-//    }
-//
-//    @Override
-//    protected void onRestoreInstanceState(Bundle savedInstanceState) {
-//
-//        Log.v(BezierGlobals.TAG, "MainActivity::onRestoreInstanceState");
-//        super.onRestoreInstanceState(savedInstanceState);
-//    }
+    @Override
+    protected void onStart() {
+
+        Log.v(BezierGlobals.TAG, "MainActivity::onStart");
+        super.onStart();
+    }
+
+    @Override
+    protected void onStop() {
+
+        Log.v(BezierGlobals.TAG, "MainActivity::onStop");
+        super.onStop();
+    }
+
+    @Override
+    protected void onSaveInstanceState(Bundle outState) {
+
+        Log.v(BezierGlobals.TAG, "MainActivity::onSaveInstanceState");
+        super.onSaveInstanceState(outState);
+    }
+
+    @Override
+    protected void onRestoreInstanceState(Bundle savedInstanceState) {
+
+        Log.v(BezierGlobals.TAG, "MainActivity::onRestoreInstanceState");
+        super.onRestoreInstanceState(savedInstanceState);
+    }
 }
