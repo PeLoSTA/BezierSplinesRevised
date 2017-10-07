@@ -108,21 +108,21 @@ public class BezierGridView extends BezierView {
         // draw horizontal lines
         for (int i = 0; i <= this.numCellRows; i++) {
             canvas.drawLine(
-                0,
-                (float) (i * this.cellLength),
-                (float) this.viewWidth,
-                (float) (i * this.cellLength),
-                this.linePaint);
+                    0,
+                    (float) (i * this.cellLength),
+                    (float) this.viewWidth,
+                    (float) (i * this.cellLength),
+                    this.linePaint);
         }
 
         // draw vertical lines
         for (int i = 0; i <= this.numCellCols; i++) {
             canvas.drawLine(
-                (float) (i * this.cellLength),
-                0,
-                (float) (i * this.cellLength),
-                (float) this.viewHeight,
-                this.linePaint);
+                    (float) (i * this.cellLength),
+                    0,
+                    (float) (i * this.cellLength),
+                    (float) this.viewHeight,
+                    this.linePaint);
         }
     }
 

@@ -130,8 +130,8 @@ public class DemonstrationActivity
 
                 String info =
                         String.format(Locale.getDefault(),
-                        "DemonstrationActivity: Size in Pixel: -------------> %d, %d",
-                        DemonstrationActivity.this.viewWidth, DemonstrationActivity.this.viewHeight);
+                                "DemonstrationActivity: Size in Pixel: -------------> %d, %d",
+                                DemonstrationActivity.this.viewWidth, DemonstrationActivity.this.viewHeight);
                 Log.v(BezierGlobals.TAG, info);
 
                 DemonstrationActivity.this.holder.computeDemoRectangle(width, height);
@@ -169,10 +169,11 @@ public class DemonstrationActivity
         }
     }
 
-    /** called when user press the back button */
+    /**
+     * called when user press the back button
+     */
     @Override
-    public void onBackPressed()
-    {
+    public void onBackPressed() {
         if (this.task != null) {
             this.task.setRunning(false);
             this.task = null;
@@ -208,7 +209,9 @@ public class DemonstrationActivity
 
     private class DemoOperation extends AsyncTask<Void, UpdateDescriptor, Void> {
 
-        /** need thread safe access to 'running' state of async task (!) */
+        /**
+         * need thread safe access to 'running' state of async task (!)
+         */
         private boolean running;
 
         public synchronized void setRunning(boolean running) {
@@ -236,7 +239,7 @@ public class DemonstrationActivity
 
             for (int i = 0; i < this.demoPoints.size(); i++) {
 
-                if (! this.isRunning())
+                if (!this.isRunning())
                     return null;
 
                 try {
@@ -253,7 +256,7 @@ public class DemonstrationActivity
 
             for (int i = 0; i <= 100; i++) {
 
-                if (! this.isRunning())
+                if (!this.isRunning())
                     return null;
 
                 try {
@@ -297,7 +300,7 @@ public class DemonstrationActivity
         protected void onProgressUpdate(UpdateDescriptor... values) {
 
             // ignore late arriving progress updates
-            if (! isRunning()) {
+            if (!isRunning()) {
 
                 Log.v(BezierGlobals.TAG, "info: ignored late arriving progress updates");
                 return;

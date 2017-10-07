@@ -26,17 +26,17 @@ public class ControlPointsHolder {
     private List<BezierPoint> data;      /* referencing users or demo spline */
 
     // restrict the constructor from being instantiated
-    private ControlPointsHolder () {
+    private ControlPointsHolder() {
 
         this.userData = new ArrayList<>();
         this.demoData = new ArrayList<>();
         this.data = this.userData;
     }
 
-    public static synchronized ControlPointsHolder getInstance () {
+    public static synchronized ControlPointsHolder getInstance() {
 
         if (instance == null) {
-            instance = new ControlPointsHolder ();
+            instance = new ControlPointsHolder();
         }
 
         return instance;
@@ -112,7 +112,7 @@ public class ControlPointsHolder {
             float deltaX = viewWidth / (float) NumDemoEdges;
             float deltaY = viewHeight / (float) NumDemoEdges;
 
-            demoData = getDemoRectangle (centerX, centerY, deltaX, deltaY);
+            demoData = getDemoRectangle(centerX, centerY, deltaX, deltaY);
         }
     }
 

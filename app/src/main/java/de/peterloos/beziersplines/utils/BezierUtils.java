@@ -37,29 +37,29 @@ public class BezierUtils {
         p.setY(snapY);
     }
 
-    public static void calculateCellLengths (DisplayMetrics dm, int widthPx, int heightPx) {
+    public static void calculateCellLengths(DisplayMetrics dm, int widthPx, int heightPx) {
 
         // calculate size of this display in cm
         double xInches = (double) widthPx / (double) dm.xdpi;
         double xCm = xInches * 2.54;
         double yInches = (double) heightPx / (double) dm.ydpi;
         double yCm = yInches * 2.54;
-        Log.d(BezierGlobals.TAG,"View in cm (width): " + xCm);
-        Log.d(BezierGlobals.TAG,"View in cm (height): " + yCm);
+        Log.d(BezierGlobals.TAG, "View in cm (width): " + xCm);
+        Log.d(BezierGlobals.TAG, "View in cm (height): " + yCm);
 
         // calculate cell size for bézier grid view in pixel
         double numPixelsHorizontalPerCm = (double) widthPx / xCm;
         double numPixelsVerticalPerCm = (double) heightPx / yCm;
 
-        Log.d(BezierGlobals.TAG,"numPixelsHorizontalPerCm: " + numPixelsHorizontalPerCm);
-        Log.d(BezierGlobals.TAG,"numPixelsVerticalPerCm:   " + numPixelsVerticalPerCm);
+        Log.d(BezierGlobals.TAG, "numPixelsHorizontalPerCm: " + numPixelsHorizontalPerCm);
+        Log.d(BezierGlobals.TAG, "numPixelsVerticalPerCm:   " + numPixelsVerticalPerCm);
 
         cellLengths[0] = numPixelsHorizontalPerCm / 2.0;    // 1/2 cm
         cellLengths[1] = numPixelsHorizontalPerCm / 4.0;    // 1/4 cm
         cellLengths[2] = numPixelsHorizontalPerCm / 8.0;    // 1/8 cm
     }
 
-    public static double getCellLength (int density) {
+    public static double getCellLength(int density) {
         return cellLengths[density];
     }
 }

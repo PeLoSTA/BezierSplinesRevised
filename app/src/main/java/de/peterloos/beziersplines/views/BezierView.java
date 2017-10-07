@@ -213,6 +213,7 @@ public class BezierView extends View implements View.OnTouchListener {
         this.holder.update(index, p);
         this.invalidate();
     }
+
     @Override
     protected void onDraw(Canvas canvas) {
         super.onDraw(canvas);
