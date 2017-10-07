@@ -12,33 +12,13 @@ Ein Calculator
 
 // --------------------------------------------------------------------------------
 
-Thread bzw. Demo Klasse:
-
-Wie sieht das mit Start und Stopp aus ???
-Ist anhalten der Demo nicht besser ?!?!?
-Vielleicht doch nicht ....
+ALLE TODOs abarbeiten !!!
 
 // --------------------------------------------------------------------------------
 
 IN der Holder Klasse müsste meines Erachtens ÜERALL ein static hin ..........
 
 Sonst schaut das Ganze irgendwie SCHIEF aus .......
-
-// --------------------------------------------------------------------------------
-
-VORSICHT: Habe Demo-Mode (in zwei Dateien strings.xm scharf geschalten !!!!)
-
-
-// --------------------------------------------------------------------------------
-
-Ohhhh - noch ein Bug: Wenn ich die App "ikonisiere",
-dann werden die beiden Schaltflächen "Konstruktion" ind "Gitternetzlinien"
-nicht wie beim letzten Mal gesetzt .........
-
-// --------------------------------------------------------------------------------
-
-Ohhhh - noch ein Bug: Wenn ich mit der "linken" Taste die App in den "Liste aller Tasks" Mode versetze,
-dann läuft nach Wiederanwahl die Task NICHT WEITER ?!?!?!?!?!? FEHLER !!!!!!!!!!!!!
 
 // --------------------------------------------------------------------------------
 
