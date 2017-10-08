@@ -20,11 +20,11 @@ public class ControlPointsCalculator {
 
     public static List<BezierPoint> computeDemoRectangle(float viewWidth, float viewHeight) {
 
-        float centerX = viewWidth / 2;
-        float centerY = viewHeight / 2;
+        float deltaX = viewWidth / (float) (NumDemoEdges + 2);
+        float deltaY = viewHeight / (float) (NumDemoEdges + 2);
 
-        float deltaX = viewWidth / (float) NumDemoEdges;
-        float deltaY = viewHeight / (float) NumDemoEdges;
+        float centerX = viewWidth / 2 - (deltaX / 2.0F);
+        float centerY = viewHeight / 2;
 
         return getDemoRectangle(centerX, centerY, deltaX, deltaY);
     }

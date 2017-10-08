@@ -1,27 +1,19 @@
 
+// --------------------------------------------------------------------------------
+
+DER BUG MIT DER ROTEN LINIE MUSS WEG !!!!
 
 // --------------------------------------------------------------------------------
 
-Jetzt sind alle Control Points in einer Klasse:
-
-Zwei sind besser:
-
-Ein Singleton
-
-Ein Calculator
+Bei Auflösnug von t = 0 bekommt man die rote Linie nicht zu sehen !!!!
 
 // --------------------------------------------------------------------------------
 
-MIT DEM MONITOR DEN SPEICHERVERRAUCH BETRACHNTE !!!!!!!!!!!!!!!!!!!
+MIT DEM MONITOR DEN SPEICHERVERRAUCH BETRACHNEN !!!!!!!!!!!!!!!!!!!
 
 // --------------------------------------------------------------------------------
-
 
 Die Liste alles Control Points ausgeben -- wie ?????????????????????
-
-// --------------------------------------------------------------------------------
-
-ACHTUNG: In den 2 strings.xml ist der Demo Mode freigeschalten !!!!!!!!!!
 
 // --------------------------------------------------------------------------------
 

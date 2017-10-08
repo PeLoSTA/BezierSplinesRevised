@@ -229,8 +229,7 @@ public class DemonstrationActivity
         protected void onPreExecute() {
 
             // retrieve demo points (demo or for screen shot purposes)
-            this.demoPoints = ControlPointsCalculator.getControlPointsForScreenshot(
-                    ControlPointsCalculator.SCREENSHOT_CASCADING_RECTANGLES,
+            this.demoPoints = ControlPointsCalculator.computeDemoRectangle(
                     DemonstrationActivity.this.viewWidth,
                     DemonstrationActivity.this.viewHeight);
         }
