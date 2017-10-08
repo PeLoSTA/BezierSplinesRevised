@@ -30,6 +30,7 @@ import java.util.Locale;
 import de.peterloos.beziersplines.BezierGlobals;
 import de.peterloos.beziersplines.utils.BezierMode;
 import de.peterloos.beziersplines.utils.BezierUtils;
+import de.peterloos.beziersplines.utils.ControlPointsCalculator;
 import de.peterloos.beziersplines.utils.ControlPointsHolder;
 import de.peterloos.beziersplines.utils.SharedPreferencesUtils;
 import de.peterloos.beziersplines.views.BezierGridView;
@@ -356,8 +357,8 @@ public class MainActivity
             case 4:  // demo mode
                 this.bezierViewWithoutGrid.setMode(BezierMode.Demo);
                 this.bezierViewWithGrid.setMode(BezierMode.Demo);
-                holder.setControlPointsForScreenshot(
-                        ControlPointsHolder.SCREENSHOT_NICE_FIGURE_02,
+                holder.setScreenshotSpline(
+                        ControlPointsCalculator.SCREENSHOT_NICE_FIGURE_02,
                         this.viewWidth, this.viewHeight);
                 this.bezierViewWithoutGrid.invalidate();
                 this.bezierViewWithGrid.invalidate();

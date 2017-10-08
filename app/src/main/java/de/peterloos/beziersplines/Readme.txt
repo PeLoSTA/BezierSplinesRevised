@@ -12,6 +12,17 @@ Ein Calculator
 
 // --------------------------------------------------------------------------------
 
+
+ACHTUNG: In den 2 strings.xml ist der Demo Mode freigeschalten !!!!!!!!!!
+
+// --------------------------------------------------------------------------------
+
+In  Bezier Splines App umsetzen ....
+
+http://stackoverflow.com/questions/12870537/android-naming-convention
+
+// --------------------------------------------------------------------------------
+
 Im XML sind einige Fehler enthalten .... bzw. die Layouts nochmal ansehen .......
 
 // --------------------------------------------------------------------------------
@@ -30,6 +41,7 @@ Sonst schaut das Ganze irgendwie SCHIEF aus .......
 
 // --------------------------------------------------------------------------------
 
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 Irgendwie geht bei großen Gitternetzen das Verschieben NICHT ?!?!?!?
 
 // --------------------------------------------------------------------------------

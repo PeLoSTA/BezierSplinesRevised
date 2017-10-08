@@ -22,6 +22,7 @@ import de.peterloos.beziersplines.utils.BezierMode;
 import de.peterloos.beziersplines.utils.BezierPoint;
 import de.peterloos.beziersplines.R;
 import de.peterloos.beziersplines.utils.BezierUtils;
+import de.peterloos.beziersplines.utils.ControlPointsCalculator;
 import de.peterloos.beziersplines.utils.ControlPointsHolder;
 import de.peterloos.beziersplines.utils.SharedPreferencesUtils;
 import de.peterloos.beziersplines.views.BezierGridView;
@@ -134,7 +135,7 @@ public class DemonstrationActivity
                                 DemonstrationActivity.this.viewWidth, DemonstrationActivity.this.viewHeight);
                 Log.v(BezierGlobals.TAG, info);
 
-                DemonstrationActivity.this.holder.computeDemoRectangle(width, height);
+                DemonstrationActivity.this.holder.setDemoSpline(width, height);
 
                 DemonstrationActivity.this.task = new DemoOperation();
                 DemonstrationActivity.this.task.setRunning(true);
@@ -228,8 +229,8 @@ public class DemonstrationActivity
         protected void onPreExecute() {
 
             // retrieve demo points (demo or for screen shot purposes)
-            this.demoPoints = DemonstrationActivity.this.holder.getControlPointsForScreenshot(
-                    ControlPointsHolder.SCREENSHOT_CASCADING_RECTANGLES,
+            this.demoPoints = ControlPointsCalculator.getControlPointsForScreenshot(
+                    ControlPointsCalculator.SCREENSHOT_CASCADING_RECTANGLES,
                     DemonstrationActivity.this.viewWidth,
                     DemonstrationActivity.this.viewHeight);
         }
