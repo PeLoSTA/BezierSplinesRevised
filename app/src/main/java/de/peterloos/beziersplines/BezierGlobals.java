@@ -33,7 +33,6 @@ public class BezierGlobals {
     public static final int StrokeWidthCircleRadiusDp = 9;
     public static final int StrokeWidthBorderWidthDp = 2;
     public static final int DistanceFromNumberDp = 12;
-    public static final int NearestDistanceMaximumDp = 16;
 
     // density-independent pixels for text
     public static final int StrokeWidthTextSizeDp = 18;

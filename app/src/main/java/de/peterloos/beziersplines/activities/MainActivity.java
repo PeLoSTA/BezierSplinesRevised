@@ -162,8 +162,12 @@ public class MainActivity
                 MainActivity.this.getWindowManager().getDefaultDisplay().getMetrics(dm);
 
                 // calculate cell lengths (according to unit 'cm')
-                BezierUtils.calculateCellLengths(dm, width, height);
+                BezierUtils.calculateDeviceIndependentMetrics(dm, width, height);
                 MainActivity.this.bezierViewWithGrid.setDensityOfGridlines(gridlinesFactor);
+
+                float dipDistanceMaximum = BezierUtils.getDipDistanceMaximum();
+                MainActivity.this.bezierViewWithGrid.setDipDistanceMaximum(dipDistanceMaximum);
+                MainActivity.this.bezierViewWithoutGrid.setDipDistanceMaximum(dipDistanceMaximum);
             }
 
             @Override
@@ -277,11 +281,6 @@ public class MainActivity
                 this.gridIsVisible = false;
                 this.viewSwitcher.showPrevious();
             }
-
-            // needed for both views
-            this.seekBarResolution.setProgress(this.resolution);
-            this.seekBarT.setProgress(50);
-            this.spinnerMode.setSelection(0);
         }
     }
 

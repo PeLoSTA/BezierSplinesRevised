@@ -12,6 +12,14 @@ Ein Calculator
 
 // --------------------------------------------------------------------------------
 
+MIT DEM MONITOR DEN SPEICHERVERRAUCH BETRACHNTE !!!!!!!!!!!!!!!!!!!
+
+// --------------------------------------------------------------------------------
+
+
+Die Liste alles Control Points ausgeben -- wie ?????????????????????
+
+// --------------------------------------------------------------------------------
 
 ACHTUNG: In den 2 strings.xml ist der Demo Mode freigeschalten !!!!!!!!!!
 
@@ -32,24 +40,6 @@ Die Toolbar ist möglicherweise auszutauschen ....
 // --------------------------------------------------------------------------------
 
 ALLE TODOs abarbeiten !!!
-
-// --------------------------------------------------------------------------------
-
-IN der Holder Klasse müsste meines Erachtens ÜERALL ein static hin ..........
-
-Sonst schaut das Ganze irgendwie SCHIEF aus .......
-
-// --------------------------------------------------------------------------------
-
-!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-Irgendwie geht bei großen Gitternetzen das Verschieben NICHT ?!?!?!?
-
-// --------------------------------------------------------------------------------
-
-TODO: WICHTIG:
-
-Die Demontration-View hat eine andere Größe ....
-Da muss die CellLength geändert werden !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 
 // --------------------------------------------------------------------------------
 

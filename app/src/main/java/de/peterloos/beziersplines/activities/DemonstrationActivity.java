@@ -126,7 +126,7 @@ public class DemonstrationActivity
                 DemonstrationActivity.this.getWindowManager().getDefaultDisplay().getMetrics(dm);
 
                 // calculate some cell lengths (according to unit 'cm')
-                BezierUtils.calculateCellLengths(dm, width, height);
+                BezierUtils.calculateDeviceIndependentMetrics(dm, width, height);
                 DemonstrationActivity.this.bezierViewWithGrid.setDensityOfGridlines(BezierGlobals.GridlineIndexHigh);
 
                 String info =

@@ -61,7 +61,7 @@ public class BezierView extends View implements View.OnTouchListener {
     private float strokeWidthCircle;
     private float strokeWidthBorderWidth;
     private float distanceFromNumber;
-    private float nearestDistanceMaximum;
+    private double nearestDistanceMaximum;
 
     // real pixel densities for text
     private float strokeTextSize;
@@ -99,6 +99,9 @@ public class BezierView extends View implements View.OnTouchListener {
         ViewConfiguration vc = ViewConfiguration.get(context);
         this.touchSlop = vc.getScaledTouchSlop();
 
+        String s = String.format(Locale.getDefault(), "BezierView::getScaledTouchSlop:  distance in pixels = %f", this.touchSlop);
+        Log.v(BezierGlobals.TAG, s);
+
         this.showControlPoints = true;
         this.showBezierCurve = true;
         this.showConstruction = true;
@@ -110,7 +113,6 @@ public class BezierView extends View implements View.OnTouchListener {
         this.strokeWidthBorderWidth = convertDpToPixel(this.res, BezierGlobals.StrokeWidthBorderWidthDp);
         this.strokeTextSize = convertDpToPixel(this.res, BezierGlobals.StrokeWidthTextSizeDp);
         this.distanceFromNumber = convertDpToPixel(this.res, BezierGlobals.DistanceFromNumberDp);
-        this.nearestDistanceMaximum = convertDpToPixel(this.res, BezierGlobals.NearestDistanceMaximumDp);
 
         // color settings
         this.colorControlPoints = getColorWrapper(context, R.color.material_blue_grey_500);
@@ -168,6 +170,10 @@ public class BezierView extends View implements View.OnTouchListener {
     public void setShowConstruction(boolean showConstruction) {
         this.showConstruction = showConstruction;
         this.invalidate();
+    }
+
+    public void setDipDistanceMaximum(float dipDistanceMaximum) {
+        this.nearestDistanceMaximum = dipDistanceMaximum;
     }
 
     public void setMode(BezierMode mode) {
@@ -425,6 +431,7 @@ public class BezierView extends View implements View.OnTouchListener {
                 index = i;
             }
         }
+
         return (dist < this.nearestDistanceMaximum) ? index : -1;
     }
 
