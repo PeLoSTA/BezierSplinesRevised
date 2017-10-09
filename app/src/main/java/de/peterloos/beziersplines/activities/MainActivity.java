@@ -293,6 +293,10 @@ public class MainActivity
 
         if (seekBar == this.seekBarResolution) {
 
+            // don't allow value of zero for resolution seekbar
+            if (i == 0)
+                i = 1;
+
             this.resolution = i;
             String s = Integer.toString(this.resolution);
             this.textViewResolution.setText(s);
