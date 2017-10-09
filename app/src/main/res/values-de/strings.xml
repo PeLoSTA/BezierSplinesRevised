@@ -3,7 +3,8 @@
 <resources>
     <string name="app_name">De Casteljau Bézierkurven Simulation</string>
     <string name="app_name_for_app_drawer">Bézier Kurven</string>
-    <string name="app_version">Version 2.0 &#8213; &#169; Peter Loos</string>
+    <string name="app_version">Version 2.1 &#8213; &#169; Peter Loos</string>
+    <string name="app_version_date">9.10.2017</string>
 
     <!-- activities -->
     <string name="app_main_title">Bézierkurven Simulation</string>

@@ -20,11 +20,22 @@
         android:textSize="15sp" />
 
     <TextView
-        android:id="@+id/textview_version"
+        android:id="@+id/textview_version_date"
         style="@style/ThemeOverlay.MyTextDetail"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_above="@id/textview_website"
+        android:layout_marginTop="12dp"
+        android:gravity="center"
+        android:text="@string/app_version_date"
+        android:textSize="15sp" />
+
+    <TextView
+        android:id="@+id/textview_version_number"
+        style="@style/ThemeOverlay.MyTextDetail"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_above="@id/textview_version_date"
         android:layout_marginTop="12dp"
         android:gravity="center"
         android:text="@string/app_version"
@@ -35,7 +46,7 @@
         style="@style/ThemeOverlay.MyTextDetail"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_above="@id/textview_version"
+        android:layout_above="@id/textview_version_number"
         android:layout_marginTop="12dp"
         android:gravity="center"
         android:text="@string/app_main_title"

@@ -1,11 +1,10 @@
+Thanks David - I've improved two issues:
+Toggling the display (with/without grid) doesn't clear the curve anymore
+Losing the node during moving should now be more difficult.
 
 // --------------------------------------------------------------------------------
 
-DER BUG MIT DER ROTEN LINIE MUSS WEG !!!!
-
-// --------------------------------------------------------------------------------
-
-Bei Auflösnug von t = 0 bekommt man die rote Linie nicht zu sehen !!!!
+TESTEN bei geteiltem Bildschirm !!!!!!!!!!!!!!!!!!
 
 // --------------------------------------------------------------------------------
 
