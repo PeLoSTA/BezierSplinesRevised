@@ -8,7 +8,16 @@ TESTEN bei geteiltem Bildschirm !!!!!!!!!!!!!!!!!!
 
 // --------------------------------------------------------------------------------
 
+Unter Settings die Größe des Displays ausgeben
+
+// --------------------------------------------------------------------------------
+
 MIT DEM MONITOR DEN SPEICHERVERRAUCH BETRACHNEN !!!!!!!!!!!!!!!!!!!
+
+// --------------------------------------------------------------------------------
+
+In den Strings.xml sind die sprachunabhängigen Zeichenkette ZWEIMAL drin ...
+das sollte so nicht sein !!!!!!!!!
 
 // --------------------------------------------------------------------------------
 

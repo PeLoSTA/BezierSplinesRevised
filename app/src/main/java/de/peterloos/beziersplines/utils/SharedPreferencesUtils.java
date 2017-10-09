@@ -71,4 +71,32 @@ public class SharedPreferencesUtils {
         editor.putInt(key, strokewidthFactor);
         editor.apply();
     }
+
+    /*
+     * currently saved spline
+     */
+    public static String getPersistedSpline(Context context) {
+
+        SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(context);
+        String key = context.getString(R.string.shared_pref_spline);
+        String spline = sharedPref.getString(key, "[]");
+        String msg = String.format(Locale.getDefault(), "reading spline ==> %s", spline);
+        Log.v(BezierGlobals.TAG, msg);
+
+        return spline;
+    }
+
+    public static void persistSpline(Context context, String jsonSpline) {
+
+        SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(context);
+
+        String msg = String.format(Locale.getDefault(), "writing spline ==> %s", jsonSpline);
+        Log.v(BezierGlobals.TAG, msg);
+
+        SharedPreferences.Editor editor = sharedPref.edit();
+        String key = context.getString(R.string.shared_pref_spline);
+        editor.putString(key, jsonSpline);
+        editor.apply();
+    }
+
 }

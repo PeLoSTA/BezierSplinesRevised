@@ -24,6 +24,18 @@
         app:showAsAction="never" />
 
     <item
+        android:id="@+id/menu_action_store"
+        android:orderInCategory="93"
+        android:title="@string/action_store"
+        app:showAsAction="never" />
+
+    <item
+        android:id="@+id/menu_action_load"
+        android:orderInCategory="93"
+        android:title="@string/action_load"
+        app:showAsAction="never" />
+
+    <item
         android:id="@+id/menu_action_about"
         android:orderInCategory="93"
         android:title="@string/action_about"

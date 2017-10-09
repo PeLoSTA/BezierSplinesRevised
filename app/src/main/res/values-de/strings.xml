@@ -18,6 +18,8 @@
     <string name="resolution">Auflösung:</string>
     <string name="t">t:</string>
     <string name="action_settings">Einstellungen</string>
+    <string name="action_store">Speichern</string>
+    <string name="action_load">Laden</string>
     <string name="action_about">Über</string>
     <string name="action_demo">Demonstration</string>
     <string name="action_documentation">Dokumentation</string>
@@ -30,6 +32,7 @@
     <!-- shared preferences -->
     <string name="shared_pref_strokewidthfactor">StrokeWidthFactor</string>
     <string name="shared_pref_gridlines">Gridlines</string>
+    <string name="shared_pref_spline">SavedSpline</string>
 
     <!-- state changes according to settings activity -->
     <string name="result_gridlines">ResultGridlines</string>

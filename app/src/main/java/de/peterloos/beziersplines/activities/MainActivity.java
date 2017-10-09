@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.content.res.Resources;
+import android.provider.Settings;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -23,12 +24,18 @@ import android.widget.TextView;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.widget.Toast;
 import android.widget.ViewSwitcher;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.util.Locale;
 
 import de.peterloos.beziersplines.BezierGlobals;
 import de.peterloos.beziersplines.utils.BezierMode;
+import de.peterloos.beziersplines.utils.BezierPoint;
 import de.peterloos.beziersplines.utils.BezierUtils;
 import de.peterloos.beziersplines.utils.ControlPointsCalculator;
 import de.peterloos.beziersplines.utils.ControlPointsHolder;
@@ -224,9 +231,71 @@ public class MainActivity
             Context currentContext = this.getApplicationContext();
             Intent demoIntent = new Intent(currentContext, DocumentationActivity.class);
             this.startActivity(demoIntent);
+        } else if (id == R.id.menu_action_store) {
+
+            this.SAVE_TEST_METHOD();
+            Toast.makeText(getApplicationContext(), "Stored the picture ...", Toast.LENGTH_SHORT).show();
+
+        } else if (id == R.id.menu_action_load) {
+
+            this.LOAD_TEST_METHOD();
+            Toast.makeText(getApplicationContext(), "Loaded the picture ...", Toast.LENGTH_SHORT).show();
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    private void SAVE_TEST_METHOD() {
+
+        ControlPointsHolder holder = ControlPointsHolder.getInstance();
+
+        JSONArray jsonArray = new JSONArray();
+        for (int i = 0; i < holder.size(); i++) {
+
+            BezierPoint point = holder.get(i);
+            JSONObject jsonObject = new JSONObject();
+
+            try {
+                jsonObject.put("x", point.getX());
+                jsonObject.put("y", point.getY());
+            } catch (JSONException e) {
+                Log.v(BezierGlobals.TAG, "Internal Error: put to JSON failed !");
+            }
+
+            jsonArray.put(jsonObject);
+        }
+
+        Context context = this.getApplicationContext();
+        SharedPreferencesUtils.persistSpline(context, jsonArray.toString());
+
+        Log.v(BezierGlobals.TAG, "STORING JSON:");
+        Log.v(BezierGlobals.TAG, jsonArray.toString());
+    }
+
+    private void LOAD_TEST_METHOD() {
+
+        Context context = this.getApplicationContext();
+        String jsonStr = SharedPreferencesUtils.getPersistedSpline(context);
+
+        // now deserialize this JSON string
+        try {
+
+            JSONArray jsonArray = new JSONArray(jsonStr);
+
+            for (int i = 0; i < jsonArray.length(); i++) {
+                JSONObject jsonobject = jsonArray.getJSONObject(i);
+                String sx = jsonobject.getString("x");
+                String sy = jsonobject.getString("y");
+                Log.v(BezierGlobals.TAG, "     found x=" + sx + ", x=" + sy);
+            }
+
+        } catch (JSONException e) {
+            Log.v(BezierGlobals.TAG, "Internal Error: put to JSON failed !");
+        }
+
+        Log.v(BezierGlobals.TAG, "LOADING JSON:");
+        Log.v(BezierGlobals.TAG, jsonStr);
+
     }
 
     @Override
