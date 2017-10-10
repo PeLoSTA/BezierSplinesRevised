@@ -79,6 +79,7 @@
         <item>Modi der Kurvenstellung</item>
         <item>Auflösung der Kurve</item>
         <item>Algorithmus von de Casteljau</item>
+        <item>Sichern und Öffnen eines Splines</item>
     </string-array>
 
     <!-- documentation: description -->
@@ -124,6 +125,12 @@
                 des <em>Casteljau</em>-Schemas mit angezeigt.<br/><br/>
                 Dies ist natürlich immer nur für einen bestimmten Parameter <em>t</em> aus dem Intervall [0,1] möglich.
                 Mit dem zweiten Schiebebalken am unteren Rand (Beschriftung <em>t</em>) stellen Sie diesen Wert ein.
+            ]]>
+        </item>
+        <item>
+            <![CDATA[
+                 Mit dieser Version ist es möglich, den aktuell gezeichneten Spline abzuspeichern (Anzahl des Menüpunkts &bdquo;<em>Speichern</em>&ldquo;).
+                 Bei Anwahl des Menüpunkts &bdquo;<em>Laden</em>&ldquo; wird der zuletzt abgespeicherte Spline in die Ansicht geladen.
             ]]>
         </item>
     </string-array>

@@ -1,6 +1,6 @@
-Thanks David - I've improved two issues:
-Toggling the display (with/without grid) doesn't clear the curve anymore
-Losing the node during moving should now be more difficult.
+// --------------------------------------------------------------------------------
+
+TODO: Der Text nach dem Speichern muss lauten "Saved Spline with 12 Control Points"
 
 // --------------------------------------------------------------------------------
 

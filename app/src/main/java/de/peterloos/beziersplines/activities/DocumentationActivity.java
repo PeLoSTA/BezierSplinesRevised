@@ -34,7 +34,8 @@ public class DocumentationActivity extends AppCompatActivity implements OnPageCh
             R.mipmap.device_2017_02_01,
             R.mipmap.device_2017_02_02,
             R.mipmap.device_2017_02_03,
-            R.mipmap.device_2017_02_04
+            R.mipmap.device_2017_02_04,
+            R.mipmap.device_2017_02_05
     };
 
     @Override
@@ -84,7 +85,7 @@ public class DocumentationActivity extends AppCompatActivity implements OnPageCh
 
     private void setUiPageViewController() {
 
-        this.dotsCount = viewPagerAdapter.getCount();
+        this.dotsCount = this.viewPagerAdapter.getCount();
         this.dots = new ImageView[this.dotsCount];
 
         for (int i = 0; i < this.dotsCount; i++) {
