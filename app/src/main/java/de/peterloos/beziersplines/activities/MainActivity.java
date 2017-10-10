@@ -4,7 +4,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.content.res.Resources;
-import android.provider.Settings;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -26,10 +25,6 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.widget.Toast;
 import android.widget.ViewSwitcher;
-
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
 
 import java.util.Locale;
 
@@ -214,88 +209,32 @@ public class MainActivity
     public boolean onOptionsItemSelected(MenuItem item) {
 
         int id = item.getItemId();
+        Context currentContext = this.getApplicationContext();
 
         if (id == R.id.menu_action_settings) {
-            Context currentContext = this.getApplicationContext();
             Intent settingsIntent = new Intent(currentContext, SettingsActivity.class);
             this.startActivityForResult(settingsIntent, REQUESTCODE_SETTINGS);
         } else if (id == R.id.menu_action_demo) {
-            Context currentContext = this.getApplicationContext();
             Intent demoIntent = new Intent(currentContext, DemonstrationActivity.class);
             this.startActivity(demoIntent);
         } else if (id == R.id.menu_action_about) {
-            Context currentContext = this.getApplicationContext();
             Intent demoIntent = new Intent(currentContext, AboutActivity.class);
             this.startActivity(demoIntent);
         } else if (id == R.id.menu_action_docs) {
-            Context currentContext = this.getApplicationContext();
             Intent demoIntent = new Intent(currentContext, DocumentationActivity.class);
             this.startActivity(demoIntent);
         } else if (id == R.id.menu_action_store) {
 
-            this.SAVE_TEST_METHOD();
+            this.saveCurrentSpline();
             Toast.makeText(getApplicationContext(), "Stored the picture ...", Toast.LENGTH_SHORT).show();
 
         } else if (id == R.id.menu_action_load) {
 
-            this.LOAD_TEST_METHOD();
+            this.loadCurrentSpline();
             Toast.makeText(getApplicationContext(), "Loaded the picture ...", Toast.LENGTH_SHORT).show();
         }
 
         return super.onOptionsItemSelected(item);
-    }
-
-    private void SAVE_TEST_METHOD() {
-
-        ControlPointsHolder holder = ControlPointsHolder.getInstance();
-
-        JSONArray jsonArray = new JSONArray();
-        for (int i = 0; i < holder.size(); i++) {
-
-            BezierPoint point = holder.get(i);
-            JSONObject jsonObject = new JSONObject();
-
-            try {
-                jsonObject.put("x", point.getX());
-                jsonObject.put("y", point.getY());
-            } catch (JSONException e) {
-                Log.v(BezierGlobals.TAG, "Internal Error: put to JSON failed !");
-            }
-
-            jsonArray.put(jsonObject);
-        }
-
-        Context context = this.getApplicationContext();
-        SharedPreferencesUtils.persistSpline(context, jsonArray.toString());
-
-        Log.v(BezierGlobals.TAG, "STORING JSON:");
-        Log.v(BezierGlobals.TAG, jsonArray.toString());
-    }
-
-    private void LOAD_TEST_METHOD() {
-
-        Context context = this.getApplicationContext();
-        String jsonStr = SharedPreferencesUtils.getPersistedSpline(context);
-
-        // now deserialize this JSON string
-        try {
-
-            JSONArray jsonArray = new JSONArray(jsonStr);
-
-            for (int i = 0; i < jsonArray.length(); i++) {
-                JSONObject jsonobject = jsonArray.getJSONObject(i);
-                String sx = jsonobject.getString("x");
-                String sy = jsonobject.getString("y");
-                Log.v(BezierGlobals.TAG, "     found x=" + sx + ", x=" + sy);
-            }
-
-        } catch (JSONException e) {
-            Log.v(BezierGlobals.TAG, "Internal Error: put to JSON failed !");
-        }
-
-        Log.v(BezierGlobals.TAG, "LOADING JSON:");
-        Log.v(BezierGlobals.TAG, jsonStr);
-
     }
 
     @Override
@@ -442,6 +381,39 @@ public class MainActivity
     public void onNothingSelected(AdapterView<?> adapterView) {
         Log.v(BezierGlobals.TAG, "onNothingSelected");
     }
+
+    /*
+     * persistence handling of current spline
+     */
+
+    private void saveCurrentSpline() {
+
+        ControlPointsHolder holder = ControlPointsHolder.getInstance();
+        String json = holder.getAsJSON();
+        Log.v(BezierGlobals.TAG, "Saving JSON:");
+        Log.v(BezierGlobals.TAG, json);
+        Context context = this.getApplicationContext();
+        SharedPreferencesUtils.persistSpline(context, json);
+    }
+
+    private void loadCurrentSpline() {
+
+        Context context = this.getApplicationContext();
+        String jsonStr = SharedPreferencesUtils.getPersistedSpline(context);
+        Log.v(BezierGlobals.TAG, "Loading JSON:");
+        Log.v(BezierGlobals.TAG, jsonStr);
+        ControlPointsHolder holder = ControlPointsHolder.getInstance();
+        holder.setAsJSON(jsonStr);
+
+        // snap points, if necessary, and force a redraw on both views
+        if (this.gridIsVisible) {
+            this.bezierViewWithGrid.snapAllPoints();
+        }
+
+        this.bezierViewWithGrid.invalidate();
+        this.bezierViewWithoutGrid.invalidate();
+    }
+
 
      /*
      * lifecycle methods

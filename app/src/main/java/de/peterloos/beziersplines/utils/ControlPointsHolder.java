@@ -2,6 +2,10 @@ package de.peterloos.beziersplines.utils;
 
 import android.util.Log;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -15,6 +19,9 @@ import de.peterloos.beziersplines.BezierGlobals;
 
 public class ControlPointsHolder {
 
+    // =====================================================================
+
+    // implementation of 'singleton pattern'
     private static ControlPointsHolder instance;
 
     static {
@@ -41,19 +48,6 @@ public class ControlPointsHolder {
         }
 
         return instance;
-    }
-
-    // =====================================================================
-
-    // switching between user and demo mode
-    public synchronized void setNormalMode() {
-        Log.v(BezierGlobals.TAG, "ControlPointsHolder: set normal mode");
-        this.data = this.userData;
-    }
-
-    public synchronized void setDemoMode() {
-        Log.v(BezierGlobals.TAG, "ControlPointsHolder: set demonstration mode");
-        this.data = this.demoData;
     }
 
     // =====================================================================
@@ -96,6 +90,76 @@ public class ControlPointsHolder {
             BezierUtils.snapPoint(p, cellLength);
         }
     }
+
+    // =====================================================================
+
+    // switching between user and demo mode
+    public synchronized void setNormalMode() {
+        Log.v(BezierGlobals.TAG, "ControlPointsHolder: set normal mode");
+        this.data = this.userData;
+    }
+
+    public synchronized void setDemoMode() {
+        Log.v(BezierGlobals.TAG, "ControlPointsHolder: set demonstration mode");
+        this.data = this.demoData;
+    }
+
+    // =====================================================================
+
+    // persistence methods (JSON)
+    public String getAsJSON () {
+
+        JSONArray jsonArray = new JSONArray();
+        for (int i = 0; i < this.size(); i++) {
+
+            BezierPoint point = this.get(i);
+            JSONObject jsonObject = new JSONObject();
+
+            try {
+                jsonObject.put("x", point.getX());
+                jsonObject.put("y", point.getY());
+            } catch (JSONException e) {
+                Log.v(BezierGlobals.TAG, "ControlPointsHolder::Internal Error: getAsJSON  failed !");
+            }
+
+            jsonArray.put(jsonObject);
+        }
+
+        return jsonArray.toString();
+    }
+
+    public boolean setAsJSON (String json) {
+
+        List<BezierPoint> tmp = new ArrayList<>();
+
+        try {
+            JSONArray jsonArray = new JSONArray(json);
+
+            for (int i = 0; i < jsonArray.length(); i++) {
+
+                JSONObject jsonobject = jsonArray.getJSONObject(i);
+                String sx = jsonobject.getString("x");
+                String sy = jsonobject.getString("y");
+                Log.v(BezierGlobals.TAG, "     found x=" + sx + ", x=" + sy);
+                float x = Float.parseFloat(sx);
+                float y = Float.parseFloat(sy);
+                BezierPoint p = new BezierPoint(x, y);
+                tmp.add(p);
+            }
+
+        } catch (JSONException e) {
+            Log.v(BezierGlobals.TAG, "ControlPointsHolder::Internal Error: setAsJSON  failed !");
+            return false;
+        }
+
+        // switch from current spline to saved spline
+        this.userData = tmp;
+        this.setNormalMode();
+
+        return true;
+    }
+
+    // =====================================================================
 
     public void setDemoSpline(float viewWidth, float viewHeight) {
 

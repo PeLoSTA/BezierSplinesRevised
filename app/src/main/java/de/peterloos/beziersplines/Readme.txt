@@ -4,6 +4,11 @@ Losing the node during moving should now be more difficult.
 
 // --------------------------------------------------------------------------------
 
+Die kleine Textview links oben mit dem aktuellen Koordinaten sollte man löschen,
+wenn das Menü neu angewählt wird .................
+
+// --------------------------------------------------------------------------------
+
 TESTEN bei geteiltem Bildschirm !!!!!!!!!!!!!!!!!!
 
 // --------------------------------------------------------------------------------
