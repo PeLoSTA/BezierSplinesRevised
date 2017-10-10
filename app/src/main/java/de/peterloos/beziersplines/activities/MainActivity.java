@@ -30,7 +30,6 @@ import java.util.Locale;
 
 import de.peterloos.beziersplines.BezierGlobals;
 import de.peterloos.beziersplines.utils.BezierMode;
-import de.peterloos.beziersplines.utils.BezierPoint;
 import de.peterloos.beziersplines.utils.BezierUtils;
 import de.peterloos.beziersplines.utils.ControlPointsCalculator;
 import de.peterloos.beziersplines.utils.ControlPointsHolder;
