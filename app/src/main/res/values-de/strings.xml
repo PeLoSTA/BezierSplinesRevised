@@ -23,6 +23,7 @@
     <string name="action_about">Über</string>
     <string name="action_demo">Demonstration</string>
     <string name="action_documentation">Dokumentation</string>
+    <string name="action_console">Konsole</string>
     <string name="about_link">peterloos.de</string>
     <string name="button_stop">Stop</string>
     <string name="button_restart">Start</string>

@@ -1,3 +1,12 @@
+
+
+
+// --------------------------------------------------------------------------------
+
+Die Datei manifest ist NICHT KONSISTENT im Gebrauch mit den Metadaten Tags:
+
+meta-data
+
 // --------------------------------------------------------------------------------
 
 In  Bezier Splines App umsetzen ....

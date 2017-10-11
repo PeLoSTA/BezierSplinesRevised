@@ -230,8 +230,10 @@ public class MainActivity
             this.saveSpline();
         } else if (id == R.id.menu_action_load) {
             this.loadSpline();
+        } else if (id == R.id.menu_action_console) {
+            Intent demoIntent = new Intent(currentContext, ConsoleActivity.class);
+            this.startActivity(demoIntent);
         }
-
         return super.onOptionsItemSelected(item);
     }
 
