@@ -223,14 +223,9 @@ public class MainActivity
             Intent demoIntent = new Intent(currentContext, DocumentationActivity.class);
             this.startActivity(demoIntent);
         } else if (id == R.id.menu_action_store) {
-
-            this.saveCurrentSpline();
-            Toast.makeText(getApplicationContext(), "Stored the picture ...", Toast.LENGTH_SHORT).show();
-
+            this.saveSpline();
         } else if (id == R.id.menu_action_load) {
-
-            this.loadCurrentSpline();
-            Toast.makeText(getApplicationContext(), "Loaded the picture ...", Toast.LENGTH_SHORT).show();
+            this.loadSpline();
         }
 
         return super.onOptionsItemSelected(item);
@@ -385,7 +380,7 @@ public class MainActivity
      * persistence handling of current spline
      */
 
-    private void saveCurrentSpline() {
+    private void saveSpline() {
 
         ControlPointsHolder holder = ControlPointsHolder.getInstance();
         String json = holder.getAsJSON();
@@ -393,9 +388,11 @@ public class MainActivity
         Log.v(BezierGlobals.TAG, json);
         Context context = this.getApplicationContext();
         SharedPreferencesUtils.persistSpline(context, json);
+        String info = String.format("Stored spline with %d control points!", holder.size());
+        Toast.makeText(context, info, Toast.LENGTH_SHORT).show();
     }
 
-    private void loadCurrentSpline() {
+    private void loadSpline() {
 
         Context context = this.getApplicationContext();
         String jsonStr = SharedPreferencesUtils.getPersistedSpline(context);
@@ -411,8 +408,10 @@ public class MainActivity
 
         this.bezierViewWithGrid.invalidate();
         this.bezierViewWithoutGrid.invalidate();
-    }
 
+        String info = String.format("Loaded spline with %d control points!", holder.size());
+        Toast.makeText(context, info, Toast.LENGTH_SHORT).show();
+    }
 
      /*
      * lifecycle methods

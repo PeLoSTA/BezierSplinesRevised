@@ -79,7 +79,7 @@
         <item>Modi der Kurvenstellung</item>
         <item>Auflösung der Kurve</item>
         <item>Algorithmus von de Casteljau</item>
-        <item>Sichern und Öffnen eines Splines</item>
+        <item>Speichern und Laden eines Splines</item>
     </string-array>
 
     <!-- documentation: description -->
@@ -129,7 +129,7 @@
         </item>
         <item>
             <![CDATA[
-                 Mit dieser Version ist es möglich, den aktuell gezeichneten Spline abzuspeichern (Anzahl des Menüpunkts &bdquo;<em>Speichern</em>&ldquo;).
+                 Mit diesem Menü ist es möglich, den aktuell gezeichneten Spline abzuspeichern (Menüpunkt &bdquo;<em>Speichern</em>&ldquo;).
                  Bei Anwahl des Menüpunkts &bdquo;<em>Laden</em>&ldquo; wird der zuletzt abgespeicherte Spline in die Ansicht geladen.
             ]]>
         </item>

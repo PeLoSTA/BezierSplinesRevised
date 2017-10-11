@@ -129,9 +129,6 @@
         </item>
         <item>
             <![CDATA[
-                 Mit dieser Version ist es möglich, den aktuell gezeichneten Spline abzuspeichern (Anzahl des Menüpunkts &bdquo;<em>Speichern</em>&ldquo;).
-                 Bei Anwahl des Menüpunkts &bdquo;<em>Laden</em>&ldquo; wird der zuletzt abgespeicherte Spline in die Ansicht geladen.
-
                  The current spline can be saved upon selecting the menu item &bdquo;<em>Saving</em>&ldquo;
                  If you select &bdquo;<em>Loading</em>&ldquo;, the last saved spline will be restored in the view.
             ]]>

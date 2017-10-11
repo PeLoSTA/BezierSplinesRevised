@@ -1,6 +1,8 @@
 // --------------------------------------------------------------------------------
 
-TODO: Der Text nach dem Speichern muss lauten "Saved Spline with 12 Control Points"
+BUG !!!
+Wenn ich die Sprache umstelle ... werden die Checkboxes wieder gecheckt !!!!
+Das passt NICHT ZUSAMMEN ....
 
 // --------------------------------------------------------------------------------
 
@@ -9,7 +11,8 @@ wenn das Menü neu angewählt wird .................
 
 // --------------------------------------------------------------------------------
 
-TESTEN bei geteiltem Bildschirm !!!!!!!!!!!!!!!!!!
+BUG !!!
+Bei geteiltem Bildschirm passen die Checkboxes NICHT !!!!!!
 
 // --------------------------------------------------------------------------------
 
