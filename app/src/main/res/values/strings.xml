@@ -54,6 +54,9 @@
     <string name="documentation_image">documentation image</string>
 
     <!-- settings activity - stroke widths -->
+    <string name="settings_viewdimension_title">Bézier View Dimension:</string>
+
+    <!-- settings activity - stroke widths -->
     <string name="settings_stroke_widths_title">Stroke Width</string>
 
     <string-array name="settings_stroke_widths">

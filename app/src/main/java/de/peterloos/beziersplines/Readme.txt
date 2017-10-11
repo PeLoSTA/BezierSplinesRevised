@@ -1,5 +1,11 @@
 // --------------------------------------------------------------------------------
 
+In  Bezier Splines App umsetzen ....
+
+http://stackoverflow.com/questions/12870537/android-naming-convention
+
+// --------------------------------------------------------------------------------
+
 BUG !!!
 Wenn ich die Sprache umstelle ... werden die Checkboxes wieder gecheckt !!!!
 Das passt NICHT ZUSAMMEN ....
@@ -31,11 +37,6 @@ das sollte so nicht sein !!!!!!!!!
 
 Die Liste alles Control Points ausgeben -- wie ?????????????????????
 
-// --------------------------------------------------------------------------------
-
-In  Bezier Splines App umsetzen ....
-
-http://stackoverflow.com/questions/12870537/android-naming-convention
 
 // --------------------------------------------------------------------------------
 

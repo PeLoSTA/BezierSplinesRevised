@@ -13,6 +13,50 @@
     tools:context="de.peterloos.beziersplines.activities.SettingsActivity">
 
     <RelativeLayout
+        android:id="@+id/relative_layout_viewdimensions"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="15dp"
+        android:background="@drawable/ripple"
+        android:clickable="true">
+
+        <TextView
+            android:id="@+id/textview_header_viewdimensions"
+            style="@style/ThemeOverlay.MyTitleText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentTop="true"
+            android:layout_marginStart="5dp"
+            android:layout_marginLeft="5dp"
+            android:gravity="start" />
+
+        <TextView
+            android:id="@+id/textview_viewdimensions_width"
+            style="@style/ThemeOverlay.MyTextDetail"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/textview_header_viewdimensions"
+            android:layout_marginStart="5dp"
+            android:layout_marginLeft="5dp"
+            android:fontFamily="sans-serif-light"
+            android:gravity="start" />
+
+        <TextView
+            android:id="@+id/textview_viewdimensions_height"
+            style="@style/ThemeOverlay.MyTextDetail"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/textview_viewdimensions_width"
+            android:layout_marginStart="5dp"
+            android:layout_marginLeft="5dp"
+            android:fontFamily="sans-serif-light"
+            android:gravity="start" />
+
+    </RelativeLayout>
+
+    <RelativeLayout
         android:id="@+id/relative_layout_strokewidth"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -42,6 +86,7 @@
             android:layout_marginLeft="5dp"
             android:fontFamily="sans-serif-light"
             android:gravity="start" />
+
     </RelativeLayout>
 
     <RelativeLayout
@@ -74,6 +119,7 @@
             android:layout_marginLeft="5dp"
             android:fontFamily="sans-serif-light"
             android:gravity="start" />
+
     </RelativeLayout>
 
 </LinearLayout>

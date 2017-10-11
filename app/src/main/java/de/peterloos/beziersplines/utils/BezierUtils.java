@@ -15,18 +15,52 @@ import de.peterloos.beziersplines.BezierGlobals;
 
 public class BezierUtils {
 
+    // size of bézier view
+    private static int viewWidth;
+    private static int viewHeight;
+
+    // cell sizes, if view with grid is choosen
     private static double cellLengths[];
 
+    // used to detect the nearest bézier point
     private static float dipDistanceMaximum;
 
-
     static {
+        viewWidth = -1;
+        viewHeight = -1;
+
         cellLengths = new double[3];
         cellLengths[0] = -1;
         cellLengths[1] = -1;
         cellLengths[2] = -1;
 
         dipDistanceMaximum = -1;
+    }
+
+    public static int getViewWidth() {
+        return viewWidth;
+    }
+
+    public static void setViewWidth(int width) {
+        viewWidth = width;
+    }
+
+    public static int getViewHeight() {
+        return viewHeight;
+    }
+
+    public static void setViewHeight(int height) {
+        viewHeight = height;
+    }
+
+    public static double getCellLength(int density) {
+        return cellLengths[density];
+    }
+
+    // heuristic value for moving points on the surface
+    // (maximum acceptable distance of touch position and bézier point)
+    public static float getDipDistanceMaximum() {
+        return dipDistanceMaximum;
     }
 
     public static void snapPoint(BezierPoint p, double cellLength) {
@@ -73,13 +107,5 @@ public class BezierUtils {
             String s2 = String.format(Locale.getDefault(), "  Length of cell [density %d]: %f", i, cellLengths[i]);
             Log.d(BezierGlobals.TAG, s2);
         }
-    }
-
-    public static double getCellLength(int density) {
-        return cellLengths[density];
-    }
-
-    public static float getDipDistanceMaximum() {
-        return dipDistanceMaximum;
     }
 }

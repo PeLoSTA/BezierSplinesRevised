@@ -155,8 +155,12 @@ public class MainActivity
             @Override
             public void setSize(int width, int height) {
 
+                // TODO: Ich habe diese Werte in den BezierUtils .... benötige ich dann die noch
                 MainActivity.this.viewWidth = width;
                 MainActivity.this.viewHeight = height;
+
+                BezierUtils.setViewWidth(width);
+                BezierUtils.setViewHeight(height);
 
                 // retrieve display metrics that describe the size and density of this display
                 DisplayMetrics dm = new DisplayMetrics();

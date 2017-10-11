@@ -14,8 +14,11 @@ import android.view.View;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import java.util.Locale;
+
 import de.peterloos.beziersplines.BezierGlobals;
 import de.peterloos.beziersplines.R;
+import de.peterloos.beziersplines.utils.BezierUtils;
 import de.peterloos.beziersplines.utils.SharedPreferencesUtils;
 
 /**
@@ -25,6 +28,11 @@ import de.peterloos.beziersplines.utils.SharedPreferencesUtils;
  */
 
 public class SettingsActivity extends AppCompatActivity {
+
+    private RelativeLayout relativeLayoutViewDimensions;
+    private TextView textviewViewDimensionsHeader;
+    private TextView textviewViewDimensionsWidth;
+    private TextView textviewViewDimensionsHeight;
 
     private RelativeLayout relativeLayoutStrokeWidth;
     private TextView textviewStrokeWidthHeader;
@@ -60,12 +68,16 @@ public class SettingsActivity extends AppCompatActivity {
         }
 
         // retrieve control references
+        this.textviewViewDimensionsHeader = (TextView) this.findViewById(R.id.textview_header_viewdimensions);
+        this.textviewViewDimensionsWidth = (TextView) this.findViewById(R.id.textview_viewdimensions_width);
+        this.textviewViewDimensionsHeight = (TextView) this.findViewById(R.id.textview_viewdimensions_height);
         this.textviewStrokeWidthHeader = (TextView) this.findViewById(R.id.textview_header_strokewidth);
         this.textviewStrokeWidth = (TextView) this.findViewById(R.id.textview_strokewidth);
         this.textviewGridlinesHeader = (TextView) this.findViewById(R.id.textview_header_gridlines);
         this.textviewGridlines = (TextView) this.findViewById(R.id.textview_gridlines);
 
         // setup controls
+        this.textviewViewDimensionsHeader.setText(R.string.settings_viewdimension_title);
         this.textviewStrokeWidthHeader.setText(R.string.settings_stroke_widths_title);
         this.textviewGridlinesHeader.setText(R.string.settings_gridlines_title);
 
@@ -106,6 +118,16 @@ public class SettingsActivity extends AppCompatActivity {
         this.indexGridlines = SharedPreferencesUtils.getPersistedGridlinesFactor(context);
         String currentGridlinesFactor = this.gridlinesDisplayNames[this.indexGridlines];
         this.textviewGridlines.setText(currentGridlinesFactor);
+
+        // read dimension info's
+        double width = BezierUtils.getViewWidth();
+        double height = BezierUtils.getViewHeight();
+        String sw = String.format(Locale.getDefault(), "Width:  %d", (int) width);
+        String sh = String.format(Locale.getDefault(), "Height: %d", (int) height);
+        this.textviewViewDimensionsWidth.setText(sw);
+        this.textviewViewDimensionsHeight.setText(sh);
+
+        //TODO: Hier müssen die beiden Worte Höhe und Breite noch fremdsprachenabhängig gemacht werden !!!!
     }
 
     @Override
