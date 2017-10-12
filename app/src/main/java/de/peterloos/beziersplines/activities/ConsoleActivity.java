@@ -7,8 +7,11 @@ import android.os.Bundle;
 import android.view.MenuItem;
 import android.widget.ListView;
 
+import java.util.ArrayList;
+
 import de.peterloos.beziersplines.R;
 import de.peterloos.beziersplines.adapters.ConsoleArrayAdapter;
+import de.peterloos.beziersplines.utils.ControlPointsHolder;
 
 /**
  * Project: Bézier Splines Simulation
@@ -26,7 +29,7 @@ public class ConsoleActivity extends AppCompatActivity {
         // prefer action bar title with two lines
         ActionBar actionBar = this.getSupportActionBar();
         if (actionBar != null) {
-            actionBar.setTitle(R.string.title_activity_about);
+            actionBar.setTitle(R.string.title_activity_console);
             actionBar.setSubtitle(this.getString(R.string.app_main_title));
         }
 
@@ -35,10 +38,19 @@ public class ConsoleActivity extends AppCompatActivity {
 
         // create adapter
         Context context = this.getApplicationContext();
-        String[] values = new String[] { "Android", "iPhone", "WindowsMobile",
-                "Blackberry", "WebOS", "Ubuntu", "Windows7", "Max OS X",
-                "Linux", "OS/2" };
-        ConsoleArrayAdapter adapter = new ConsoleArrayAdapter (context, values);
+
+//        String[] values = new String[] { "Android", "iPhone", "WindowsMobile",
+//                "Blackberry", "WebOS", "Ubuntu", "Windows7", "Max OS X",
+//                "Linux", "OS/2" };
+
+        ControlPointsHolder holder = ControlPointsHolder.getInstance();
+
+        ArrayList<String> resultt = holder.getAsListOfStrings();
+
+        ConsoleArrayAdapter adapter = new ConsoleArrayAdapter (context, resultt);
+
+        // TODO: Sonderfälle in der Ergebnisliste erstellen: Liste der Länge 0 und 1
+        // Achtung: In der Liste der Länge 1 kommt das = nicht vor ?!?!?!
 
         listView.setAdapter(adapter);
     }

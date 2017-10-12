@@ -51,6 +51,6 @@ public class BezierPoint {
 
     @Override
     public String toString() {
-        return String.format(Locale.getDefault(), "{%.1f - %.1f{", this.x, this.y);
+        return String.format(Locale.getDefault(), "{%.1f - %.1f}", this.x, this.y);
     }
 }

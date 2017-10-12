@@ -13,6 +13,7 @@
     <string name="title_activity_documentation">Dokumentation</string>
     <string name="title_activity_demo">Demo</string>
     <string name="title_activity_settings">Einstellungen</string>
+    <string name="title_activity_console">Bézier Konsole</string>
 
     <!-- views -->
     <string name="resolution">Auflösung:</string>

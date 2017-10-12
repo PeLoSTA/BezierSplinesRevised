@@ -8,6 +8,7 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 
 import de.peterloos.beziersplines.BezierGlobals;
 
@@ -106,8 +107,43 @@ public class ControlPointsHolder {
 
     // =====================================================================
 
+    // bézier console method(s)
+    // public String[] getAsStringArray() {
+    public ArrayList<String> getAsListOfStrings() {
+
+        ArrayList<String> resultt = new ArrayList<String>();
+
+        // general format for String.split:
+        // "1.000-2.000=1.500-2.500" for control points list { (1,2),(1.5, 2.5) }
+
+//        if (this.size() == 0)
+//            return (String[]) resultt.toArray();
+
+        // TODO: AUf StringBuilder umstellen ....
+
+//        String result = "";
+//        for (int i = 0; i < this.size(); i++) {
+//            BezierPoint p = this.get(i);
+//            result += String.format(Locale.getDefault(), "%f-%f", p.getX(), p.getY());
+//            if (i < this.size() - 1)
+//                result += "=";
+//        }
+
+        for (int i = 0; i < this.size(); i++) {
+            BezierPoint p = this.get(i);
+            String s = String.format(Locale.getDefault(), "%f-%f", p.getX(), p.getY());
+            resultt.add(s);
+        }
+
+        // Log.v(BezierGlobals.TAG, "ControlPointsHolder::getAsString TEST == " + result);
+
+        return resultt;
+    }
+
+    // =====================================================================
+
     // persistence methods (JSON)
-    public String getAsJSON () {
+    public String getAsJSON() {
 
         JSONArray jsonArray = new JSONArray();
         for (int i = 0; i < this.size(); i++) {
@@ -128,7 +164,7 @@ public class ControlPointsHolder {
         return jsonArray.toString();
     }
 
-    public boolean setAsJSON (String json) {
+    public boolean setAsJSON(String json) {
 
         List<BezierPoint> tmp = new ArrayList<>();
 
