@@ -19,6 +19,8 @@ import de.peterloos.beziersplines.utils.ControlPointsHolder;
  * Contact info: peter.loos@gmx.de
  */
 
+// TODO: Auch diese Datei ist aufzuräumen
+
 public class ConsoleActivity extends AppCompatActivity {
 
     @Override

@@ -107,6 +107,8 @@ public class ControlPointsHolder {
 
     // =====================================================================
 
+    // TODO: Aufräumen
+
     // bézier console method(s)
     // public String[] getAsStringArray() {
     public ArrayList<String> getAsListOfStrings() {
