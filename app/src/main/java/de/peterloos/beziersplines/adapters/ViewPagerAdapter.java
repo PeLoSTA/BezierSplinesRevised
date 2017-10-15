@@ -7,7 +7,6 @@ import android.support.v4.view.PagerAdapter;
 import android.text.Html;
 import android.text.Spanned;
 import android.text.method.ScrollingMovementMethod;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,7 +14,6 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import de.peterloos.beziersplines.BezierGlobals;
 import de.peterloos.beziersplines.R;
 
 /**

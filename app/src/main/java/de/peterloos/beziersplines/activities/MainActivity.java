@@ -4,11 +4,14 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.content.res.Resources;
+import android.os.Bundle;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.util.DisplayMetrics;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.AdapterView;
@@ -19,16 +22,13 @@ import android.widget.SeekBar.OnSeekBarChangeListener;
 import android.widget.Spinner;
 import android.widget.TableRow;
 import android.widget.TextView;
-
-import android.view.Menu;
-import android.view.MenuInflater;
-import android.view.MenuItem;
 import android.widget.Toast;
 import android.widget.ViewSwitcher;
 
 import java.util.Locale;
 
 import de.peterloos.beziersplines.BezierGlobals;
+import de.peterloos.beziersplines.R;
 import de.peterloos.beziersplines.utils.BezierMode;
 import de.peterloos.beziersplines.utils.BezierUtils;
 import de.peterloos.beziersplines.utils.ControlPointsCalculator;
@@ -37,7 +37,6 @@ import de.peterloos.beziersplines.utils.SharedPreferencesUtils;
 import de.peterloos.beziersplines.views.BezierGridView;
 import de.peterloos.beziersplines.views.BezierListener;
 import de.peterloos.beziersplines.views.BezierView;
-import de.peterloos.beziersplines.R;
 
 /**
  * Project: Bézier Splines Simulation
@@ -72,10 +71,6 @@ public class MainActivity
     private int resolution;
     private boolean gridIsVisible;
     private boolean constructionIsVisible;
-
-    // size of underlying bezier view(s) (data type Size only at API level 21 supported)
-    private int viewWidth;
-    private int viewHeight;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -155,10 +150,7 @@ public class MainActivity
             @Override
             public void setSize(int width, int height) {
 
-                // TODO: Ich habe diese Werte in den BezierUtils .... benötige ich dann die noch
-                MainActivity.this.viewWidth = width;
-                MainActivity.this.viewHeight = height;
-
+                // set size of underlying bezier view
                 BezierUtils.setViewWidth(width);
                 BezierUtils.setViewHeight(height);
 
@@ -370,7 +362,8 @@ public class MainActivity
                 this.bezierViewWithGrid.setMode(BezierMode.Demo);
                 holder.setScreenshotSpline(
                         ControlPointsCalculator.SCREENSHOT_NICE_FIGURE_02,
-                        this.viewWidth, this.viewHeight);
+                        BezierUtils.getViewWidth(),
+                        BezierUtils.getViewHeight());
                 this.bezierViewWithoutGrid.invalidate();
                 this.bezierViewWithGrid.invalidate();
                 break;
@@ -394,7 +387,10 @@ public class MainActivity
         Log.v(BezierGlobals.TAG, json);
         Context context = this.getApplicationContext();
         SharedPreferencesUtils.persistSpline(context, json);
-        String info = String.format("Stored spline with %d control points!", holder.size());
+
+        Resources res = this.getResources();
+        String msg = res.getString(R.string.saving_bezier_sline);
+        String info = String.format(msg, holder.size());
         Toast.makeText(context, info, Toast.LENGTH_SHORT).show();
     }
 
@@ -415,7 +411,9 @@ public class MainActivity
         this.bezierViewWithGrid.invalidate();
         this.bezierViewWithoutGrid.invalidate();
 
-        String info = String.format("Loaded spline with %d control points!", holder.size());
+        Resources res = this.getResources();
+        String msg = res.getString(R.string.loading_bezier_sline);
+        String info = String.format(msg, holder.size());
         Toast.makeText(context, info, Toast.LENGTH_SHORT).show();
     }
 

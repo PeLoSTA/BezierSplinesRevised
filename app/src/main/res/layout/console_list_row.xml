@@ -3,8 +3,7 @@
 <RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:background="@color/colorPrimaryDark">
+    android:layout_height="wrap_content" >
 
     <!-- this nested layout is necessary, because it's used inside a listview widget -->
     <!-- (listview widgets are using AbsListView.LayoutParams, -->
@@ -13,37 +12,36 @@
 
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/material_blue_700"
-
         android:padding="5dp"
-        android:layout_marginBottom="50dp">
+        android:layout_marginBottom="4dp"
+        android:background="@color/white">
 
         <TextView
             android:id="@+id/textview_counter"
-            android:background="@color/material_blue_A200"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
-
             android:layout_alignParentTop="true"
             android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
             android:layout_marginRight="6dip"
-            android:text="100"
-
+            android:layout_marginEnd="6dip"
             android:layout_centerVertical="true"
             android:layout_centerInParent="true"
-
             android:textAlignment="center"
             android:gravity="fill"
             android:textAppearance="?android:attr/textAppearanceLarge" />
 
         <TextView
             android:id="@+id/textview_x"
-            android:background="@color/material_red_700"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:paddingLeft="5dp"
+            android:paddingLeft="10dp"
+            android:paddingStart="10dp"
+            android:paddingRight="10dp"
+            android:paddingEnd="10dp"
             android:layout_alignParentTop="true"
             android:layout_toRightOf="@id/textview_counter"
+            android:layout_toEndOf="@id/textview_counter"
             android:textAppearance="?android:attr/textAppearanceSmall" />
 
         <ImageView
@@ -52,17 +50,21 @@
             android:layout_height="5dp"
             android:layout_below="@+id/textview_x"
             android:layout_toRightOf="@id/textview_counter"
+            android:layout_toEndOf="@id/textview_counter"
             android:layerType="software"
             android:src="@drawable/dotted" />
 
         <TextView
             android:id="@+id/textview_y"
-            android:background="@color/material_red_700"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:paddingLeft="5dp"
+            android:paddingLeft="10dp"
+            android:paddingStart="10dp"
+            android:paddingRight="10dp"
+            android:paddingEnd="10dp"
             android:layout_below="@+id/imageview_dottedline"
             android:layout_toRightOf="@id/textview_counter"
+            android:layout_toEndOf="@id/textview_counter"
             android:layout_alignParentBottom="true"
             android:textAppearance="?android:attr/textAppearanceSmall"/>
 

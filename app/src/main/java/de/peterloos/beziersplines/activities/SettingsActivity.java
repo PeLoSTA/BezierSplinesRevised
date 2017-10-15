@@ -122,12 +122,12 @@ public class SettingsActivity extends AppCompatActivity {
         // read dimension info's
         double width = BezierUtils.getViewWidth();
         double height = BezierUtils.getViewHeight();
-        String sw = String.format(Locale.getDefault(), "Width:  %d", (int) width);
-        String sh = String.format(Locale.getDefault(), "Height: %d", (int) height);
+        String swidth = res.getString(R.string.settings_viewdimension_width);
+        String sheight = res.getString(R.string.settings_viewdimension_height);
+        String sw = String.format(Locale.getDefault(), "%s: %d", swidth, (int) width);
+        String sh = String.format(Locale.getDefault(), "%s: %d", sheight, (int) height);
         this.textviewViewDimensionsWidth.setText(sw);
         this.textviewViewDimensionsHeight.setText(sh);
-
-        //TODO: Hier müssen die beiden Worte Höhe und Breite noch fremdsprachenabhängig gemacht werden !!!!
     }
 
     @Override

@@ -1,7 +1,5 @@
 package de.peterloos.beziersplines.views;
 
-import android.util.Size;
-
 import de.peterloos.beziersplines.utils.BezierMode;
 
 /**

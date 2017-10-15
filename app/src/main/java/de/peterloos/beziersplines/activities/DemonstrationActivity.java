@@ -40,7 +40,6 @@ public class DemonstrationActivity
 
     private static final int DemoViewResolution = 200; // resolution of demonstration view
     private static final int TaskDelay = 30; // animation velocity
-    private static final float OffsetFromBorderDp = 15F; // density-independent pixels: offset from border
 
     private DemoOperation task;
 
@@ -215,11 +214,11 @@ public class DemonstrationActivity
          */
         private boolean running;
 
-        public synchronized void setRunning(boolean running) {
+        synchronized void setRunning(boolean running) {
             this.running = running;
         }
 
-        public synchronized boolean isRunning() {
+        synchronized boolean isRunning() {
             return this.running;
         }
 
@@ -331,26 +330,26 @@ public class DemonstrationActivity
         private BezierPoint p;
         private float t;
 
-        public UpdateDescriptor(BezierPoint p, float t, boolean addPoint, boolean changeT) {
+        UpdateDescriptor(BezierPoint p, float t, boolean addPoint, boolean changeT) {
             this.p = p;
             this.t = t;
             this.addPoint = addPoint;
             this.changeT = changeT;
         }
 
-        public BezierPoint getP() {
+        BezierPoint getP() {
             return this.p;
         }
 
-        public float getT() {
+        float getT() {
             return this.t;
         }
 
-        public boolean isAddPoint() {
+        boolean isAddPoint() {
             return this.addPoint;
         }
 
-        public boolean isChangeT() {
+        boolean isChangeT() {
             return this.changeT;
         }
     }

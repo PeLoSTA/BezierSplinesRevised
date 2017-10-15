@@ -2,9 +2,9 @@ package de.peterloos.beziersplines.activities;
 
 import android.content.Context;
 import android.content.res.Resources;
+import android.os.Bundle;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.view.MenuItem;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -21,8 +21,6 @@ import de.peterloos.beziersplines.utils.ControlPointsHolder;
  * Copyright (c) 2017 by PeLo on 23.01.2017. All rights reserved.
  * Contact info: peter.loos@gmx.de
  */
-
-// TODO: Auch diese Datei ist aufzuräumen
 
 public class ConsoleActivity extends AppCompatActivity {
 
@@ -53,22 +51,15 @@ public class ConsoleActivity extends AppCompatActivity {
 
             String header = String.format(Locale.getDefault(), s, 0);
             textView.setText(header);
-        }
-        else {
+        } else {
 
             String header = String.format(Locale.getDefault(), s, list.size());
             textView.setText(header);
 
             Context context = this.getApplicationContext();
-            ConsoleArrayAdapter adapter = new ConsoleArrayAdapter (context, list);
-
-            // TODO: Sonderfälle in der Ergebnisliste erstellen: Liste der Länge 0 und 1
-            // Achtung: In der Liste der Länge 1 kommt das = nicht vor ?!?!?!
-
+            ConsoleArrayAdapter adapter = new ConsoleArrayAdapter(context, list);
             listView.setAdapter(adapter);
         }
-
-
     }
 
     @Override

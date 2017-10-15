@@ -107,39 +107,17 @@ public class ControlPointsHolder {
 
     // =====================================================================
 
-    // TODO: Aufräumen
-
     // bézier console method(s)
-    // public String[] getAsStringArray() {
     public ArrayList<String> getAsListOfStrings() {
 
-        ArrayList<String> resultt = new ArrayList<String>();
-
-        // general format for String.split:
-        // "1.000-2.000=1.500-2.500" for control points list { (1,2),(1.5, 2.5) }
-
-//        if (this.size() == 0)
-//            return (String[]) resultt.toArray();
-
-        // TODO: AUf StringBuilder umstellen ....
-
-//        String result = "";
-//        for (int i = 0; i < this.size(); i++) {
-//            BezierPoint p = this.get(i);
-//            result += String.format(Locale.getDefault(), "%f-%f", p.getX(), p.getY());
-//            if (i < this.size() - 1)
-//                result += "=";
-//        }
-
+        ArrayList<String> result = new ArrayList<String>();
         for (int i = 0; i < this.size(); i++) {
             BezierPoint p = this.get(i);
-            String s = String.format(Locale.getDefault(), "%f-%f", p.getX(), p.getY());
-            resultt.add(s);
+            String s = String.format(Locale.getDefault(), "%.4f-%.4f", p.getX(), p.getY());
+            result.add(s);
         }
 
-        // Log.v(BezierGlobals.TAG, "ControlPointsHolder::getAsString TEST == " + result);
-
-        return resultt;
+        return result;
     }
 
     // =====================================================================

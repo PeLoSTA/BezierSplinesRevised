@@ -40,7 +40,7 @@
     <string name="result_gridlines">ResultGridlines</string>
     <string name="result_strokewidth">ResultStrokewidth</string>
 
-    <!-- main spinner -->
+    <!-- main activity - spinner -->
     <string-array name="editor_modes">
         <item>Create</item>
         <item>Edit</item>
@@ -49,6 +49,9 @@
         <!-- <item>Demo</item>  -->     <!-- just for generating screenshots -->
     </string-array>
 
+    <string name="loading_bezier_sline">Loaded spline with %d control points!</string>
+    <string name="saving_bezier_sline">Stored spline with %d control points!</string>
+
     <!-- miscellaneous -->
     <string name="settings_dialog_ok">OK</string>
     <string name="settings_dialog_cancel">Cancel</string>
@@ -56,7 +59,9 @@
     <string name="documentation_image">documentation image</string>
 
     <!-- settings activity - stroke widths -->
-    <string name="settings_viewdimension_title">Bézier View Dimension:</string>
+    <string name="settings_viewdimension_title">Bézier View Dimension (Pixel):</string>
+    <string name="settings_viewdimension_width">Width</string>
+    <string name="settings_viewdimension_height">Height</string>
 
     <!-- settings activity - stroke widths -->
     <string name="settings_stroke_widths_title">Stroke Width</string>

@@ -1,6 +1,7 @@
 package de.peterloos.beziersplines.adapters;
 
 import android.content.Context;
+import android.support.annotation.NonNull;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -8,6 +9,7 @@ import android.widget.ArrayAdapter;
 import android.widget.TextView;
 
 import java.util.ArrayList;
+import java.util.Locale;
 
 import de.peterloos.beziersplines.R;
 
@@ -28,6 +30,7 @@ public class ConsoleArrayAdapter extends ArrayAdapter<String> {
         this.list = list;
     }
 
+    @NonNull
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
 
@@ -53,7 +56,7 @@ public class ConsoleArrayAdapter extends ArrayAdapter<String> {
         // fill data
         ViewHolder holder = (ViewHolder) rowView.getTag();
 
-        String spos = String.format("%4d:", position);
+        String spos = String.format(Locale.getDefault(), "%4d:", (position + 1));
         holder.textview_counter.setText(spos);
 
         String s = this.list.get(position);
@@ -61,20 +64,18 @@ public class ConsoleArrayAdapter extends ArrayAdapter<String> {
         String sx = parts[0];
         String sy = parts[1];
 
-        String s1 = String.format("X = %s", sx);
+        String s1 = String.format(Locale.getDefault(), "X = %s", sx);
         holder.textview_x.setText(s1);
 
-        String s2 = String.format("Y = %s", sy);
+        String s2 = String.format(Locale.getDefault(), "Y = %s", sy);
         holder.textview_y.setText(s2);
 
         return rowView;
     }
 
-    // TODO: DAS ist alles noch anzupassennnnn
-
-    static class ViewHolder {
-        public TextView textview_counter;
-        public TextView textview_x;
-        public TextView textview_y;
+    private static class ViewHolder {
+        TextView textview_counter;
+        TextView textview_x;
+        TextView textview_y;
     }
 }

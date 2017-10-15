@@ -1,6 +1,24 @@
+// --------------------------------------------------------------------------------
+// BUGS                                                                          //
+// --------------------------------------------------------------------------------
 
+Es sind mir einige BUGS bekannt --- diese sind allerdings nicht
+ganz einfach zu lokalisieren:
 
+// --------------------------------------------------------------------------------
 
+BUG !!!
+Wenn ich die Sprache umstelle ... werden die Checkboxes wieder gecheckt !!!!
+Das passt NICHT ZUSAMMEN ....
+
+// --------------------------------------------------------------------------------
+
+BUG !!!
+Bei geteiltem Bildschirm passen die Checkboxes NICHT !!!!!!
+Könnte mit dem ersten Bug zusammenhängen
+
+// --------------------------------------------------------------------------------
+// Reminders für die nächste Version                                             //
 // --------------------------------------------------------------------------------
 
 Die Datei manifest ist NICHT KONSISTENT im Gebrauch mit den Metadaten Tags:
@@ -15,37 +33,13 @@ http://stackoverflow.com/questions/12870537/android-naming-convention
 
 // --------------------------------------------------------------------------------
 
-BUG !!!
-Wenn ich die Sprache umstelle ... werden die Checkboxes wieder gecheckt !!!!
-Das passt NICHT ZUSAMMEN ....
-
-// --------------------------------------------------------------------------------
 
 Die kleine Textview links oben mit dem aktuellen Koordinaten sollte man löschen,
 wenn das Menü neu angewählt wird .................
 
 // --------------------------------------------------------------------------------
 
-BUG !!!
-Bei geteiltem Bildschirm passen die Checkboxes NICHT !!!!!!
-
-// --------------------------------------------------------------------------------
-
-Unter Settings die Größe des Displays ausgeben
-
-// --------------------------------------------------------------------------------
-
 MIT DEM MONITOR DEN SPEICHERVERRAUCH BETRACHNEN !!!!!!!!!!!!!!!!!!!
-
-// --------------------------------------------------------------------------------
-
-In den Strings.xml sind die sprachunabhängigen Zeichenkette ZWEIMAL drin ...
-das sollte so nicht sein !!!!!!!!!
-
-// --------------------------------------------------------------------------------
-
-Die Liste alles Control Points ausgeben -- wie ?????????????????????
-
 
 // --------------------------------------------------------------------------------
 
