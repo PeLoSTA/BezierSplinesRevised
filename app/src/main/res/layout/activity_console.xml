@@ -20,7 +20,6 @@
         android:layout_margin="15dp"
         android:background="@drawable/ripple"
         android:clickable="true"
-        android:text="List of Control Points:"
         android:gravity="start"  />
 
     <ListView

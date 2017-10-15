@@ -1,13 +1,16 @@
 package de.peterloos.beziersplines.activities;
 
 import android.content.Context;
+import android.content.res.Resources;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.widget.ListView;
+import android.widget.TextView;
 
 import java.util.ArrayList;
+import java.util.Locale;
 
 import de.peterloos.beziersplines.R;
 import de.peterloos.beziersplines.adapters.ConsoleArrayAdapter;
@@ -37,24 +40,35 @@ public class ConsoleActivity extends AppCompatActivity {
 
         // retrieve control references
         ListView listView = (ListView) this.findViewById(R.id.listview);
+        TextView textView = (TextView) this.findViewById(R.id.textview_header_console);
 
         // create adapter
-        Context context = this.getApplicationContext();
-
-//        String[] values = new String[] { "Android", "iPhone", "WindowsMobile",
-//                "Blackberry", "WebOS", "Ubuntu", "Windows7", "Max OS X",
-//                "Linux", "OS/2" };
-
         ControlPointsHolder holder = ControlPointsHolder.getInstance();
+        ArrayList<String> list = holder.getAsListOfStrings();
 
-        ArrayList<String> resultt = holder.getAsListOfStrings();
+        // setup header and fill listview, if list isn't empty
+        Resources res = this.getResources();
+        String s = res.getString(R.string.header_console);
+        if (list.size() == 0) {
 
-        ConsoleArrayAdapter adapter = new ConsoleArrayAdapter (context, resultt);
+            String header = String.format(Locale.getDefault(), s, 0);
+            textView.setText(header);
+        }
+        else {
 
-        // TODO: Sonderfälle in der Ergebnisliste erstellen: Liste der Länge 0 und 1
-        // Achtung: In der Liste der Länge 1 kommt das = nicht vor ?!?!?!
+            String header = String.format(Locale.getDefault(), s, list.size());
+            textView.setText(header);
 
-        listView.setAdapter(adapter);
+            Context context = this.getApplicationContext();
+            ConsoleArrayAdapter adapter = new ConsoleArrayAdapter (context, list);
+
+            // TODO: Sonderfälle in der Ergebnisliste erstellen: Liste der Länge 0 und 1
+            // Achtung: In der Liste der Länge 1 kommt das = nicht vor ?!?!?!
+
+            listView.setAdapter(adapter);
+        }
+
+
     }
 
     @Override

@@ -78,6 +78,9 @@
         <item>Mehr</item>
     </string-array>
 
+    <!-- bézier console activity -->
+    <string name="header_console">Liste der Kontrollpunkte: %d Punkte.</string>
+
     <!-- documentation: header -->
     <string-array name="docs_app_modes_headers">
         <item>Interaktives Erstellen einer\nBézier-Kurve</item>

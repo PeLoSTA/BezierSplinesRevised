@@ -78,6 +78,9 @@
         <item>High</item>
     </string-array>
 
+    <!-- bézier console activity -->
+    <string name="header_console">Control Points List: %d Points.</string>
+
     <!-- documentation: header -->
     <string-array name="docs_app_modes_headers">
         <item>Interactive creation of a \nBézier-curve</item>

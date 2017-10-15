@@ -65,7 +65,7 @@ public class ConsoleArrayAdapter extends ArrayAdapter<String> {
         holder.textview_x.setText(s1);
 
         String s2 = String.format("Y = %s", sy);
-        holder.textview_y.setText(s1);
+        holder.textview_y.setText(s2);
 
         return rowView;
     }
