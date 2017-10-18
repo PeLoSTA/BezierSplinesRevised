@@ -14,7 +14,7 @@
         android:layout_height="match_parent"
         android:padding="5dp"
         android:layout_marginBottom="4dp"
-        android:background="@color/white">
+        android:background="@color/white" >
 
         <TextView
             android:id="@+id/textview_counter"
@@ -29,7 +29,8 @@
             android:layout_centerInParent="true"
             android:textAlignment="center"
             android:gravity="fill"
-            android:textAppearance="?android:attr/textAppearanceLarge" />
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:textColor="#FF2F2F2F" />
 
         <TextView
             android:id="@+id/textview_x"
@@ -42,7 +43,8 @@
             android:layout_alignParentTop="true"
             android:layout_toRightOf="@id/textview_counter"
             android:layout_toEndOf="@id/textview_counter"
-            android:textAppearance="?android:attr/textAppearanceSmall" />
+            android:textAppearance="?android:attr/textAppearanceSmall"
+            android:textColor="#FF2F2F2F" />
 
         <ImageView
             android:id="@+id/imageview_dottedline"
@@ -66,9 +68,12 @@
             android:layout_toRightOf="@id/textview_counter"
             android:layout_toEndOf="@id/textview_counter"
             android:layout_alignParentBottom="true"
-            android:textAppearance="?android:attr/textAppearanceSmall"/>
+            android:textAppearance="?android:attr/textAppearanceSmall"
+            android:textColor="#FF2F2F2F" />
 
     </RelativeLayout>
 
 </RelativeLayout>
+
+
 
