@@ -93,6 +93,7 @@
         <item>Curve resolution</item>
         <item>Algorithm of de Casteljau</item>
         <item>Saving and loading a spline</item>
+        <item>Bézier console</item>
     </string-array>
 
     <!-- documentation: description -->
@@ -146,5 +147,15 @@
                  If you select &bdquo;<em>Loading</em>&ldquo;, the last saved spline will be restored in the view.
             ]]>
         </item>
+        <item>
+            <![CDATA[
+                The coordinates of the current spline can be watched precisely in a separate &bdquo;Bezier Console&ldquo; view
+                (listview with all control points).
+                <em>Note</em>: The control point (0, 0) is located in the top left-corner of the view,
+                as this is the normal behavior of all graphical coordinate systems in computer science.
+            ]]>
+        </item>
     </string-array>
 </resources>
+
+

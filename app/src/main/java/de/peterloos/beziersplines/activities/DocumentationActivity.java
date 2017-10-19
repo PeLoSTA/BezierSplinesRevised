@@ -35,7 +35,8 @@ public class DocumentationActivity extends AppCompatActivity implements OnPageCh
             R.mipmap.device_2017_02_02,
             R.mipmap.device_2017_02_03,
             R.mipmap.device_2017_02_04,
-            R.mipmap.device_2017_02_05
+            R.mipmap.device_2017_02_05,
+            R.mipmap.device_2017_02_06
     };
 
     @Override

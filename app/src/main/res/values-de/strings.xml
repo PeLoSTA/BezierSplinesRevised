@@ -93,6 +93,7 @@
         <item>Auflösung der Kurve</item>
         <item>Algorithmus von de Casteljau</item>
         <item>Speichern und Laden eines Splines</item>
+        <item>Bézier Konsole</item>
     </string-array>
 
     <!-- documentation: description -->
@@ -144,6 +145,13 @@
             <![CDATA[
                  Mit diesem Menü ist es möglich, den aktuell gezeichneten Spline abzuspeichern (Menüpunkt &bdquo;<em>Speichern</em>&ldquo;).
                  Bei Anwahl des Menüpunkts &bdquo;<em>Laden</em>&ldquo; wird der zuletzt abgespeicherte Spline in die Ansicht geladen.
+            ]]>
+        </item>
+        <item>
+            <![CDATA[
+                Die Kontrollpunkte des aktuellen Splines lassen sich in einer &bdquo;Bezier Konsole&ldquo; darstellen.
+                (listenartige Darstellung aller Punkte mit <em>x</em>- und <em>y</em>-Koordinate).
+                <em>Hinweis</em>: Der Kontrollpunkt (0,0) befindet sich in der linken oberen Ecke des grafischen Koordinatensystems.
             ]]>
         </item>
     </string-array>
