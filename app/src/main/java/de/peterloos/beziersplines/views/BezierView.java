@@ -350,7 +350,7 @@ public class BezierView extends View implements View.OnTouchListener {
         }
     }
 
-    // helper function to compute a bezier point defined by the control polygon at value t
+    // private helper function to compute a bezier point defined by the control polygon at value t
     private BezierPoint computeBezierPoint(float t) {
         int numPoints = this.holder.size();
         BezierPoint[] dest = new BezierPoint[numPoints];
@@ -414,7 +414,7 @@ public class BezierView extends View implements View.OnTouchListener {
         return constructionPoints;
     }
 
-    // helper function to find the nearest control point
+    // private helper function to find the nearest control point
     private int getNearestPointIndex(BezierPoint p) {
         int numPoints = holder.size();
         if (numPoints == 0)
@@ -435,7 +435,7 @@ public class BezierView extends View implements View.OnTouchListener {
         return (dist < this.nearestDistanceMaximum) ? index : -1;
     }
 
-    // drawing helper methods for points
+    // private drawing helper methods for points
     private void drawControlPoint(Canvas canvas, float cx, float cy, String text) {
         this.drawPoint(canvas, cx, cy, Color.LTGRAY, Color.BLACK, text, false);
     }
@@ -482,7 +482,7 @@ public class BezierView extends View implements View.OnTouchListener {
         this.onBezierPointChanged("");
     }
 
-    // drawing helper methods for lines
+    // private drawing helper methods for lines
     private void drawConstructionLine(Canvas canvas, BezierPoint p0, BezierPoint p1) {
         this.drawLine(canvas, p0, p1, this.colorConstructionLine, this.strokeWidthConstructionLines);
     }
@@ -501,20 +501,20 @@ public class BezierView extends View implements View.OnTouchListener {
         canvas.drawLine(p0.getX(), p0.getY(), p1.getX(), p1.getY(), this.linePaint);
     }
 
-    public static float convertDpToPixel(Resources res, float dpSize) {
+    private static float convertDpToPixel(Resources res, float dpSize) {
         DisplayMetrics dm = res.getDisplayMetrics();
         float strokeWidth = TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, dpSize, dm);
         return strokeWidth;
     }
 
     @SuppressWarnings("unused")
-    public static float convertDpToPixel_V2(Resources res, int dpSize) {
+    private static float convertDpToPixel_V2(Resources res, int dpSize) {
         DisplayMetrics dm = res.getDisplayMetrics();
         float strokeWidth = dpSize * dm.density + 0.5f;
         return strokeWidth;
     }
 
-    public static int getColorWrapper(Context context, int id) {
+    private static int getColorWrapper(Context context, int id) {
         final int version = Build.VERSION.SDK_INT;
         if (version >= Build.VERSION_CODES.M) {
             return ContextCompat.getColor(context, id);
